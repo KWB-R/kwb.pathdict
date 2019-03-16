@@ -1,0 +1,23 @@
+Package: kwb.pathdict
+Title: Functions to Work with Path Dictionaries
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Hauke",
+             family = "Sonnenberg",
+             role = c("aut", "cre"),
+             email = "hauke.sonnenberg@kompetenz-wasser.de",
+             comment = structure("0000-0001-9134-2871", .Names = "ORCID")),
+      person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
+             role = "cph"))
+Description: This package provides functions to work with
+    what I call path dictionaries. Path dictionaries are lists defining
+    file and folder paths. In order not to repeat sub-paths, placeholders
+    can be used. The package provides functions to find duplicated
+    sub-paths and to define placeholders accordingly.
+License: MIT + file LICENSE
+URL: https://github.com/KWB-R/kwb.pathdict
+BugReports: https://github.com/KWB-R/kwb.pathdict/issues
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    covr
