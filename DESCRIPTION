@@ -9,11 +9,11 @@ Authors@R:
              comment = structure("0000-0001-9134-2871", .Names = "ORCID")),
       person(given = "Kompetenzzentrum Wasser Berlin gGmbH (KWB)",
              role = "cph"))
-Description: This package provides functions to work with
-    what I call path dictionaries. Path dictionaries are lists defining
-    file and folder paths. In order not to repeat sub-paths, placeholders
-    can be used. The package provides functions to find duplicated
-    sub-paths and to define placeholders accordingly.
+Description: This package provides functions to work with what I call path 
+    dictionaries. Path dictionaries are lists defining file and folder paths. 
+    In order not to repeat sub-paths, placeholders can be used. The package 
+    provides functions to find duplicated sub-paths and to define placeholders 
+    accordingly.
 License: MIT + file LICENSE
 URL: https://github.com/KWB-R/kwb.pathdict
 BugReports: https://github.com/KWB-R/kwb.pathdict/issues
@@ -21,3 +21,11 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
     covr
+RoxygenNote: 6.1.1
+Imports: 
+    kwb.file,
+    kwb.utils
+Remotes: 
+    github::kwb-r/kwb.file,
+    github::kwb-r/kwb.utils
+    
