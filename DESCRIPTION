@@ -20,7 +20,9 @@ BugReports: https://github.com/KWB-R/kwb.pathdict/issues
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    covr
+    covr,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.1.1
 Imports: 
     kwb.file,
@@ -28,4 +30,4 @@ Imports:
 Remotes: 
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils
-    
+VignetteBuilder: knitr

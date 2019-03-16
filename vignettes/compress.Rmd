@@ -1,0 +1,90 @@
+---
+title: "Compression of Paths"
+author: "Hauke Sonnenberg"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Compression of Paths}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Definition of Example File Paths
+
+```{r}
+paths <- c(
+  "project-1/wp-1/input/file 1.csv",
+  "project-1/wp-1/input/file-2.csv",
+  "project-1/wp-1/analysis/summary.pdf",
+  "project-1/wp 2/input/köpenick_dirty.csv",
+  "project-1/wp 2/output/koepenick_clean.csv",
+  "project-2/Daten/file-1.csv",
+  "project-2/Grafiken/file 1.png",
+  "project-2/Berichte/bericht-1.doc",
+  "project-2/Berichte/bericht-2.doc"
+)
+```
+
+## Importance of Directories
+
+In order to find the most important folder paths in terms of frequency and
+length you may use the function `sortedImportance()`:
+
+```{r}
+kwb.pathdict:::sortedImportance(dirname(paths))
+```
+
+## Compression of Folder Paths
+
+Assume you have a folder with a long path (either due to a lot of levels or due
+to long folder names). This long path is repeated for each file in the folder. 
+The package kwb.pathdict provides a `compress()` function that may be used to
+introduce short names for directory paths.
+
+```{r}
+directories <- c(
+  "short/path/to/directory", 
+  "short/path/to/directory", 
+  "short/path/to/directory", 
+  "longer/path/to/another/directory", 
+  "longer/path/to/another/directory"
+)
+
+short_dirs <- kwb.pathdict:::compress(directories)
+
+as.character(short_dirs)
+```
+
+The function returns the lookup table (dictionary) that maps short names to long 
+names in the attribute `dict`:
+
+```{r collapse = TRUE}
+(dictionary <- kwb.utils::getAttribute(short_dirs, "dict"))
+```
+
+The dictionary is sorted by the importance of the strings (paths) that have been
+given to `compress()` so that the most important paths get the highest positions 
+in the dictionary. With importance we mean the product of the length of a string 
+(path) and its number of occurrences.
+
+The dictionary is required to convert the short names back to the original
+paths using the `resolve()` function of the `kwb.utils` package:
+
+```{r collapse = TRUE}
+(long_dirs <- kwb.utils::resolve(short_dirs, dictionary))
+
+identical(long_dirs, directories)
+```
+
+There is another function `compressOneByOne`, what does it do?
+
+```{r}
+attributes(kwb.pathdict:::compressOneByOne(paths, n = 3))
+```
