@@ -145,7 +145,7 @@ dirs_3 <- list(
 ```
 
 Finally, we could even define entries for each directory representing a work 
-package (wp) of project 1 (`p1.1` and `p2.2` in the following):
+package (wp) of project 1 (`p1.1` and `p1.2` in the following):
 
 ```{r}
 dirs_4 <- list(
