@@ -4,7 +4,7 @@
 #'
 #' @param paths vector of character strings representing file or folder paths
 #' @param n number of compression levels
-#'
+#' @importFrom kwb.utils moveColumnsToFront
 get_dictionary_one_by_one <- function(paths, n = 10)
 {
   # Get the frequencies of the directory paths
@@ -49,6 +49,9 @@ get_dictionary_one_by_one <- function(paths, n = 10)
 }
 
 # get_subdir_frequencies -------------------------------------------------------
+#' @importFrom kwb.file split_paths
+#' @importFrom kwb.utils catIf collapsed getElementLengths printIf
+#' @importFrom graphics hist
 get_subdir_frequencies <- function(
   subdirs = kwb.file::split_paths(paths), paths = NULL, first.only = TRUE,
   dbg = TRUE
@@ -122,6 +125,7 @@ sorted_importance <- function(x, weighted = TRUE)
 }
 
 # to_frequency_data ------------------------------------------------------------
+#' @importFrom kwb.utils noFactorDataFrame
 to_frequency_data <- function(freqs)
 {
   sorted_frequencies <- sort(unlist(freqs), decreasing = TRUE)
@@ -155,6 +159,7 @@ to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
 }
 
 # rescore_and_reorder_frequency_data -------------------------------------------
+#' @importFrom kwb.utils resetRowNames
 rescore_and_reorder_frequency_data <-function(frequency_data, key)
 {
   frequency_data$score2 <- get_frequency_score(frequency_data, key)
@@ -165,6 +170,7 @@ rescore_and_reorder_frequency_data <-function(frequency_data, key)
 }
 
 # get_frequency_score ----------------------------------------------------------
+#' @importFrom kwb.utils selectColumns
 get_frequency_score <- function(frequency_data, key)
 {
   key_placeholder_size <- nchar(to_placeholder(key))
@@ -191,6 +197,7 @@ main_columns_winner <- function()
 }
 
 # update_frequency_data_length -------------------------------------------------
+#' @importFrom kwb.utils selectColumns
 update_frequency_data_length <- function(frequency_data, winner, key)
 {
   winner_length <- kwb.utils::selectColumns(winner, "length")

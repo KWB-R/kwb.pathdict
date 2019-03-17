@@ -7,6 +7,7 @@ data_frame_to_paths <- function(df)
 }
 
 # get_subdirs_by_frequence -----------------------------------------------------
+#' @importFrom kwb.utils printIf
 get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
@@ -19,8 +20,6 @@ get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 # lookup_in_dictionary ---------------------------------------------------------
 lookup_in_dictionary <- function(x, dict)
 {
-  #x <- old_dirs; dict <- old_dict
-
   ready <- x %in% to_placeholder(names(dict))
 
   out <- x
