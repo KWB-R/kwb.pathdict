@@ -110,8 +110,8 @@
 <div id="importance-of-directories" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importance-of-directories" class="anchor"></a>Importance of Directories</h2>
-<p>In order to find the most important folder paths in terms of frequency and length you may use the function <code><a href="../reference/sortedImportance.html">sortedImportance()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">kwb.pathdict<span class="op">:::</span><span class="kw"><a href="../reference/sortedImportance.html">sortedImportance</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/basename">dirname</a></span>(paths))</a>
+<p>In order to find the most important folder paths in terms of frequency and length you may use the function <code><a href="../reference/sorted_importance.html">sorted_importance()</a></code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">kwb.pathdict<span class="op">:::</span><span class="kw"><a href="../reference/sorted_importance.html">sorted_importance</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/basename">dirname</a></span>(paths))</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; x</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;    project-1/wp-1/input      project-2/Berichte project-1/wp-1/analysis </span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;                      40                      36                      23 </span></a>
@@ -152,8 +152,8 @@
 <a class="sourceLine" id="cb5-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(long_dirs, directories)</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
-<p>There is another function <code>compressOneByOne</code>, what does it do?</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/attributes">attributes</a></span>(kwb.pathdict<span class="op">:::</span><span class="kw">compressOneByOne</span>(paths, <span class="dt">n =</span> <span class="dv">3</span>))</a>
+<p>There is another function <code>compress_one_by_one</code>, what does it do?</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/attributes">attributes</a></span>(kwb.pathdict<span class="op">:::</span><span class="kw">compress_one_by_one</span>(paths, <span class="dt">n =</span> <span class="dv">3</span>))</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Splitting paths ... ok. (0.00s) </span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Elapsed: 0.0 s</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Splitting paths ... ok. (0.00s) </span></a>
