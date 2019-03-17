@@ -19,7 +19,7 @@ getDictOneByOne <- function(paths, n = 10)
   while (length(dictionary) < n) {
 
     # Next key to be used in the dictionary
-    key <- toKey(length(dictionary) + 1)
+    key <- to_dictionary_key(length(dictionary) + 1)
 
     # Rescore and reorder frequency_data
     frequency_data <- rescore_and_reorder_frequency_data(frequency_data, key)
@@ -137,12 +137,12 @@ toFrequencyData <- function(freqs)
   )
 }
 
-# toKey ------------------------------------------------------------------------
-toKey <- function(i, prefix = "p", leading.zeros = FALSE)
+# to_dictionary_key ------------------------------------------------------------
+to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
 {
   fmt <- if (leading.zeros) {
 
-    digits <- nchar(toKey(length(i), ""))
+    digits <- nchar(to_dictionary_key(length(i), ""))
 
     paste0("%s%0", digits, "X")
 
@@ -167,7 +167,7 @@ rescore_and_reorder_frequency_data <-function(frequency_data, key)
 # get_frequency_score ----------------------------------------------------------
 get_frequency_score <- function(frequency_data, key)
 {
-  key_placeholder_size <- nchar(toPlaceholder(key))
+  key_placeholder_size <- nchar(to_placeholder(key))
 
   lengths <- kwb.utils::selectColumns(frequency_data, "length")
 
@@ -199,7 +199,7 @@ update_frequency_data_length <- function(frequency_data, winner, key)
   data_length <- kwb.utils::selectColumns(frequency_data, "length")
   data_path <- kwb.utils::selectColumns(frequency_data, "path")
 
-  shortage <- winner_length - nchar(toPlaceholder(key))
+  shortage <- winner_length - nchar(to_placeholder(key))
 
   matching <- (substr(data_path, 1, winner_length) == winner_path)
 

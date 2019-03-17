@@ -21,44 +21,13 @@ lookup <- function(x, dict)
 {
   #x <- old_dirs; dict <- old_dict
 
-  ready <- x %in% toPlaceholder(names(dict))
+  ready <- x %in% to_placeholder(names(dict))
 
   out <- x
 
-  out[! ready] <- toPlaceholder(names(dict[match(x[! ready], dict)]))
+  out[! ready] <- to_placeholder(names(dict[match(x[! ready], dict)]))
 
   out
-}
-
-# removeCommonRoot -------------------------------------------------------------
-
-#' Remove the common root parts
-#'
-#' @param x list of vectors of character as returned by
-#'   \code{\link[base]{strsplit}} or a vector of character.
-#' @param n_keep number of common path segments to keep (so that the path
-#'   tree keeps its root)
-#' @param dbg if \code{TRUE} debug messages are shown
-#'
-#' @export
-#' @examples
-#' # Split paths at the slashes
-#' absparts <- strsplit(c("a/b/c", "a/b/d", "a/b/e/f/g", "a/b/hi"), "/")
-#'
-#' # Remove the common parts of the paths
-#' relparts <- removeCommonRoot(absparts)
-#' relparts
-#'
-#' # The extracted root is returned in attribute "root"
-#' attr(relparts, "root")
-#'
-removeCommonRoot <- function(x, n_keep = 0, dbg = TRUE)
-{
-  use_function_instead(
-    kwb.file::remove_common_root, "kwb.fakin::removeCommonRoot"
-  )
-
-  kwb.file::remove_common_root(x, n_keep, dbg)
 }
 
 # replaceSubdirs ---------------------------------------------------------------
@@ -76,13 +45,6 @@ replaceSubdirs <- function(s, r, p)
   maxcol <- max(which(apply(s, 2, function(x) sum(! is.na(x))) > 0))
 
   s[, seq_len(maxcol)]
-}
-
-# splitPaths -------------------------------------------------------------------
-splitPaths <- function(paths, dbg = TRUE)
-{
-  use_function_instead(kwb.file::split_paths, splitPaths)
-  kwb.file::split_paths(paths)
 }
 
 # startsWithParts --------------------------------------------------------------
@@ -134,8 +96,8 @@ startsWithParts <- function(parts, elements)
 }
 
 
-# toPlaceholder ----------------------------------------------------------------
-toPlaceholder <- function(x)
+# to_placeholder ---------------------------------------------------------------
+to_placeholder <- function(x)
 {
   paste0("<", x, ">")
 }

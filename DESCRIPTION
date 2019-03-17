@@ -22,7 +22,8 @@ LazyData: true
 Suggests: 
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 RoxygenNote: 6.1.1
 Imports: 
     kwb.file,
