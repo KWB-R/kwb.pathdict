@@ -16,20 +16,31 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Definition of Example File Paths
+See the [Working with File Paths in R Scripts](introduction.html) for an 
+introduction on how we suggest to handle file paths in R scripts.
+
+## Define some Example File Paths
 
 ```{r}
 paths <- c(
-  "project-1/wp-1/input/file 1.csv",
-  "project-1/wp-1/input/file-2.csv",
-  "project-1/wp-1/analysis/summary.pdf",
-  "project-1/wp 2/input/köpenick_dirty.csv",
-  "project-1/wp 2/output/koepenick_clean.csv",
-  "project-2/Daten/file-1.csv",
-  "project-2/Grafiken/file 1.png",
-  "project-2/Berichte/bericht-1.doc",
-  "project-2/Berichte/bericht-2.doc"
+  "//very/long/path/to/the/projects/project-1/wp-1/input/file 1.csv",
+  "//very/long/path/to/the/projects/project-1/wp-1/input/file-2.csv",
+  "//very/long/path/to/the/projects/project-1/wp-1/analysis/summary.pdf",
+  "//very/long/path/to/the/projects/project-1/wp 2/input/köpenick_dirty.csv",
+  "//very/long/path/to/the/projects/project-1/wp 2/output/koepenick_clean.csv",
+  "//very/long/path/to/the/projects/project-2/Daten/file-1.csv",
+  "//very/long/path/to/the/projects/project-2/Grafiken/file 1.png",
+  "//very/long/path/to/the/projects/project-2/Berichte/bericht-1.doc",
+  "//very/long/path/to/the/projects/project-2/Berichte/bericht-2.doc"
 )
+``` 
+
+## Compress the Paths
+
+```{r}
+kwb.pathdict:::compress_paths(paths)
+kwb.pathdict:::compress_paths(paths, maxdepth = 2)
+kwb.pathdict:::compress_paths(paths, maxdepth = 4)
 ```
 
 ## Importance of Directories
