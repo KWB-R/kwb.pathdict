@@ -1,7 +1,6 @@
 [![Appveyor build Status](https://ci.appveyor.com/api/projects/status/github/KWB-R/kwb.pathdict?branch=master&svg=true)](https://ci.appveyor.com/project/KWB-R/kwb-pathdict/branch/master)
 [![Travis build Status](https://travis-ci.org/KWB-R/kwb.pathdict.svg?branch=master)](https://travis-ci.org/KWB-R/kwb.pathdict)
 [![codecov](https://codecov.io/github/KWB-R/kwb.pathdict/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.pathdict)
-url
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.pathdict)]()
 
 # kwb.pathdict
