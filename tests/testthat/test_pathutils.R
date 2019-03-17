@@ -44,10 +44,10 @@ test_that("compress works for simple path vectors", {
 if (FALSE)
 {
   dict <- list(p1 = "abc", p2 = "def")
-  lookup("abc", dict) == "<p1>"
-  lookup("def", dict) == "<p2>"
-  lookup("ghi", dict) == "<NA>"
-  lookup("abc/def", dict) == "<NA>"
+  lookup_in_dictionary("abc", dict) == "<p1>"
+  lookup_in_dictionary("def", dict) == "<p2>"
+  lookup_in_dictionary("ghi", dict) == "<NA>"
+  lookup_in_dictionary("abc/def", dict) == "<NA>"
 
   y <- compress(x = c("hallo", "hallo", "hallo")) # -> error
   y == c("<p1>", "<p1>", "<p1>")
@@ -75,7 +75,7 @@ if (FALSE)
 
   x <- c("longPath/a", "longPath/b", "longPath/other/xyz/abc")
   x <- c("abc/longPath/a", "b/longPath/c")
-  y <- compressPaths(x, maxdepth = 14, dbg = FALSE)
+  y <- compress_paths(x, maxdepth = 14, dbg = FALSE)
 
-  logResultIf(TRUE, x, y)
+  log_result_if(TRUE, x, y)
 }

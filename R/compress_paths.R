@@ -1,13 +1,13 @@
-# compressPaths ----------------------------------------------------------------
+# compress_paths ---------------------------------------------------------------
 #' @importFrom kwb.utils catIf getAttribute
-compressPaths <- function(
+compress_paths <- function(
   x, depth = 1, maxdepth = 1, dicts = list(), dbg = FALSE
 )
 {
-  # kwb.utils::assignArgumentDefaults(compressPaths)
+  # kwb.utils::assignArgumentDefaults(compress_paths)
 
   kwb.utils::catIf(dbg, sprintf(
-    "\n### In compressPaths(depth = %d)...\n", depth
+    "\n### In compress_paths(depth = %d)...\n", depth
   ))
 
   dirs <- dirname(x)
@@ -22,20 +22,15 @@ compressPaths <- function(
 
     y <- compress(x = dirs[ok], dict = dict_old, prefix = letters[depth])
 
-    logResultIf(dbg, dirs[ok], y)
+    log_result_if(dbg, dirs[ok], y)
 
     dict_new <- kwb.utils::getAttribute(y, "dict")
 
     dicts[[depth]] <- dict_new
 
-    #str(dicts)
-
     if (depth < maxdepth) {
 
-      #bak <- list()
-      #bak[[depth]] <- list(x, depth, dicts, dirs, ok, result, dict_old)
-      #x = as.character(dict_new); depth = depth + 1
-      y2 <- compressPaths(
+      y2 <- compress_paths(
         x = as.character(dict_new), depth = depth + 1, maxdepth = maxdepth,
         dicts = dicts
       )
@@ -78,7 +73,7 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 # to_dictionary ----------------------------------------------------------------
 to_dictionary <- function(x, prefix = "a", leading.zeros = FALSE)
 {
-  dict <- as.list(names(sortedImportance(x)))
+  dict <- as.list(names(sorted_importance(x)))
 
   keys <- to_dictionary_key(seq_along(dict), prefix, leading.zeros)
 
@@ -91,9 +86,9 @@ is_placeholder <- function(x)
   grepl("^<[^<>]+>$", x)
 }
 
-# logResultIf ------------------------------------------------------------------
+# log_result_if ----------------------------------------------------------------
 #' @importFrom kwb.utils catLines getAttribute
-logResultIf <- function(dbg, x, y)
+log_result_if <- function(dbg, x, y)
 {
   if (dbg) {
 
@@ -107,12 +102,12 @@ logResultIf <- function(dbg, x, y)
   }
 }
 
-# compressOneByOne -------------------------------------------------------------
-compressOneByOne <- function(x, keys = LETTERS[1:n], n = 10)
+# compress_one_by_one ----------------------------------------------------------
+compress_one_by_one <- function(x, keys = LETTERS[1:n], n = 10)
 {
   lapply(keys, function(key) {
 
-    elapsed <- system.time(x <<- getNextLevel(x, key))
+    elapsed <- system.time(x <<- get_next_level(x, key))
 
     cat(sprintf("Elapsed: %0.1f s\n", elapsed["elapsed"]))
 
@@ -120,10 +115,10 @@ compressOneByOne <- function(x, keys = LETTERS[1:n], n = 10)
   })
 }
 
-# getNextLevel -----------------------------------------------------------------
-getNextLevel <- function(x, key, set.attributes = FALSE, dbg = FALSE)
+# get_next_level ---------------------------------------------------------------
+get_next_level <- function(x, key, set.attributes = FALSE, dbg = FALSE)
 {
-  freqs <- getFrequencies(paths = x, dbg = dbg)
+  freqs <- get_subdir_frequencies(paths = x, dbg = dbg)
 
   allfreqs <- sort(unlist(freqs), decreasing = TRUE)
 
@@ -141,8 +136,8 @@ getNextLevel <- function(x, key, set.attributes = FALSE, dbg = FALSE)
   result
 }
 
-# compressWithDictionary -------------------------------------------------------
-compressWithDictionary <- function(subdirs, dict, fill.value = "")
+# compress_with_dictionary -----------------------------------------------------
+compress_with_dictionary <- function(subdirs, dict, fill.value = "")
 {
   strings <- names(dict)[match(subdirs, as.character(dict))]
 

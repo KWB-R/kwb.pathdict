@@ -1,16 +1,16 @@
-# getDictOneByOne --------------------------------------------------------------
+# get_dictionary_one_by_one ----------------------------------------------------
 
 #' Get a Path Dictionary
 #'
 #' @param paths vector of character strings representing file or folder paths
 #' @param n number of compression levels
 #'
-getDictOneByOne <- function(paths, n = 10)
+get_dictionary_one_by_one <- function(paths, n = 10)
 {
   # Get the frequencies of the directory paths
-  frequencies <- getFrequencies(paths = paths, first.only = TRUE)
+  frequencies <- get_subdir_frequencies(paths = paths, first.only = TRUE)
 
-  frequency_data_raw <- toFrequencyData(frequencies)
+  frequency_data_raw <- to_frequency_data(frequencies)
 
   frequency_data <- frequency_data_raw
 
@@ -24,7 +24,7 @@ getDictOneByOne <- function(paths, n = 10)
     # Rescore and reorder frequency_data
     frequency_data <- rescore_and_reorder_frequency_data(frequency_data, key)
 
-    printFreqs(frequency_data)
+    print_path_frequencies(frequency_data)
 
     # Which is the "winning" path?
     winner <- frequency_data[1, ]
@@ -48,8 +48,8 @@ getDictOneByOne <- function(paths, n = 10)
   dictionary
 }
 
-# getFrequencies ---------------------------------------------------------------
-getFrequencies <- function(
+# get_subdir_frequencies -------------------------------------------------------
+get_subdir_frequencies <- function(
   subdirs = kwb.file::split_paths(paths), paths = NULL, first.only = TRUE,
   dbg = TRUE
 )
@@ -76,7 +76,7 @@ getFrequencies <- function(
       kwb.utils::collapsed(xx[seq_len(i)], "/")
     })
 
-    y <- sortedImportance(x)
+    y <- sorted_importance(x)
 
     kwb.utils::printIf(dbg, utils::head(y))
 
@@ -84,7 +84,7 @@ getFrequencies <- function(
   })
 }
 
-# sortedImportance -------------------------------------------------------------
+# sorted_importance ------------------------------------------------------------
 
 #' Importance of Strings
 #'
@@ -103,26 +103,26 @@ getFrequencies <- function(
 #' @examples
 #' strings <- c("a", "a", "a", "bc", "bc", "cdefg")
 #'
-#' (importance <- kwb.pathdict:::sortedImportance(strings))
+#' (importance <- kwb.pathdict:::sorted_importance(strings))
 #'
 #' # Check that each input element is mentioned in the output
 #' all(unique(strings) %in% names(importance))
 #'
 #' # weighted = FALSE just returns the frequencies of strings in x
-#' (importance <- kwb.pathdict:::sortedImportance(strings, weighted = FALSE))
+#' (importance <- kwb.pathdict:::sorted_importance(strings, weighted = FALSE))
 #'
 #' # Check if the sum of frequencies is the number of elements in x
 #' sum(importance) == length(strings)
 #'
-sortedImportance <- function(x, weighted = TRUE)
+sorted_importance <- function(x, weighted = TRUE)
 {
   freq <- table(x)
 
   sort(if (weighted) nchar(names(freq)) * freq else freq, decreasing = TRUE)
 }
 
-# toFrequencyData --------------------------------------------------------------
-toFrequencyData <- function(freqs)
+# to_frequency_data ------------------------------------------------------------
+to_frequency_data <- function(freqs)
 {
   sorted_frequencies <- sort(unlist(freqs), decreasing = TRUE)
 
@@ -176,8 +176,8 @@ get_frequency_score <- function(frequency_data, key)
   (lengths - key_placeholder_size) * counts
 }
 
-# printFreqs -------------------------------------------------------------------
-printFreqs <- function(x, maxchar = 80)
+# print_path_frequencies -------------------------------------------------------
+print_path_frequencies <- function(x, maxchar = 80)
 {
   x$path <- substr(x$path, 1, maxchar)
 

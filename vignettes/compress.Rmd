@@ -35,10 +35,10 @@ paths <- c(
 ## Importance of Directories
 
 In order to find the most important folder paths in terms of frequency and
-length you may use the function `sortedImportance()`:
+length you may use the function `sorted_importance()`:
 
 ```{r}
-kwb.pathdict:::sortedImportance(dirname(paths))
+kwb.pathdict:::sorted_importance(dirname(paths))
 ```
 
 ## Compression of Folder Paths
@@ -83,8 +83,8 @@ paths using the `resolve()` function of the `kwb.utils` package:
 identical(long_dirs, directories)
 ```
 
-There is another function `compressOneByOne`, what does it do?
+There is another function `compress_one_by_one`, what does it do?
 
 ```{r}
-attributes(kwb.pathdict:::compressOneByOne(paths, n = 3))
+attributes(kwb.pathdict:::compress_one_by_one(paths, n = 3))
 ```

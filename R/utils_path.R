@@ -6,8 +6,8 @@ data_frame_to_paths <- function(df)
   gsub("/+$", "", kwb.utils::pasteColumns(df, sep = "/"))
 }
 
-# getSubdirsByFrequence --------------------------------------------------------
-getSubdirsByFrequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
+# get_subdirs_by_frequence -----------------------------------------------------
+get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
 
@@ -16,8 +16,8 @@ getSubdirsByFrequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
   subdirs[rows, seq_len(freqinfo$depth)]
 }
 
-# lookup -----------------------------------------------------------------------
-lookup <- function(x, dict)
+# lookup_in_dictionary ---------------------------------------------------------
+lookup_in_dictionary <- function(x, dict)
 {
   #x <- old_dirs; dict <- old_dict
 
@@ -30,10 +30,10 @@ lookup <- function(x, dict)
   out
 }
 
-# replaceSubdirs ---------------------------------------------------------------
-replaceSubdirs <- function(s, r, p)
+# replace_subdirs --------------------------------------------------------------
+replace_subdirs <- function(s, r, p)
 {
-  selected <- startsWithParts(s, r)
+  selected <- starts_with_parts(s, r)
 
   cols <- seq(length(r) + 1, ncol(s))
 
@@ -47,7 +47,7 @@ replaceSubdirs <- function(s, r, p)
   s[, seq_len(maxcol)]
 }
 
-# startsWithParts --------------------------------------------------------------
+# starts_with_parts ------------------------------------------------------------
 
 #' Do Subfolder List Elements Start with Given Folder Names?
 #'
@@ -65,14 +65,14 @@ replaceSubdirs <- function(s, r, p)
 #'
 #' @examples
 #' parts <- strsplit(c("a/b/c", "a/b/d", "b/c"), "/")
-#' startsWithParts(parts, elements = c("a", "b"))
-#' startsWithParts(parts, elements = c("b", "c"))
+#' starts_with_parts(parts, elements = c("a", "b"))
+#' starts_with_parts(parts, elements = c("b", "c"))
 #'
 #' subdir_matrix <- kwb.file::to_subdir_matrix(parts)
-#' startsWithParts(subdir_matrix, elements = c("a", "b"))
-#' startsWithParts(subdir_matrix, elements = c("b", "c"))
+#' starts_with_parts(subdir_matrix, elements = c("a", "b"))
+#' starts_with_parts(subdir_matrix, elements = c("b", "c"))
 #'
-startsWithParts <- function(parts, elements)
+starts_with_parts <- function(parts, elements)
 {
   stopifnot(is.list(parts) || is.matrix(parts))
 
