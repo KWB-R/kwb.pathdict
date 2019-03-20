@@ -381,242 +381,242 @@ result
 #&gt; $p5
 #&gt; [1] "space/moon/spring/mount/burn/above/separate/village"</code></pre>
 </div>
-<div id="get_frequency_score" class="section level3">
+<div id="to_frequency_data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#get_frequency_score" class="anchor"></a>get_frequency_score</h3>
-<p>This function takes a data frame with columns <code>length</code> and <code>count</code> as input. It calculates <code>(length - length(to_placeholder(key))) * count</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">frequency_data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">length =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">11</span>), <span class="dt">count =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">key &lt;-<span class="st"> "abc"</span></a>
+<a href="#to_frequency_data" class="anchor"></a>to_frequency_data</h3>
+<p>This function creates a data frame from list with paths as keys and path frequencies as values.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Define artificial frequency data</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">freqs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">a =</span> <span class="dv">10</span>, <span class="dt">bc =</span> <span class="dv">20</span>, <span class="dt">cde =</span> <span class="dv">15</span>)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">kwb.pathdict<span class="op">:::</span><span class="kw">get_frequency_score</span>(frequency_data, key)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [1] 15 24</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># Calculate manually</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">(frequency_data<span class="op">$</span>length <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(key) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>frequency_data<span class="op">$</span>count</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; [1] 15 24</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># Convert to data frame, calculate string length and score</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">kwb.pathdict<span class="op">:::</span><span class="kw">to_frequency_data</span>(freqs)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   path score length count</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 1   bc    20      2    10</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 2  cde    15      3     5</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 3    a    10      1    10</span></a></code></pre></div>
+</div>
+<div id="rescore_and_reorder_frequency_data-and-get_frequency_score" class="section level3">
+<h3 class="hasAnchor">
+<a href="#rescore_and_reorder_frequency_data-and-get_frequency_score" class="anchor"></a>rescore_and_reorder_frequency_data() and get_frequency_score()</h3>
+<p>This function takes a data frame with columns <code>length</code> and <code>count</code> as input. It calculates <code>score = (length - length(to_placeholder(key))) * count</code> and orders the data frame decreasingly by this score.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Define artificial frequency data</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">frequency_data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">length =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">20</span>), <span class="dt">count =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">key &lt;-<span class="st"> "abc"</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">kwb.pathdict<span class="op">:::</span><span class="kw">rescore_and_reorder_frequency_data</span>(frequency_data, key)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   length count score2</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1     20     4     60</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 2     11     4     24</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 3     10     3     15</span></a></code></pre></div>
+<p>This function internally uses <code>get_frequency_score()</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">kwb.pathdict<span class="op">:::</span><span class="kw">get_frequency_score</span>(frequency_data, key)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1] 15 24 60</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Calculate manually</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">(frequency_data<span class="op">$</span>length <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(key) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>frequency_data<span class="op">$</span>count</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [1] 15 24 60</span></a></code></pre></div>
 </div>
 <div id="functions-that-still-need-to-be-des-described" class="section level3">
 <h3 class="hasAnchor">
 <a href="#functions-that-still-need-to-be-des-described" class="anchor"></a>Functions that still need to be des described</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">kwb.pathdict<span class="op">:::</span>get_next_level</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; function (x, key, set.attributes = FALSE, dbg = FALSE) </span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;     freqs &lt;- get_subdir_frequencies(paths = x, dbg = dbg)</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;     allfreqs &lt;- sort(unlist(freqs), decreasing = TRUE)</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;     dict &lt;- structure(list(names(allfreqs[1])), names = key)</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;     result &lt;- use_dictionary(x, dict, method = "part")</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;     if (set.attributes) {</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;         attr(result, "freqs") &lt;- freqs</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;         attr(result, "dict") &lt;- dict</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;     result</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; &lt;bytecode: 0x6f23498&gt;</span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">kwb.pathdict<span class="op">:::</span>get_subdir_frequencies</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; function (subdirs = kwb.file::split_paths(paths), paths = NULL, </span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt;     first.only = TRUE, dbg = TRUE) </span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt;     n_levels &lt;- kwb.utils::getElementLengths(subdirs)</span></a>
-<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt;     if (dbg) {</span></a>
-<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt;         main &lt;- "Distribution of path depths"</span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;         graphics::hist(n_levels, main = main)</span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt;         kwb.utils::printIf(dbg, table(n_levels), main)</span></a>
-<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt;     lapply(seq_len(max(n_levels)), function(i) {</span></a>
-<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt;         is_long_enough &lt;- n_levels &gt;= i</span></a>
-<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt;         kwb.utils::catIf(dbg, sprintf("i = %d, n = %d...\n", </span></a>
-<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt;             i, sum(is_long_enough)))</span></a>
-<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="co">#&gt;         x &lt;- sapply(subdirs[is_long_enough], function(xx) {</span></a>
-<a class="sourceLine" id="cb7-31" data-line-number="31"><span class="co">#&gt;             kwb.utils::collapsed(xx[seq_len(i)], "/")</span></a>
-<a class="sourceLine" id="cb7-32" data-line-number="32"><span class="co">#&gt;         })</span></a>
-<a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">#&gt;         y &lt;- sorted_importance(x)</span></a>
-<a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">#&gt;         kwb.utils::printIf(dbg, utils::head(y))</span></a>
-<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt;         if (first.only) </span></a>
-<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt;             y[1]</span></a>
-<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt;         else y</span></a>
-<a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt;     })</span></a>
-<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt; &lt;bytecode: 0x50dd250&gt;</span></a>
-<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-42" data-line-number="42">kwb.pathdict<span class="op">:::</span>get_subdirs_by_frequence</a>
-<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; function (subdirs, cumid, freqinfo, dbg = TRUE) </span></a>
-<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-45" data-line-number="45"><span class="co">#&gt;     kwb.utils::printIf(dbg, freqinfo)</span></a>
-<a class="sourceLine" id="cb7-46" data-line-number="46"><span class="co">#&gt;     rows &lt;- which(cumid[, freqinfo$depth] == freqinfo$n.x)[1]</span></a>
-<a class="sourceLine" id="cb7-47" data-line-number="47"><span class="co">#&gt;     subdirs[rows, seq_len(freqinfo$depth)]</span></a>
-<a class="sourceLine" id="cb7-48" data-line-number="48"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-49" data-line-number="49"><span class="co">#&gt; &lt;bytecode: 0x700f660&gt;</span></a>
-<a class="sourceLine" id="cb7-50" data-line-number="50"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-51" data-line-number="51">kwb.pathdict<span class="op">:::</span>log_result_if</a>
-<a class="sourceLine" id="cb7-52" data-line-number="52"><span class="co">#&gt; function (dbg, x, y) </span></a>
-<a class="sourceLine" id="cb7-53" data-line-number="53"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-54" data-line-number="54"><span class="co">#&gt;     if (dbg) {</span></a>
-<a class="sourceLine" id="cb7-55" data-line-number="55"><span class="co">#&gt;         kwb.utils::catLines(c("\n### x:", x))</span></a>
-<a class="sourceLine" id="cb7-56" data-line-number="56"><span class="co">#&gt;         kwb.utils::catLines(c("\n### y:", y))</span></a>
-<a class="sourceLine" id="cb7-57" data-line-number="57"><span class="co">#&gt;         cat("\n### str(dict):\n")</span></a>
-<a class="sourceLine" id="cb7-58" data-line-number="58"><span class="co">#&gt;         utils::str(kwb.utils::getAttribute(y, "dict"))</span></a>
-<a class="sourceLine" id="cb7-59" data-line-number="59"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-60" data-line-number="60"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-61" data-line-number="61"><span class="co">#&gt; &lt;bytecode: 0x7084660&gt;</span></a>
-<a class="sourceLine" id="cb7-62" data-line-number="62"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-63" data-line-number="63">kwb.pathdict<span class="op">:::</span>lookup_in_dictionary</a>
-<a class="sourceLine" id="cb7-64" data-line-number="64"><span class="co">#&gt; function (x, dict) </span></a>
-<a class="sourceLine" id="cb7-65" data-line-number="65"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-66" data-line-number="66"><span class="co">#&gt;     ready &lt;- x %in% to_placeholder(names(dict))</span></a>
-<a class="sourceLine" id="cb7-67" data-line-number="67"><span class="co">#&gt;     out &lt;- x</span></a>
-<a class="sourceLine" id="cb7-68" data-line-number="68"><span class="co">#&gt;     out[!ready] &lt;- to_placeholder(names(dict[match(x[!ready], </span></a>
-<a class="sourceLine" id="cb7-69" data-line-number="69"><span class="co">#&gt;         dict)]))</span></a>
-<a class="sourceLine" id="cb7-70" data-line-number="70"><span class="co">#&gt;     out</span></a>
-<a class="sourceLine" id="cb7-71" data-line-number="71"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-72" data-line-number="72"><span class="co">#&gt; &lt;bytecode: 0x70f7ac0&gt;</span></a>
-<a class="sourceLine" id="cb7-73" data-line-number="73"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-74" data-line-number="74">kwb.pathdict<span class="op">:::</span>main_columns_winner</a>
-<a class="sourceLine" id="cb7-75" data-line-number="75"><span class="co">#&gt; function () </span></a>
-<a class="sourceLine" id="cb7-76" data-line-number="76"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-77" data-line-number="77"><span class="co">#&gt;     c("i", "key", "score", "count", "length")</span></a>
-<a class="sourceLine" id="cb7-78" data-line-number="78"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-79" data-line-number="79"><span class="co">#&gt; &lt;bytecode: 0x611ab00&gt;</span></a>
-<a class="sourceLine" id="cb7-80" data-line-number="80"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-81" data-line-number="81">kwb.pathdict<span class="op">:::</span>print_path_frequencies</a>
-<a class="sourceLine" id="cb7-82" data-line-number="82"><span class="co">#&gt; function (x, maxchar = 80) </span></a>
-<a class="sourceLine" id="cb7-83" data-line-number="83"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-84" data-line-number="84"><span class="co">#&gt;     x$path &lt;- substr(x$path, 1, maxchar)</span></a>
-<a class="sourceLine" id="cb7-85" data-line-number="85"><span class="co">#&gt;     print(x)</span></a>
-<a class="sourceLine" id="cb7-86" data-line-number="86"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-87" data-line-number="87"><span class="co">#&gt; &lt;bytecode: 0x6067860&gt;</span></a>
-<a class="sourceLine" id="cb7-88" data-line-number="88"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-89" data-line-number="89">kwb.pathdict<span class="op">:::</span>replace_subdirs</a>
-<a class="sourceLine" id="cb7-90" data-line-number="90"><span class="co">#&gt; function (s, r, p) </span></a>
-<a class="sourceLine" id="cb7-91" data-line-number="91"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-92" data-line-number="92"><span class="co">#&gt;     selected &lt;- starts_with_parts(s, r)</span></a>
-<a class="sourceLine" id="cb7-93" data-line-number="93"><span class="co">#&gt;     cols &lt;- seq(length(r) + 1, ncol(s))</span></a>
-<a class="sourceLine" id="cb7-94" data-line-number="94"><span class="co">#&gt;     fillright &lt;- matrix(nrow = sum(selected), ncol = length(r) - </span></a>
-<a class="sourceLine" id="cb7-95" data-line-number="95"><span class="co">#&gt;         1)</span></a>
-<a class="sourceLine" id="cb7-96" data-line-number="96"><span class="co">#&gt;     s[selected, ] &lt;- cbind(p, s[selected, cols, drop = FALSE], </span></a>
-<a class="sourceLine" id="cb7-97" data-line-number="97"><span class="co">#&gt;         fillright)</span></a>
-<a class="sourceLine" id="cb7-98" data-line-number="98"><span class="co">#&gt;     maxcol &lt;- max(which(apply(s, 2, function(x) sum(!is.na(x))) &gt; </span></a>
-<a class="sourceLine" id="cb7-99" data-line-number="99"><span class="co">#&gt;         0))</span></a>
-<a class="sourceLine" id="cb7-100" data-line-number="100"><span class="co">#&gt;     s[, seq_len(maxcol)]</span></a>
-<a class="sourceLine" id="cb7-101" data-line-number="101"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-102" data-line-number="102"><span class="co">#&gt; &lt;bytecode: 0x7248c80&gt;</span></a>
-<a class="sourceLine" id="cb7-103" data-line-number="103"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-104" data-line-number="104">kwb.pathdict<span class="op">:::</span>rescore_and_reorder_frequency_data</a>
-<a class="sourceLine" id="cb7-105" data-line-number="105"><span class="co">#&gt; function (frequency_data, key) </span></a>
-<a class="sourceLine" id="cb7-106" data-line-number="106"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-107" data-line-number="107"><span class="co">#&gt;     frequency_data$score2 &lt;- get_frequency_score(frequency_data, </span></a>
-<a class="sourceLine" id="cb7-108" data-line-number="108"><span class="co">#&gt;         key)</span></a>
-<a class="sourceLine" id="cb7-109" data-line-number="109"><span class="co">#&gt;     row_order &lt;- order(frequency_data$score2, decreasing = TRUE)</span></a>
-<a class="sourceLine" id="cb7-110" data-line-number="110"><span class="co">#&gt;     kwb.utils::resetRowNames(frequency_data[row_order, ])</span></a>
-<a class="sourceLine" id="cb7-111" data-line-number="111"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-112" data-line-number="112"><span class="co">#&gt; &lt;bytecode: 0x6048740&gt;</span></a>
-<a class="sourceLine" id="cb7-113" data-line-number="113"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-114" data-line-number="114">kwb.pathdict<span class="op">:::</span>starts_with_parts</a>
-<a class="sourceLine" id="cb7-115" data-line-number="115"><span class="co">#&gt; function (parts, elements) </span></a>
-<a class="sourceLine" id="cb7-116" data-line-number="116"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-117" data-line-number="117"><span class="co">#&gt;     stopifnot(is.list(parts) || is.matrix(parts))</span></a>
-<a class="sourceLine" id="cb7-118" data-line-number="118"><span class="co">#&gt;     stopifnot(all(!is.na(elements)))</span></a>
-<a class="sourceLine" id="cb7-119" data-line-number="119"><span class="co">#&gt;     length_out &lt;- if (is.list(parts)) </span></a>
-<a class="sourceLine" id="cb7-120" data-line-number="120"><span class="co">#&gt;         length(parts)</span></a>
-<a class="sourceLine" id="cb7-121" data-line-number="121"><span class="co">#&gt;     else nrow(parts)</span></a>
-<a class="sourceLine" id="cb7-122" data-line-number="122"><span class="co">#&gt;     selected_at_level &lt;- lapply(seq_along(elements), function(i) {</span></a>
-<a class="sourceLine" id="cb7-123" data-line-number="123"><span class="co">#&gt;         if (is.list(parts)) {</span></a>
-<a class="sourceLine" id="cb7-124" data-line-number="124"><span class="co">#&gt;             sapply(parts, "[", i) == elements[i]</span></a>
-<a class="sourceLine" id="cb7-125" data-line-number="125"><span class="co">#&gt;         }</span></a>
-<a class="sourceLine" id="cb7-126" data-line-number="126"><span class="co">#&gt;         else {</span></a>
-<a class="sourceLine" id="cb7-127" data-line-number="127"><span class="co">#&gt;             !is.na(parts[, i]) &amp; (parts[, i] == elements[i])</span></a>
-<a class="sourceLine" id="cb7-128" data-line-number="128"><span class="co">#&gt;         }</span></a>
-<a class="sourceLine" id="cb7-129" data-line-number="129"><span class="co">#&gt;     })</span></a>
-<a class="sourceLine" id="cb7-130" data-line-number="130"><span class="co">#&gt;     Reduce(`&amp;`, selected_at_level, init = rep(TRUE, length_out))</span></a>
-<a class="sourceLine" id="cb7-131" data-line-number="131"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-132" data-line-number="132"><span class="co">#&gt; &lt;bytecode: 0x733ab00&gt;</span></a>
-<a class="sourceLine" id="cb7-133" data-line-number="133"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-134" data-line-number="134">kwb.pathdict<span class="op">:::</span>to_dictionary</a>
-<a class="sourceLine" id="cb7-135" data-line-number="135"><span class="co">#&gt; function (x, prefix = "a", leading.zeros = FALSE) </span></a>
-<a class="sourceLine" id="cb7-136" data-line-number="136"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-137" data-line-number="137"><span class="co">#&gt;     dict &lt;- as.list(names(sorted_importance(x)))</span></a>
-<a class="sourceLine" id="cb7-138" data-line-number="138"><span class="co">#&gt;     keys &lt;- to_dictionary_key(seq_along(dict), prefix, leading.zeros)</span></a>
-<a class="sourceLine" id="cb7-139" data-line-number="139"><span class="co">#&gt;     stats::setNames(dict, keys)</span></a>
-<a class="sourceLine" id="cb7-140" data-line-number="140"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-141" data-line-number="141"><span class="co">#&gt; &lt;bytecode: 0x73b4a48&gt;</span></a>
-<a class="sourceLine" id="cb7-142" data-line-number="142"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-143" data-line-number="143">kwb.pathdict<span class="op">:::</span>to_dictionary_key</a>
-<a class="sourceLine" id="cb7-144" data-line-number="144"><span class="co">#&gt; function (i, prefix = "p", leading.zeros = FALSE) </span></a>
-<a class="sourceLine" id="cb7-145" data-line-number="145"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-146" data-line-number="146"><span class="co">#&gt;     fmt &lt;- if (leading.zeros) {</span></a>
-<a class="sourceLine" id="cb7-147" data-line-number="147"><span class="co">#&gt;         digits &lt;- nchar(to_dictionary_key(length(i), ""))</span></a>
-<a class="sourceLine" id="cb7-148" data-line-number="148"><span class="co">#&gt;         paste0("%s%0", digits, "X")</span></a>
-<a class="sourceLine" id="cb7-149" data-line-number="149"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-150" data-line-number="150"><span class="co">#&gt;     else {</span></a>
-<a class="sourceLine" id="cb7-151" data-line-number="151"><span class="co">#&gt;         "%s%X"</span></a>
-<a class="sourceLine" id="cb7-152" data-line-number="152"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-153" data-line-number="153"><span class="co">#&gt;     sprintf(fmt, prefix, i)</span></a>
-<a class="sourceLine" id="cb7-154" data-line-number="154"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-155" data-line-number="155"><span class="co">#&gt; &lt;bytecode: 0x6044040&gt;</span></a>
-<a class="sourceLine" id="cb7-156" data-line-number="156"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-157" data-line-number="157">kwb.pathdict<span class="op">:::</span>to_frequency_data</a>
-<a class="sourceLine" id="cb7-158" data-line-number="158"><span class="co">#&gt; function (freqs) </span></a>
-<a class="sourceLine" id="cb7-159" data-line-number="159"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-160" data-line-number="160"><span class="co">#&gt;     sorted_frequencies &lt;- sort(unlist(freqs), decreasing = TRUE)</span></a>
-<a class="sourceLine" id="cb7-161" data-line-number="161"><span class="co">#&gt;     path_length &lt;- nchar(names(sorted_frequencies))</span></a>
-<a class="sourceLine" id="cb7-162" data-line-number="162"><span class="co">#&gt;     kwb.utils::noFactorDataFrame(path = names(sorted_frequencies), </span></a>
-<a class="sourceLine" id="cb7-163" data-line-number="163"><span class="co">#&gt;         score = sorted_frequencies, length = path_length, count = sorted_frequencies/path_length, </span></a>
-<a class="sourceLine" id="cb7-164" data-line-number="164"><span class="co">#&gt;         row.names = NULL)</span></a>
-<a class="sourceLine" id="cb7-165" data-line-number="165"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-166" data-line-number="166"><span class="co">#&gt; &lt;bytecode: 0x6018e40&gt;</span></a>
-<a class="sourceLine" id="cb7-167" data-line-number="167"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-168" data-line-number="168">kwb.pathdict<span class="op">:::</span>to_placeholder</a>
-<a class="sourceLine" id="cb7-169" data-line-number="169"><span class="co">#&gt; function (x) </span></a>
-<a class="sourceLine" id="cb7-170" data-line-number="170"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-171" data-line-number="171"><span class="co">#&gt;     paste0("&lt;", x, "&gt;")</span></a>
-<a class="sourceLine" id="cb7-172" data-line-number="172"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-173" data-line-number="173"><span class="co">#&gt; &lt;bytecode: 0x604a158&gt;</span></a>
-<a class="sourceLine" id="cb7-174" data-line-number="174"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-175" data-line-number="175">kwb.pathdict<span class="op">:::</span>update_frequency_data_length</a>
-<a class="sourceLine" id="cb7-176" data-line-number="176"><span class="co">#&gt; function (frequency_data, winner, key) </span></a>
-<a class="sourceLine" id="cb7-177" data-line-number="177"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-178" data-line-number="178"><span class="co">#&gt;     winner_length &lt;- kwb.utils::selectColumns(winner, "length")</span></a>
-<a class="sourceLine" id="cb7-179" data-line-number="179"><span class="co">#&gt;     winner_path &lt;- kwb.utils::selectColumns(winner, "path")</span></a>
-<a class="sourceLine" id="cb7-180" data-line-number="180"><span class="co">#&gt;     data_length &lt;- kwb.utils::selectColumns(frequency_data, "length")</span></a>
-<a class="sourceLine" id="cb7-181" data-line-number="181"><span class="co">#&gt;     data_path &lt;- kwb.utils::selectColumns(frequency_data, "path")</span></a>
-<a class="sourceLine" id="cb7-182" data-line-number="182"><span class="co">#&gt;     shortage &lt;- winner_length - nchar(to_placeholder(key))</span></a>
-<a class="sourceLine" id="cb7-183" data-line-number="183"><span class="co">#&gt;     matching &lt;- (substr(data_path, 1, winner_length) == winner_path)</span></a>
-<a class="sourceLine" id="cb7-184" data-line-number="184"><span class="co">#&gt;     frequency_data$length[matching] &lt;- data_length[matching] - </span></a>
-<a class="sourceLine" id="cb7-185" data-line-number="185"><span class="co">#&gt;         shortage</span></a>
-<a class="sourceLine" id="cb7-186" data-line-number="186"><span class="co">#&gt;     frequency_data</span></a>
-<a class="sourceLine" id="cb7-187" data-line-number="187"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-188" data-line-number="188"><span class="co">#&gt; &lt;bytecode: 0x6180838&gt;</span></a>
-<a class="sourceLine" id="cb7-189" data-line-number="189"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
-<a class="sourceLine" id="cb7-190" data-line-number="190">kwb.pathdict<span class="op">:::</span>use_dictionary</a>
-<a class="sourceLine" id="cb7-191" data-line-number="191"><span class="co">#&gt; function (x, dict, method = "full") </span></a>
-<a class="sourceLine" id="cb7-192" data-line-number="192"><span class="co">#&gt; {</span></a>
-<a class="sourceLine" id="cb7-193" data-line-number="193"><span class="co">#&gt;     if (method == "full") {</span></a>
-<a class="sourceLine" id="cb7-194" data-line-number="194"><span class="co">#&gt;         indices &lt;- match(x, as.character(dict))</span></a>
-<a class="sourceLine" id="cb7-195" data-line-number="195"><span class="co">#&gt;         found &lt;- !is.na(indices)</span></a>
-<a class="sourceLine" id="cb7-196" data-line-number="196"><span class="co">#&gt;         x[found] &lt;- to_placeholder(names(dict)[indices[found]])</span></a>
-<a class="sourceLine" id="cb7-197" data-line-number="197"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-198" data-line-number="198"><span class="co">#&gt;     else if (method == "part") {</span></a>
-<a class="sourceLine" id="cb7-199" data-line-number="199"><span class="co">#&gt;         keys &lt;- names(dict)</span></a>
-<a class="sourceLine" id="cb7-200" data-line-number="200"><span class="co">#&gt;         n &lt;- length(keys)</span></a>
-<a class="sourceLine" id="cb7-201" data-line-number="201"><span class="co">#&gt;         for (i in seq_len(n)) {</span></a>
-<a class="sourceLine" id="cb7-202" data-line-number="202"><span class="co">#&gt;             key &lt;- keys[i]</span></a>
-<a class="sourceLine" id="cb7-203" data-line-number="203"><span class="co">#&gt;             pattern &lt;- dict[[key]]</span></a>
-<a class="sourceLine" id="cb7-204" data-line-number="204"><span class="co">#&gt;             replacement &lt;- to_placeholder(key)</span></a>
-<a class="sourceLine" id="cb7-205" data-line-number="205"><span class="co">#&gt;             if (i%%20 == 0) {</span></a>
-<a class="sourceLine" id="cb7-206" data-line-number="206"><span class="co">#&gt;                 cat(sprintf("%4.1f %% Substituting '%s' with '%s'...\n", </span></a>
-<a class="sourceLine" id="cb7-207" data-line-number="207"><span class="co">#&gt;                   100 * i/n, pattern, replacement))</span></a>
-<a class="sourceLine" id="cb7-208" data-line-number="208"><span class="co">#&gt;             }</span></a>
-<a class="sourceLine" id="cb7-209" data-line-number="209"><span class="co">#&gt;             x &lt;- gsub(pattern, replacement, x, fixed = TRUE)</span></a>
-<a class="sourceLine" id="cb7-210" data-line-number="210"><span class="co">#&gt;         }</span></a>
-<a class="sourceLine" id="cb7-211" data-line-number="211"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-212" data-line-number="212"><span class="co">#&gt;     else {</span></a>
-<a class="sourceLine" id="cb7-213" data-line-number="213"><span class="co">#&gt;         stop("use_dictionary(): method must be one of 'full', 'part'", </span></a>
-<a class="sourceLine" id="cb7-214" data-line-number="214"><span class="co">#&gt;             call. = FALSE)</span></a>
-<a class="sourceLine" id="cb7-215" data-line-number="215"><span class="co">#&gt;     }</span></a>
-<a class="sourceLine" id="cb7-216" data-line-number="216"><span class="co">#&gt;     x</span></a>
-<a class="sourceLine" id="cb7-217" data-line-number="217"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb7-218" data-line-number="218"><span class="co">#&gt; &lt;bytecode: 0x46efe58&gt;</span></a>
-<a class="sourceLine" id="cb7-219" data-line-number="219"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">kwb.pathdict<span class="op">:::</span>get_next_level</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; function (x, key, set.attributes = FALSE, dbg = FALSE) </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;     freqs &lt;- get_subdir_frequencies(paths = x, dbg = dbg)</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;     allfreqs &lt;- sort(unlist(freqs), decreasing = TRUE)</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;     dict &lt;- structure(list(names(allfreqs[1])), names = key)</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;     result &lt;- use_dictionary(x, dict, method = "part")</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;     if (set.attributes) {</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;         attr(result, "freqs") &lt;- freqs</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;         attr(result, "dict") &lt;- dict</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;     result</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; &lt;bytecode: 0x7b11438&gt;</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">kwb.pathdict<span class="op">:::</span>get_subdir_frequencies</a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; function (subdirs = kwb.file::split_paths(paths), paths = NULL, </span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt;     first.only = TRUE, dbg = TRUE) </span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt;     n_levels &lt;- kwb.utils::getElementLengths(subdirs)</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt;     if (dbg) {</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt;         main &lt;- "Distribution of path depths"</span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt;         graphics::hist(n_levels, main = main)</span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt;         kwb.utils::printIf(dbg, table(n_levels), main)</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt;     lapply(seq_len(max(n_levels)), function(i) {</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt;         is_long_enough &lt;- n_levels &gt;= i</span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt;         kwb.utils::catIf(dbg, sprintf("i = %d, n = %d...\n", </span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt;             i, sum(is_long_enough)))</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt;         x &lt;- sapply(subdirs[is_long_enough], function(xx) {</span></a>
+<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt;             kwb.utils::collapsed(xx[seq_len(i)], "/")</span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt;         })</span></a>
+<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt;         y &lt;- sorted_importance(x)</span></a>
+<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt;         kwb.utils::printIf(dbg, utils::head(y))</span></a>
+<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt;         if (first.only) </span></a>
+<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt;             y[1]</span></a>
+<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt;         else y</span></a>
+<a class="sourceLine" id="cb9-38" data-line-number="38"><span class="co">#&gt;     })</span></a>
+<a class="sourceLine" id="cb9-39" data-line-number="39"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-40" data-line-number="40"><span class="co">#&gt; &lt;bytecode: 0x5767d78&gt;</span></a>
+<a class="sourceLine" id="cb9-41" data-line-number="41"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-42" data-line-number="42">kwb.pathdict<span class="op">:::</span>get_subdirs_by_frequence</a>
+<a class="sourceLine" id="cb9-43" data-line-number="43"><span class="co">#&gt; function (subdirs, cumid, freqinfo, dbg = TRUE) </span></a>
+<a class="sourceLine" id="cb9-44" data-line-number="44"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="co">#&gt;     kwb.utils::printIf(dbg, freqinfo)</span></a>
+<a class="sourceLine" id="cb9-46" data-line-number="46"><span class="co">#&gt;     rows &lt;- which(cumid[, freqinfo$depth] == freqinfo$n.x)[1]</span></a>
+<a class="sourceLine" id="cb9-47" data-line-number="47"><span class="co">#&gt;     subdirs[rows, seq_len(freqinfo$depth)]</span></a>
+<a class="sourceLine" id="cb9-48" data-line-number="48"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-49" data-line-number="49"><span class="co">#&gt; &lt;bytecode: 0x7bfdb00&gt;</span></a>
+<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-51" data-line-number="51">kwb.pathdict<span class="op">:::</span>log_result_if</a>
+<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="co">#&gt; function (dbg, x, y) </span></a>
+<a class="sourceLine" id="cb9-53" data-line-number="53"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-54" data-line-number="54"><span class="co">#&gt;     if (dbg) {</span></a>
+<a class="sourceLine" id="cb9-55" data-line-number="55"><span class="co">#&gt;         kwb.utils::catLines(c("\n### x:", x))</span></a>
+<a class="sourceLine" id="cb9-56" data-line-number="56"><span class="co">#&gt;         kwb.utils::catLines(c("\n### y:", y))</span></a>
+<a class="sourceLine" id="cb9-57" data-line-number="57"><span class="co">#&gt;         cat("\n### str(dict):\n")</span></a>
+<a class="sourceLine" id="cb9-58" data-line-number="58"><span class="co">#&gt;         utils::str(kwb.utils::getAttribute(y, "dict"))</span></a>
+<a class="sourceLine" id="cb9-59" data-line-number="59"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-60" data-line-number="60"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-61" data-line-number="61"><span class="co">#&gt; &lt;bytecode: 0x4e10fb0&gt;</span></a>
+<a class="sourceLine" id="cb9-62" data-line-number="62"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-63" data-line-number="63">kwb.pathdict<span class="op">:::</span>lookup_in_dictionary</a>
+<a class="sourceLine" id="cb9-64" data-line-number="64"><span class="co">#&gt; function (x, dict) </span></a>
+<a class="sourceLine" id="cb9-65" data-line-number="65"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-66" data-line-number="66"><span class="co">#&gt;     ready &lt;- x %in% to_placeholder(names(dict))</span></a>
+<a class="sourceLine" id="cb9-67" data-line-number="67"><span class="co">#&gt;     out &lt;- x</span></a>
+<a class="sourceLine" id="cb9-68" data-line-number="68"><span class="co">#&gt;     out[!ready] &lt;- to_placeholder(names(dict[match(x[!ready], </span></a>
+<a class="sourceLine" id="cb9-69" data-line-number="69"><span class="co">#&gt;         dict)]))</span></a>
+<a class="sourceLine" id="cb9-70" data-line-number="70"><span class="co">#&gt;     out</span></a>
+<a class="sourceLine" id="cb9-71" data-line-number="71"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-72" data-line-number="72"><span class="co">#&gt; &lt;bytecode: 0x4d96ff8&gt;</span></a>
+<a class="sourceLine" id="cb9-73" data-line-number="73"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-74" data-line-number="74">kwb.pathdict<span class="op">:::</span>main_columns_winner</a>
+<a class="sourceLine" id="cb9-75" data-line-number="75"><span class="co">#&gt; function () </span></a>
+<a class="sourceLine" id="cb9-76" data-line-number="76"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-77" data-line-number="77"><span class="co">#&gt;     c("i", "key", "score", "count", "length")</span></a>
+<a class="sourceLine" id="cb9-78" data-line-number="78"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-79" data-line-number="79"><span class="co">#&gt; &lt;bytecode: 0x685ab28&gt;</span></a>
+<a class="sourceLine" id="cb9-80" data-line-number="80"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-81" data-line-number="81">kwb.pathdict<span class="op">:::</span>print_path_frequencies</a>
+<a class="sourceLine" id="cb9-82" data-line-number="82"><span class="co">#&gt; function (x, maxchar = 80) </span></a>
+<a class="sourceLine" id="cb9-83" data-line-number="83"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-84" data-line-number="84"><span class="co">#&gt;     x$path &lt;- substr(x$path, 1, maxchar)</span></a>
+<a class="sourceLine" id="cb9-85" data-line-number="85"><span class="co">#&gt;     print(x)</span></a>
+<a class="sourceLine" id="cb9-86" data-line-number="86"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-87" data-line-number="87"><span class="co">#&gt; &lt;bytecode: 0x67a3a48&gt;</span></a>
+<a class="sourceLine" id="cb9-88" data-line-number="88"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-89" data-line-number="89">kwb.pathdict<span class="op">:::</span>replace_subdirs</a>
+<a class="sourceLine" id="cb9-90" data-line-number="90"><span class="co">#&gt; function (s, r, p) </span></a>
+<a class="sourceLine" id="cb9-91" data-line-number="91"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-92" data-line-number="92"><span class="co">#&gt;     selected &lt;- starts_with_parts(s, r)</span></a>
+<a class="sourceLine" id="cb9-93" data-line-number="93"><span class="co">#&gt;     cols &lt;- seq(length(r) + 1, ncol(s))</span></a>
+<a class="sourceLine" id="cb9-94" data-line-number="94"><span class="co">#&gt;     fillright &lt;- matrix(nrow = sum(selected), ncol = length(r) - </span></a>
+<a class="sourceLine" id="cb9-95" data-line-number="95"><span class="co">#&gt;         1)</span></a>
+<a class="sourceLine" id="cb9-96" data-line-number="96"><span class="co">#&gt;     s[selected, ] &lt;- cbind(p, s[selected, cols, drop = FALSE], </span></a>
+<a class="sourceLine" id="cb9-97" data-line-number="97"><span class="co">#&gt;         fillright)</span></a>
+<a class="sourceLine" id="cb9-98" data-line-number="98"><span class="co">#&gt;     maxcol &lt;- max(which(apply(s, 2, function(x) sum(!is.na(x))) &gt; </span></a>
+<a class="sourceLine" id="cb9-99" data-line-number="99"><span class="co">#&gt;         0))</span></a>
+<a class="sourceLine" id="cb9-100" data-line-number="100"><span class="co">#&gt;     s[, seq_len(maxcol)]</span></a>
+<a class="sourceLine" id="cb9-101" data-line-number="101"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-102" data-line-number="102"><span class="co">#&gt; &lt;bytecode: 0x4a31c80&gt;</span></a>
+<a class="sourceLine" id="cb9-103" data-line-number="103"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-104" data-line-number="104">kwb.pathdict<span class="op">:::</span>starts_with_parts</a>
+<a class="sourceLine" id="cb9-105" data-line-number="105"><span class="co">#&gt; function (parts, elements) </span></a>
+<a class="sourceLine" id="cb9-106" data-line-number="106"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-107" data-line-number="107"><span class="co">#&gt;     stopifnot(is.list(parts) || is.matrix(parts))</span></a>
+<a class="sourceLine" id="cb9-108" data-line-number="108"><span class="co">#&gt;     stopifnot(all(!is.na(elements)))</span></a>
+<a class="sourceLine" id="cb9-109" data-line-number="109"><span class="co">#&gt;     length_out &lt;- if (is.list(parts)) </span></a>
+<a class="sourceLine" id="cb9-110" data-line-number="110"><span class="co">#&gt;         length(parts)</span></a>
+<a class="sourceLine" id="cb9-111" data-line-number="111"><span class="co">#&gt;     else nrow(parts)</span></a>
+<a class="sourceLine" id="cb9-112" data-line-number="112"><span class="co">#&gt;     selected_at_level &lt;- lapply(seq_along(elements), function(i) {</span></a>
+<a class="sourceLine" id="cb9-113" data-line-number="113"><span class="co">#&gt;         if (is.list(parts)) {</span></a>
+<a class="sourceLine" id="cb9-114" data-line-number="114"><span class="co">#&gt;             sapply(parts, "[", i) == elements[i]</span></a>
+<a class="sourceLine" id="cb9-115" data-line-number="115"><span class="co">#&gt;         }</span></a>
+<a class="sourceLine" id="cb9-116" data-line-number="116"><span class="co">#&gt;         else {</span></a>
+<a class="sourceLine" id="cb9-117" data-line-number="117"><span class="co">#&gt;             !is.na(parts[, i]) &amp; (parts[, i] == elements[i])</span></a>
+<a class="sourceLine" id="cb9-118" data-line-number="118"><span class="co">#&gt;         }</span></a>
+<a class="sourceLine" id="cb9-119" data-line-number="119"><span class="co">#&gt;     })</span></a>
+<a class="sourceLine" id="cb9-120" data-line-number="120"><span class="co">#&gt;     Reduce(`&amp;`, selected_at_level, init = rep(TRUE, length_out))</span></a>
+<a class="sourceLine" id="cb9-121" data-line-number="121"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-122" data-line-number="122"><span class="co">#&gt; &lt;bytecode: 0x48a9520&gt;</span></a>
+<a class="sourceLine" id="cb9-123" data-line-number="123"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-124" data-line-number="124">kwb.pathdict<span class="op">:::</span>to_dictionary</a>
+<a class="sourceLine" id="cb9-125" data-line-number="125"><span class="co">#&gt; function (x, prefix = "a", leading.zeros = FALSE) </span></a>
+<a class="sourceLine" id="cb9-126" data-line-number="126"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-127" data-line-number="127"><span class="co">#&gt;     dict &lt;- as.list(names(sorted_importance(x)))</span></a>
+<a class="sourceLine" id="cb9-128" data-line-number="128"><span class="co">#&gt;     keys &lt;- to_dictionary_key(seq_along(dict), prefix, leading.zeros)</span></a>
+<a class="sourceLine" id="cb9-129" data-line-number="129"><span class="co">#&gt;     stats::setNames(dict, keys)</span></a>
+<a class="sourceLine" id="cb9-130" data-line-number="130"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-131" data-line-number="131"><span class="co">#&gt; &lt;bytecode: 0x435fa20&gt;</span></a>
+<a class="sourceLine" id="cb9-132" data-line-number="132"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-133" data-line-number="133">kwb.pathdict<span class="op">:::</span>to_dictionary_key</a>
+<a class="sourceLine" id="cb9-134" data-line-number="134"><span class="co">#&gt; function (i, prefix = "p", leading.zeros = FALSE) </span></a>
+<a class="sourceLine" id="cb9-135" data-line-number="135"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-136" data-line-number="136"><span class="co">#&gt;     fmt &lt;- if (leading.zeros) {</span></a>
+<a class="sourceLine" id="cb9-137" data-line-number="137"><span class="co">#&gt;         digits &lt;- nchar(to_dictionary_key(length(i), ""))</span></a>
+<a class="sourceLine" id="cb9-138" data-line-number="138"><span class="co">#&gt;         paste0("%s%0", digits, "X")</span></a>
+<a class="sourceLine" id="cb9-139" data-line-number="139"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-140" data-line-number="140"><span class="co">#&gt;     else {</span></a>
+<a class="sourceLine" id="cb9-141" data-line-number="141"><span class="co">#&gt;         "%s%X"</span></a>
+<a class="sourceLine" id="cb9-142" data-line-number="142"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-143" data-line-number="143"><span class="co">#&gt;     sprintf(fmt, prefix, i)</span></a>
+<a class="sourceLine" id="cb9-144" data-line-number="144"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-145" data-line-number="145"><span class="co">#&gt; &lt;bytecode: 0x6782148&gt;</span></a>
+<a class="sourceLine" id="cb9-146" data-line-number="146"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-147" data-line-number="147">kwb.pathdict<span class="op">:::</span>to_placeholder</a>
+<a class="sourceLine" id="cb9-148" data-line-number="148"><span class="co">#&gt; function (x) </span></a>
+<a class="sourceLine" id="cb9-149" data-line-number="149"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-150" data-line-number="150"><span class="co">#&gt;     paste0("&lt;", x, "&gt;")</span></a>
+<a class="sourceLine" id="cb9-151" data-line-number="151"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-152" data-line-number="152"><span class="co">#&gt; &lt;bytecode: 0x6788260&gt;</span></a>
+<a class="sourceLine" id="cb9-153" data-line-number="153"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-154" data-line-number="154">kwb.pathdict<span class="op">:::</span>update_frequency_data_length</a>
+<a class="sourceLine" id="cb9-155" data-line-number="155"><span class="co">#&gt; function (frequency_data, winner, key) </span></a>
+<a class="sourceLine" id="cb9-156" data-line-number="156"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-157" data-line-number="157"><span class="co">#&gt;     winner_length &lt;- kwb.utils::selectColumns(winner, "length")</span></a>
+<a class="sourceLine" id="cb9-158" data-line-number="158"><span class="co">#&gt;     winner_path &lt;- kwb.utils::selectColumns(winner, "path")</span></a>
+<a class="sourceLine" id="cb9-159" data-line-number="159"><span class="co">#&gt;     data_length &lt;- kwb.utils::selectColumns(frequency_data, "length")</span></a>
+<a class="sourceLine" id="cb9-160" data-line-number="160"><span class="co">#&gt;     data_path &lt;- kwb.utils::selectColumns(frequency_data, "path")</span></a>
+<a class="sourceLine" id="cb9-161" data-line-number="161"><span class="co">#&gt;     shortage &lt;- winner_length - nchar(to_placeholder(key))</span></a>
+<a class="sourceLine" id="cb9-162" data-line-number="162"><span class="co">#&gt;     matching &lt;- (substr(data_path, 1, winner_length) == winner_path)</span></a>
+<a class="sourceLine" id="cb9-163" data-line-number="163"><span class="co">#&gt;     frequency_data$length[matching] &lt;- data_length[matching] - </span></a>
+<a class="sourceLine" id="cb9-164" data-line-number="164"><span class="co">#&gt;         shortage</span></a>
+<a class="sourceLine" id="cb9-165" data-line-number="165"><span class="co">#&gt;     frequency_data</span></a>
+<a class="sourceLine" id="cb9-166" data-line-number="166"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-167" data-line-number="167"><span class="co">#&gt; &lt;bytecode: 0x68bca20&gt;</span></a>
+<a class="sourceLine" id="cb9-168" data-line-number="168"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
+<a class="sourceLine" id="cb9-169" data-line-number="169">kwb.pathdict<span class="op">:::</span>use_dictionary</a>
+<a class="sourceLine" id="cb9-170" data-line-number="170"><span class="co">#&gt; function (x, dict, method = "full") </span></a>
+<a class="sourceLine" id="cb9-171" data-line-number="171"><span class="co">#&gt; {</span></a>
+<a class="sourceLine" id="cb9-172" data-line-number="172"><span class="co">#&gt;     if (method == "full") {</span></a>
+<a class="sourceLine" id="cb9-173" data-line-number="173"><span class="co">#&gt;         indices &lt;- match(x, as.character(dict))</span></a>
+<a class="sourceLine" id="cb9-174" data-line-number="174"><span class="co">#&gt;         found &lt;- !is.na(indices)</span></a>
+<a class="sourceLine" id="cb9-175" data-line-number="175"><span class="co">#&gt;         x[found] &lt;- to_placeholder(names(dict)[indices[found]])</span></a>
+<a class="sourceLine" id="cb9-176" data-line-number="176"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-177" data-line-number="177"><span class="co">#&gt;     else if (method == "part") {</span></a>
+<a class="sourceLine" id="cb9-178" data-line-number="178"><span class="co">#&gt;         keys &lt;- names(dict)</span></a>
+<a class="sourceLine" id="cb9-179" data-line-number="179"><span class="co">#&gt;         n &lt;- length(keys)</span></a>
+<a class="sourceLine" id="cb9-180" data-line-number="180"><span class="co">#&gt;         for (i in seq_len(n)) {</span></a>
+<a class="sourceLine" id="cb9-181" data-line-number="181"><span class="co">#&gt;             key &lt;- keys[i]</span></a>
+<a class="sourceLine" id="cb9-182" data-line-number="182"><span class="co">#&gt;             pattern &lt;- dict[[key]]</span></a>
+<a class="sourceLine" id="cb9-183" data-line-number="183"><span class="co">#&gt;             replacement &lt;- to_placeholder(key)</span></a>
+<a class="sourceLine" id="cb9-184" data-line-number="184"><span class="co">#&gt;             if (i%%20 == 0) {</span></a>
+<a class="sourceLine" id="cb9-185" data-line-number="185"><span class="co">#&gt;                 cat(sprintf("%4.1f %% Substituting '%s' with '%s'...\n", </span></a>
+<a class="sourceLine" id="cb9-186" data-line-number="186"><span class="co">#&gt;                   100 * i/n, pattern, replacement))</span></a>
+<a class="sourceLine" id="cb9-187" data-line-number="187"><span class="co">#&gt;             }</span></a>
+<a class="sourceLine" id="cb9-188" data-line-number="188"><span class="co">#&gt;             x &lt;- gsub(pattern, replacement, x, fixed = TRUE)</span></a>
+<a class="sourceLine" id="cb9-189" data-line-number="189"><span class="co">#&gt;         }</span></a>
+<a class="sourceLine" id="cb9-190" data-line-number="190"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-191" data-line-number="191"><span class="co">#&gt;     else {</span></a>
+<a class="sourceLine" id="cb9-192" data-line-number="192"><span class="co">#&gt;         stop("use_dictionary(): method must be one of 'full', 'part'", </span></a>
+<a class="sourceLine" id="cb9-193" data-line-number="193"><span class="co">#&gt;             call. = FALSE)</span></a>
+<a class="sourceLine" id="cb9-194" data-line-number="194"><span class="co">#&gt;     }</span></a>
+<a class="sourceLine" id="cb9-195" data-line-number="195"><span class="co">#&gt;     x</span></a>
+<a class="sourceLine" id="cb9-196" data-line-number="196"><span class="co">#&gt; }</span></a>
+<a class="sourceLine" id="cb9-197" data-line-number="197"><span class="co">#&gt; &lt;bytecode: 0x2a722c8&gt;</span></a>
+<a class="sourceLine" id="cb9-198" data-line-number="198"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a></code></pre></div>
 </div>
   </div>
 
