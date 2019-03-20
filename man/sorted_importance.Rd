@@ -38,6 +38,6 @@ all(unique(strings) \%in\% names(importance))
 sum(importance) == length(strings)
 
 # You may use the function to assess the "importance" of directory paths
-kwb.pathdict:::sorted_importance(dirname(kwb.patdict:::example_paths()))
+kwb.pathdict:::sorted_importance(dirname(kwb.pathdict:::example_paths()))
 
 }
