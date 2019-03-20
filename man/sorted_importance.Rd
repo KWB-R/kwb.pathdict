@@ -20,7 +20,8 @@ named integer vector (of class table) containing the decreasingly
 }
 \description{
 Decreasingly sorted frequencies of strings, by default weighted by their
-length
+length. This function can be used to find the most "important"
+folder paths in terms of frequency and length.
 }
 \examples{
 strings <- c("a", "a", "a", "bc", "bc", "cdefg")
@@ -35,5 +36,8 @@ all(unique(strings) \%in\% names(importance))
 
 # Check if the sum of frequencies is the number of elements in x
 sum(importance) == length(strings)
+
+# You may use the function to assess the "importance" of directory paths
+kwb.pathdict:::sorted_importance(dirname(kwb.patdict:::example_paths()))
 
 }

@@ -92,7 +92,8 @@ get_subdir_frequencies <- function(
 #' Importance of Strings
 #'
 #' Decreasingly sorted frequencies of strings, by default weighted by their
-#' length
+#' length. This function can be used to find the most "important"
+#' folder paths in terms of frequency and length.
 #'
 #' @param x vector of character strings
 #' @param weighted if \code{TRUE} (default) the frequencies of strings are
@@ -116,6 +117,9 @@ get_subdir_frequencies <- function(
 #'
 #' # Check if the sum of frequencies is the number of elements in x
 #' sum(importance) == length(strings)
+#'
+#' # You may use the function to assess the "importance" of directory paths
+#' kwb.pathdict:::sorted_importance(dirname(kwb.patdict:::example_paths()))
 #'
 sorted_importance <- function(x, weighted = TRUE)
 {

@@ -24,11 +24,40 @@ vignette I want to recapitulate what the functions do that somehow deal with
 path dictionaries and that I extracted from the package kwb.fakin into this
 package.
 
+## Provide Example File Paths
+
 We start by loading some example `paths`:
 
 ```{r}
+# Read and print example (file) paths
 writeLines(paths <- kwb.pathdict:::example_paths())
+
+# Manually define some (folder) paths
+directories <- c(
+  "short/path/to/directory", 
+  "short/path/to/directory", 
+  "short/path/to/directory", 
+  "longer/path/to/another/directory", 
+  "longer/path/to/another/directory"
+)
 ``` 
+
+## Compression of Folder Paths
+
+Assume you have a folder with a long path (either due to a lot of levels or due
+to long folder names). This long path is repeated for each file in the folder. 
+The package kwb.pathdict provides a `compress()` function that may be used to
+introduce short names for directory paths.
+
+```{r}
+short_dirs <- kwb.pathdict:::compress(directories)
+
+as.character(short_dirs)
+```
+
+```{r}
+attributes(kwb.pathdict:::compress_one_by_one(paths, n = 3))
+```
 
 ## Functions compress_paths() and sorted_importance()
 
@@ -45,11 +74,26 @@ kwb.pathdict:::print_compressed(paths_1)
 ```
 
 Equal directories are replaced by equal placeholders. The placeholders and their
-"values" are stored in a so called dictionary. The placeholder \<a1\> is given
-to the most "important" directory path, the placeholder \<a2\> to the second
-most "important", and so on. With "importance" we mean the product of the
-frequency of the directory path and its string length. It is internally
-calculated by the function `sorted_importance()`:
+"values" are stored in a so called dictionary. The dictionary can be seen as a
+lookup table that maps short names to long names. The dictionary is returned
+in the attribute `dict` of what `compress_paths()` returns:
+
+```{r}
+(dictionary_1 <- kwb.utils::getAttribute(paths_1, "dict"))
+```
+
+The dictionary is sorted by the importance of the strings (paths) that have been
+given to `compress()` so that the most important paths get the highest positions 
+in the dictionary. 
+
+The placeholder \<a1\> is given to the most "important" directory path, the
+placeholder \<a2\> to the second most "important", and so on.
+
+With "importance" we mean the product of the frequency of the directory path
+(its number of occurrences) and its string length. It is internally calculated
+by the function `sorted_importance()`. This function returns the product of
+string frequency and string length for the different strings given in its first
+argument.
 
 ```{r}
 kwb.pathdict:::named_vector_to_data_frame(
@@ -101,6 +145,17 @@ The following code section demonstrates how increasing `maxdepth` step by step c
 kwb.pathdict:::print_dict(paths, 3)
 kwb.pathdict:::print_dict(paths, 4)
 kwb.pathdict:::print_dict(paths, 5)
+```
+
+The dictionary is required to convert the short names back to the original
+paths using the `resolve()` function of the `kwb.utils` package:
+
+```{r collapse = TRUE}
+# Reproduce the original file paths from the compressed paths and the dictionary
+(reproduced_paths <- kwb.utils::resolve(paths_1, dictionary_1))
+
+# Check if we really get back the original paths
+identical(paths_1, reproduced_paths)
 ```
 
 Ok, I understand what happened but what can I use this for? The idea was to 
@@ -175,24 +230,14 @@ kwb.utils::getAttribute(kwb.pathdict:::compress(x2), "dict")
 ```
 
 The elements in the dictionary are ordered by "importance", i.e. the product
-of frequency and length of the strings (see next).
+of frequency and length of the strings (see function `sorted_importance()` 
+above).
 
-### sorted_importance()
-
-This function returns the product of string frequency and string length for the
-different strings given in x.
-
-```{r}
-x1
-kwb.pathdict:::sorted_importance(x1)
-
-x2
-kwb.pathdict:::sorted_importance(x2)
-```
-
-There are three more compress functions.
+There are three more compress functions that are described next.
 
 ### compress_one_by_one()
+
+What does this function do?
 
 ```{r}
 out <- capture.output(result <- kwb.pathdict:::compress_one_by_one(x1))
@@ -224,126 +269,4 @@ kwb.pathdict:::compress_with_dictionary(
   dict = list(a = "abc", d = "def", g = "ghi", j = "jkl"),
   fill.value = "_filled_"
 )
-```
-
-### data_frame_to_paths()
-
-The next function, `data_frame_to_paths()` converts a subdirectory matrix that
-has been converted to a data frame back to the paths by pasting all non-empty
-columns with slash. Short paths must have empty values `""` and not `NA` in the
-last columns:
-
-```{r}
-(df <- kwb.utils::asNoFactorDataFrame(matrix(
-  c("a", "b", "c", 
-    "d", "e", "",
-    "f", "g", NA), 3, 3, byrow = TRUE
-)))
-
-kwb.pathdict:::data_frame_to_paths(df)
-```
-
-```{r}
-kwb.pathdict:::get_dictionary_one_by_one
-kwb.pathdict:::get_frequency_score
-kwb.pathdict:::get_next_level
-kwb.pathdict:::get_subdir_frequencies
-kwb.pathdict:::get_subdirs_by_frequence
-kwb.pathdict:::is_placeholder
-kwb.pathdict:::log_result_if
-kwb.pathdict:::lookup_in_dictionary
-kwb.pathdict:::main_columns_winner
-kwb.pathdict:::print_path_frequencies
-kwb.pathdict:::replace_subdirs
-kwb.pathdict:::rescore_and_reorder_frequency_data
-
-kwb.pathdict:::starts_with_parts
-kwb.pathdict:::to_dictionary
-kwb.pathdict:::to_dictionary_key
-kwb.pathdict:::to_frequency_data
-kwb.pathdict:::to_placeholder
-kwb.pathdict:::update_frequency_data_length
-kwb.pathdict:::use_dictionary
-```
-
-
-## Define some Example File Paths
-
-```{r}
-paths <- c(
-  "//very/long/path/to/the/projects/project-1/wp-1/input/file 1.csv",
-  "//very/long/path/to/the/projects/project-1/wp-1/input/file-2.csv",
-  "//very/long/path/to/the/projects/project-1/wp-1/analysis/summary.pdf",
-  "//very/long/path/to/the/projects/project-1/wp 2/input/köpenick_dirty.csv",
-  "//very/long/path/to/the/projects/project-1/wp 2/output/koepenick_clean.csv",
-  "//very/long/path/to/the/projects/project-2/Daten/file-1.csv",
-  "//very/long/path/to/the/projects/project-2/Grafiken/file 1.png",
-  "//very/long/path/to/the/projects/project-2/Berichte/bericht-1.doc",
-  "//very/long/path/to/the/projects/project-2/Berichte/bericht-2.doc"
-)
-``` 
-
-## Compress the Paths
-
-```{r}
-kwb.pathdict:::compress_paths(paths)
-kwb.pathdict:::compress_paths(paths, maxdepth = 2)
-kwb.pathdict:::compress_paths(paths, maxdepth = 4)
-```
-
-## Importance of Directories
-
-In order to find the most important folder paths in terms of frequency and
-length you may use the function `sorted_importance()`:
-
-```{r}
-kwb.pathdict:::sorted_importance(dirname(paths))
-```
-
-## Compression of Folder Paths
-
-Assume you have a folder with a long path (either due to a lot of levels or due
-to long folder names). This long path is repeated for each file in the folder. 
-The package kwb.pathdict provides a `compress()` function that may be used to
-introduce short names for directory paths.
-
-```{r}
-directories <- c(
-  "short/path/to/directory", 
-  "short/path/to/directory", 
-  "short/path/to/directory", 
-  "longer/path/to/another/directory", 
-  "longer/path/to/another/directory"
-)
-
-short_dirs <- kwb.pathdict:::compress(directories)
-
-as.character(short_dirs)
-```
-
-The function returns the lookup table (dictionary) that maps short names to long 
-names in the attribute `dict`:
-
-```{r collapse = TRUE}
-(dictionary <- kwb.utils::getAttribute(short_dirs, "dict"))
-```
-
-The dictionary is sorted by the importance of the strings (paths) that have been
-given to `compress()` so that the most important paths get the highest positions 
-in the dictionary. With importance we mean the product of the length of a string 
-(path) and its number of occurrences.
-
-The dictionary is required to convert the short names back to the original
-paths using the `resolve()` function of the `kwb.utils` package:
-
-```{r collapse = TRUE}
-(long_dirs <- kwb.utils::resolve(short_dirs, dictionary))
-
-identical(long_dirs, directories)
-```
-
-There is another function `compress_one_by_one`, what does it do?
-
-```{r}
-attributes(kwb.pathdict:::compress_one_by_one(paths, n = 3))
 ```
