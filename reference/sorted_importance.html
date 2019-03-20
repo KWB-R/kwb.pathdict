@@ -33,7 +33,8 @@
 <meta property="og:title" content="Importance of Strings — sorted_importance" />
 
 <meta property="og:description" content="Decreasingly sorted frequencies of strings, by default weighted by their
-length" />
+length. This function can be used to find the most &quot;important&quot;
+folder paths in terms of frequency and length." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -90,6 +91,9 @@ length" />
       <a href="../articles/compress.html">Compression of Paths</a>
     </li>
     <li>
+      <a href="../articles/functions.html">Functions in this Package</a>
+    </li>
+    <li>
       <a href="../articles/introduction.html">Working with File Paths in R Scripts</a>
     </li>
   </ul>
@@ -126,7 +130,8 @@ length" />
     <div class="ref-description">
     
     <p>Decreasingly sorted frequencies of strings, by default weighted by their
-length</p>
+length. This function can be used to find the most "important"
+folder paths in terms of frequency and length.</p>
     
     </div>
 
@@ -168,6 +173,22 @@ multiplied by the corresponding string lengths</p></td>
 #&gt;     3     2     1 </div><div class='input'>
 <span class='co'># Check if the sum of frequencies is the number of elements in x</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sum'>sum</a></span>(<span class='no'>importance</span>) <span class='kw'>==</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># You may use the function to assess the "importance" of directory paths</span>
+<span class='kw pkg'>kwb.pathdict</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/kwb.pathdict/topics/sorted_importance'>sorted_importance</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/basename'>dirname</a></span>(<span class='kw pkg'>kwb.pathdict</span><span class='kw ns'>:::</span><span class='fu'>example_paths</span>()))</div><div class='output co'>#&gt; x
+#&gt;    //very/long/path/to/the/projects/project-1/wp-1/input 
+#&gt;                                                      106 
+#&gt;      //very/long/path/to/the/projects/project-2/Berichte 
+#&gt;                                                      102 
+#&gt; //very/long/path/to/the/projects/project-1/wp-1/analysis 
+#&gt;                                                       56 
+#&gt;   //very/long/path/to/the/projects/project-1/wp 2/output 
+#&gt;                                                       54 
+#&gt;    //very/long/path/to/the/projects/project-1/wp 2/input 
+#&gt;                                                       53 
+#&gt;      //very/long/path/to/the/projects/project-2/Grafiken 
+#&gt;                                                       51 
+#&gt;         //very/long/path/to/the/projects/project-2/Daten 
+#&gt;                                                       48 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
