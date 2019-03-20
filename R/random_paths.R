@@ -45,6 +45,7 @@ random_paths_ <- function(
   is_leaf <- sample(c(TRUE, FALSE), n_elements, replace = TRUE, prob = prob)
 
   paste0(parent, "/", unlist(lapply(seq_along(is_leaf), function(i) {
+
     kwb.utils::catIf(
       depth < 5,
       paste(rep("  ", depth), collapse = ""),
@@ -59,6 +60,7 @@ random_paths_ <- function(
       depth = depth + 1,
       leaf = is_leaf[i]
     )
+
   })))
 }
 

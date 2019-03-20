@@ -173,8 +173,8 @@ However, using big file lists with thousands of paths, we get a completely
 different picture:
 
 ```{r}
-file_info <- fs::dir_info("~/Downloads/kwb", recursive = TRUE, type = "file")
-many_paths <- as.character(file_info$path)
+set.seed(12059)
+many_paths <- kwb.pathdict::random_paths(8)
 
 # Size of path vector
 object.size(many_paths)
