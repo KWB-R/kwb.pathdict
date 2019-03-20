@@ -31,8 +31,10 @@ Suggests:
     testthat
 RoxygenNote: 6.1.1
 Imports: 
+    fs,
     kwb.file,
-    kwb.utils
+    kwb.utils,
+    qdapDictionaries
 Remotes: 
     github::kwb-r/kwb.file,
     github::kwb-r/kwb.utils

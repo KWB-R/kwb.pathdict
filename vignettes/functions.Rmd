@@ -1,0 +1,62 @@
+---
+title: "Functions in this Package"
+author: "Hauke Sonnenberg"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette aims at describing the functions that have not yet been described
+in other vignettes, one by one. For the moment I only print out the 
+implementation of each function.
+
+### data_frame_to_paths()
+
+The next function, `data_frame_to_paths()` converts a subdirectory matrix that
+has been converted to a data frame back to the paths by pasting all non-empty
+columns with slash. Short paths must have empty values `""` and not `NA` in the
+last columns:
+
+```{r}
+(df <- kwb.utils::asNoFactorDataFrame(matrix(
+  c("a", "b", "c", 
+    "d", "e", "",
+    "f", "g", NA), 3, 3, byrow = TRUE
+)))
+
+kwb.pathdict:::data_frame_to_paths(df)
+```
+
+### Functions that still need to be des described
+
+```{r}
+kwb.pathdict:::get_dictionary_one_by_one
+kwb.pathdict:::get_frequency_score
+kwb.pathdict:::get_next_level
+kwb.pathdict:::get_subdir_frequencies
+kwb.pathdict:::get_subdirs_by_frequence
+kwb.pathdict:::is_placeholder
+kwb.pathdict:::log_result_if
+kwb.pathdict:::lookup_in_dictionary
+kwb.pathdict:::main_columns_winner
+kwb.pathdict:::print_path_frequencies
+kwb.pathdict:::replace_subdirs
+kwb.pathdict:::rescore_and_reorder_frequency_data
+kwb.pathdict:::starts_with_parts
+kwb.pathdict:::to_dictionary
+kwb.pathdict:::to_dictionary_key
+kwb.pathdict:::to_frequency_data
+kwb.pathdict:::to_placeholder
+kwb.pathdict:::update_frequency_data_length
+kwb.pathdict:::use_dictionary
+```

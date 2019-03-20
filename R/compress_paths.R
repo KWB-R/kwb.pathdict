@@ -71,6 +71,7 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 }
 
 # to_dictionary ----------------------------------------------------------------
+#' @importFrom stats setNames
 to_dictionary <- function(x, prefix = "a", leading.zeros = FALSE)
 {
   dict <- as.list(names(sorted_importance(x)))
