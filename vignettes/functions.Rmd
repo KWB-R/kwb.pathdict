@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Functions}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -16,36 +18,80 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette aims at describing the functions that have not yet been described
-in other vignettes, one by one. For the moment I only print out the 
-implementation of each function.
+This vignette describes the functions that have not yet been described in other
+vignettes, one by one. 
+
+### Provide Random Example Paths
+
+```{r}
+set.seed(53653815)
+
+paths <- kwb.pathdict::random_paths(10, min_chars = 4, max_elements = 4)
+```
 
 ### data_frame_to_paths()
 
-The next function, `data_frame_to_paths()` converts a subdirectory matrix that
-has been converted to a data frame back to the paths by pasting all non-empty
-columns with slash. Short paths must have empty values `""` and not `NA` in the
-last columns:
+The function, `data_frame_to_paths()` converts a subdirectory matrix that has
+been converted to a data frame back to the paths by pasting all non-empty
+columns with slashes. Short paths must have empty values `""` (and not `NA`) in
+the last columns:
 
 ```{r}
-(df <- kwb.utils::asNoFactorDataFrame(matrix(
-  c("a", "b", "c", 
-    "d", "e", "",
-    "f", "g", NA), 3, 3, byrow = TRUE
-)))
+# Create subdirectory matrix
+subdir_matrix <- kwb.file::to_subdir_matrix(paths)
 
-kwb.pathdict:::data_frame_to_paths(df)
+# Convert to data frame
+subdir_data <- kwb.utils::asNoFactorDataFrame(subdir_matrix)
+
+# Reconstruct the paths from this data frame
+paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)
+
+# Check that the paths have not changed
+identical(paths_reconstructed, paths)
+```
+
+### is_placeholder
+
+This function checks if a string looks like a \<placeholder\>:
+
+```{r}
+kwb.pathdict:::is_placeholder("abc")
+kwb.pathdict:::is_placeholder("<abc>")
+kwb.pathdict:::is_placeholder(c("<abc>", "<def>", "ghi", "<jkl>"))
+kwb.pathdict:::is_placeholder("<abc>def")
+kwb.pathdict:::is_placeholder("<abc><def>")
+kwb.pathdict:::is_placeholder("<>")
+kwb.pathdict:::is_placeholder("[abc]")
+```
+
+### get_dictionary_one_by_one
+
+```{r}
+result <- kwb.pathdict:::get_dictionary_one_by_one(paths, n = 5)
+result
+```
+
+### get_frequency_score
+
+This function takes a data frame with columns `length` and `count` as input. It
+calculates `(length - length(to_placeholder(key))) * count`
+
+```{r}
+frequency_data <- data.frame(length = c(10, 11), count = c(3, 4))
+key <- "abc"
+
+kwb.pathdict:::get_frequency_score(frequency_data, key)
+
+# Calculate manually
+(frequency_data$length - nchar(key) - 2) * frequency_data$count
 ```
 
 ### Functions that still need to be des described
 
 ```{r}
-kwb.pathdict:::get_dictionary_one_by_one
-kwb.pathdict:::get_frequency_score
 kwb.pathdict:::get_next_level
 kwb.pathdict:::get_subdir_frequencies
 kwb.pathdict:::get_subdirs_by_frequence
-kwb.pathdict:::is_placeholder
 kwb.pathdict:::log_result_if
 kwb.pathdict:::lookup_in_dictionary
 kwb.pathdict:::main_columns_winner
