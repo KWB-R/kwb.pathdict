@@ -71,15 +71,36 @@ result <- kwb.pathdict:::get_dictionary_one_by_one(paths, n = 5)
 result
 ```
 
-### get_frequency_score
+### to_frequency_data
 
-This function takes a data frame with columns `length` and `count` as input. It
-calculates `(length - length(to_placeholder(key))) * count`
+This function creates a data frame from list with paths as keys and path 
+frequencies as values.
 
 ```{r}
-frequency_data <- data.frame(length = c(10, 11), count = c(3, 4))
+# Define artificial frequency data
+freqs <- list(a = 10, bc = 20, cde = 15)
+
+# Convert to data frame, calculate string length and score
+kwb.pathdict:::to_frequency_data(freqs)
+```
+
+### rescore_and_reorder_frequency_data() and get_frequency_score()
+
+This function takes a data frame with columns `length` and `count` as input.
+It calculates `score = (length - length(to_placeholder(key))) * count` and
+orders the data frame decreasingly by this score.
+
+```{r}
+# Define artificial frequency data
+frequency_data <- data.frame(length = c(10, 11, 20), count = c(3, 4, 4))
 key <- "abc"
 
+kwb.pathdict:::rescore_and_reorder_frequency_data(frequency_data, key)
+```
+
+This function internally uses `get_frequency_score()`:
+
+```{r}
 kwb.pathdict:::get_frequency_score(frequency_data, key)
 
 # Calculate manually
@@ -97,11 +118,9 @@ kwb.pathdict:::lookup_in_dictionary
 kwb.pathdict:::main_columns_winner
 kwb.pathdict:::print_path_frequencies
 kwb.pathdict:::replace_subdirs
-kwb.pathdict:::rescore_and_reorder_frequency_data
 kwb.pathdict:::starts_with_parts
 kwb.pathdict:::to_dictionary
 kwb.pathdict:::to_dictionary_key
-kwb.pathdict:::to_frequency_data
 kwb.pathdict:::to_placeholder
 kwb.pathdict:::update_frequency_data_length
 kwb.pathdict:::use_dictionary
