@@ -19,73 +19,67 @@ knitr::opts_chunk$set(
 ```
 
 See the [Working with File Paths in R Scripts](introduction.html) for an
-introduction on how we suggest to handle file paths in R scripts. In this
-vignette I will try to recapitulate what the functions do that somehow deal with
+introduction on how we suggest to handle file paths in R scripts. With this
+vignette I want to recapitulate what the functions do that somehow deal with
 path dictionaries and that I extracted from the package kwb.fakin into this
 package.
 
-We define the following example paths:
+We start by loading some example `paths`:
 
 ```{r}
-paths <- c(
-  "//very/long/path/to/the/projects/project-1/wp-1/input/file 1.csv",
-  "//very/long/path/to/the/projects/project-1/wp-1/input/file-2.csv",
-  "//very/long/path/to/the/projects/project-1/wp-1/analysis/summary.pdf",
-  "//very/long/path/to/the/projects/project-1/wp 2/input/köpenick_dirty.csv",
-  "//very/long/path/to/the/projects/project-1/wp 2/output/koepenick_clean.csv",
-  "//very/long/path/to/the/projects/project-2/Daten/file-1.csv",
-  "//very/long/path/to/the/projects/project-2/Grafiken/file 1.png",
-  "//very/long/path/to/the/projects/project-2/Berichte/bericht-1.doc",
-  "//very/long/path/to/the/projects/project-2/Berichte/bericht-2.doc"
-)
+writeLines(paths <- kwb.pathdict:::example_paths())
 ``` 
 
-### Function compress_paths()
+## Functions compress_paths() and sorted_importance()
 
-The function `compress_paths()` takes a vector of full file paths as input. All
-directory paths are replaced by placeholders \<a1\>, \<a2\>, \<a3\>, etc.. Equal
-directories are replaced by equal placeholders. The placeholder \<a1\> is given
-to the most "important" directory path, the placeholder \<a2\> to the second
-most "important", and so on. With "importance" we mean the product of the
-frequency of the directory path and its string length. For example, if the path
-"/path/to/directory" occurs five times, its importance is 90:
+The function `compress_paths()` takes a vector of full file paths as input. The
+paths are "compressed" by replacing all directory paths by placeholders \<a1\>,
+\<a2\>, \<a3\> as shown in the following:
 
 ```{r}
-# Frequency of the path
-path_frequency <- 5
+# Compress the paths
+paths_1 <- kwb.pathdict:::compress_paths(paths)
 
-# Number of characters = path length
-path_length <- nchar("/path/to/directory")
+# Show the compressed paths, the dictionary and the total size
+kwb.pathdict:::print_compressed(paths_1)
+```
 
-# Importance of the path = path frequency * path length
+Equal directories are replaced by equal placeholders. The placeholders and their
+"values" are stored in a so called dictionary. The placeholder \<a1\> is given
+to the most "important" directory path, the placeholder \<a2\> to the second
+most "important", and so on. With "importance" we mean the product of the
+frequency of the directory path and its string length. It is internally
+calculated by the function `sorted_importance()`:
+
+```{r}
+kwb.pathdict:::named_vector_to_data_frame(
+  kwb.pathdict:::sorted_importance(dirname(paths)
+  )
+)
+```
+
+For example, the importance of the path ``r (d1 <- (d <- dirname(paths))[1])``
+is `r kwb.pathdict:::sorted_importance(d)[d1]` because it is `r nchar(d1)`
+characters long and it appears `r table(d)[d1]` times in the vector `paths`:
+
+```{r}
+# Paths of directories
+dir_paths <- dirname(paths)
+
+# Frequency of the first path
+(path_frequency <- unname(table(dir_paths)[dir_paths[1]]))
+
+# Length of the first path (in number of characters)
+(path_length <- nchar(dir_paths[1]))
+
+# Importance of the first path
 path_frequency * path_length
 ```
 
-The "importance" is internally calculated by the function `sorted_importance()`:
-
-```{r}
-kwb.pathdict:::sorted_importance(rep("/path/to/directory", 5))
-```
-
-The placeholders and their meanings are stored in a "dictionary". This
-dictionary is returned in the attribute "dict" of the vector (`paths_1` in 
-the following) that is returned by `compress_paths()`:
-
-```{r}
-# Compress the full file paths by replacing directory paths by placeholders
-paths_1 <- kwb.pathdict:::compress_paths(paths)
-
-# Show the short paths (without attribute "dict")
-structure(paths_1, dict = NULL)
-
-# Show the "dictionary" (mapping between placeholders and directory paths)
-kwb.utils::getAttribute(paths_1, "dict")
-```
-
-Such as the original file paths contained common directory paths, now the paths
-in the directory themselves contain common base paths. These common sub-paths 
-can themselves be replaced by further placeholders. Therefore, we set the 
-argument `maxdepth` of the function:
+Just as the original file paths contain common directory paths, the paths in the
+directory also contain common base paths. These common sub-paths can themselves
+be replaced by further placeholders. Therefore, we set the argument `maxdepth`
+of `compress_paths()`:
 
 ```{r}
 # Compress the full file paths by replacing directory paths by placeholders
@@ -98,20 +92,15 @@ structure(paths_2, dict = NULL)
 identical(structure(paths_2, dict = NULL), structure(paths_1, dict = NULL))
 
 # However, the "dictionary" paths are themselves shortened by new placeholders
-kwb.utils::getAttribute(paths_2, "dict")
+kwb.pathdict:::print_dict(compressed = paths_2)
 ```
 
-By setting `maxdepth` to higher values we can compress the path dictionary even
-further:
+The following code section demonstrates how increasing `maxdepth` step by step compresses the dictionary even further:
 
 ```{r}
-paths_5 <- kwb.pathdict:::compress_paths(paths, maxdepth = 5)
-
-# Again, the compressed paths are identical...
-identical(structure(paths_5, dict = NULL), structure(paths_1, dict = NULL))
-
-# ... but the dictionary is even more compact
-kwb.utils::getAttribute(paths_5, "dict")
+kwb.pathdict:::print_dict(paths, 3)
+kwb.pathdict:::print_dict(paths, 4)
+kwb.pathdict:::print_dict(paths, 5)
 ```
 
 Ok, I understand what happened but what can I use this for? The idea was to 
@@ -121,36 +110,46 @@ the size of the compressed path vector including the dictionary, we see that the
 idea does not work at all for the given example paths:
 
 ```{r}
-object.size(paths)
-object.size(paths_1)
-object.size(paths_2)
-object.size(paths_5)
+# Object sizes in bytes for maxdepth = 1 to 5
+sapply(1:5, kwb.pathdict:::dictionary_size, x = paths)
 ```
 
 However, using big file lists with thousands of paths, we get a completely
 different picture:
 
 ```{r}
-file_info <- fs::dir_info("~/Desktop", recursive = TRUE, type = "file")
+file_info <- fs::dir_info("~/Downloads/kwb", recursive = TRUE, type = "file")
 many_paths <- as.character(file_info$path)
 
+# Size of path vector
 object.size(many_paths)
 
-many_paths_1 <- kwb.pathdict:::compress_paths(many_paths)
-many_paths_2 <- kwb.pathdict:::compress_paths(many_paths, maxdepth = 2)
-many_paths_3 <- kwb.pathdict:::compress_paths(many_paths, maxdepth = 3)
+# Size of compressed path vectors including dictionary
+kwb.pathdict:::dictionary_size(many_paths, 1)
+kwb.pathdict:::dictionary_size(many_paths, 2)
+kwb.pathdict:::dictionary_size(many_paths, 3)
+kwb.pathdict:::dictionary_size(many_paths, 4)
+kwb.pathdict:::dictionary_size(many_paths, 5)
 
-many_paths_9 <- kwb.pathdict:::compress_paths(many_paths, maxdepth = 9)
-
-object.size(many_paths_2)
-object.size(many_paths_3)
-
-object.size(many_paths_9)
-
-kwb.utils::getAttribute(many_paths_9, "dict")
+# How do the dictionaries look like?
+kwb.pathdict:::print_dict(many_paths, 1)
+kwb.pathdict:::print_dict(many_paths, 2)
+kwb.pathdict:::print_dict(many_paths, 3)
+kwb.pathdict:::print_dict(many_paths, 4)
+kwb.pathdict:::print_dict(many_paths, 5)
 ```
 
 There seems to be a problem. There are unexpected duplicates!
+
+```{r}
+for (m in 1:5) {
+  message("m = ", m)
+  kwb.pathdict:::print_dict(m = m, c(
+    "a/b/c/d/e1/file1.txt", 
+    "a/b/c/d/e2/file2.txt"
+  ))
+}
+```
 
 The function `compress_paths()` is a high level function that internally calls
 the helper function `compress()`. That function is demonstrated next.

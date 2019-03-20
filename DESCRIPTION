@@ -31,6 +31,7 @@ Suggests:
     testthat
 RoxygenNote: 6.1.1
 Imports: 
+    fs,
     kwb.file,
     kwb.utils
 Remotes: 
