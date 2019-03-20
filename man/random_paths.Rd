@@ -26,6 +26,16 @@ subfolders}
 Create Random File Paths Using English Words
 }
 \examples{
+# Make this example reproducible
+set.seed(12059)
+
+# Create random paths
 paths <- kwb.pathdict::random_paths(max_depth = 5)
+
+# Show the random paths
+paths
+
+# Frequency of path depths
 table(lengths(kwb.file::split_paths(paths)))
+
 }

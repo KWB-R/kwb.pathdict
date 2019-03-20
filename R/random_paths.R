@@ -14,8 +14,18 @@
 #'   subfolders
 #' @export
 #' @examples
+#' # Make this example reproducible
+#' set.seed(12059)
+#'
+#' # Create random paths
 #' paths <- kwb.pathdict::random_paths(max_depth = 5)
+#'
+#' # Show the random paths
+#' paths
+#'
+#' # Frequency of path depths
 #' table(lengths(kwb.file::split_paths(paths)))
+#'
 random_paths <- function(
   max_depth = 5, min_chars = 5, max_elements = 10,
   depth_to_leaf_weight = function(depth) 1.2^depth
@@ -29,7 +39,8 @@ random_paths <- function(
 #' @keywords internal
 random_paths_ <- function(
   max_depth = 5, min_chars = 5, max_elements = 10,
-  depth_to_leaf_weight = function(depth) 1.2^depth, depth = 0, leaf = FALSE
+  depth_to_leaf_weight = function(depth) 1.2^depth, depth = 0, leaf = FALSE,
+  debug_depth = 0
 )
 {
   if (leaf || depth == max_depth) {
@@ -47,7 +58,7 @@ random_paths_ <- function(
   paste0(parent, "/", unlist(lapply(seq_along(is_leaf), function(i) {
 
     kwb.utils::catIf(
-      depth < 5,
+      depth < debug_depth,
       paste(rep("  ", depth), collapse = ""),
       "Creating node ", i, "/", length(is_leaf), "\n"
     )
