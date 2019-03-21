@@ -109,17 +109,22 @@ kwb.pathdict:::get_frequency_score(frequency_data, key)
 ### get_subdir_frequencies()
 
 The function `get_subdir_frequencies()` either gets a vector of path strings or
-a list of character vectors representing all parts of the full paths as input.
-For each possible path length it determines all different sub-paths and orders
-them by their "importance", i.e. the product of frequency and path length in
-number of characters. 
+a list of character vectors representing all parts of the paths as input. For
+each possible path length it determines all different sub-paths and orders them
+by their "importance", i.e. the product of frequency and path length in number
+of characters.
 
 ```{r}
 length(paths)
 
-kwb.pathdict:::get_subdir_frequencies(
+frequencies <- kwb.pathdict:::get_subdir_frequencies(
   paths = paths, first.only = FALSE, dbg = FALSE
 )
+
+for (i in seq_along(frequencies)) {
+  message("\ndepth = ", i)
+  print(kwb.pathdict:::named_vector_to_data_frame(frequencies[[i]]))
+}
 ```
 
 ### get_next_level()
@@ -131,10 +136,27 @@ function `compress_one_by_one()`.
 kwb.pathdict:::get_next_level
 ```
 
+### get_subdirs_by_frequence()
+
+The function `get_subdirs_by_frequence()` is used by a FAKIN script that is not
+yet part of a package. It gets different inputs:
+
+1. `subdirs`: subdirectory matrix
+2. `cumid`: cumulative identifier, created with
+  `kwb.pathdict:::to_cumulative_id()`
+3. `freqinfo`: one-row data frame with columns `depth`, `n.x`, `n.Freq`
+
+```{r}
+subdirs <- kwb.file::to_subdir_matrix(paths)
+cumid <- kwb.pathdict:::to_cumulative_id(subdirs)
+freqinfo <- data.frame(depth = 2, n.x = 10, n.Freq = 10)
+
+kwb.pathdict:::get_subdirs_by_frequence(subdirs, cumid, freqinfo)
+```
+
 ### Functions that still need to be described
 
 ```{r}
-kwb.pathdict:::get_subdirs_by_frequence
 kwb.pathdict:::log_result_if
 kwb.pathdict:::lookup_in_dictionary
 kwb.pathdict:::main_columns_winner
