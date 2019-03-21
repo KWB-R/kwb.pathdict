@@ -26,15 +26,16 @@ vignettes, one by one.
 ```{r}
 set.seed(53653815)
 
-paths <- kwb.pathdict::random_paths(10, min_chars = 4, max_elements = 4)
+paths <- kwb.pathdict::random_paths(5, min_chars = 5, max_elements = 4)
 ```
 
 ### data_frame_to_paths()
 
-The function, `data_frame_to_paths()` converts a subdirectory matrix that has
+The function `data_frame_to_paths()` converts a subdirectory matrix that has
 been converted to a data frame back to the paths by pasting all non-empty
-columns with slashes. Short paths must have empty values `""` (and not `NA`) in
-the last columns:
+columns with slashes. Paths that do not have the maximum depth must have empty 
+values `""` (and not `NA`) in the last columns, otherwise the string `NA` will
+appear in the paths.
 
 ```{r}
 # Create subdirectory matrix
@@ -71,28 +72,26 @@ result <- kwb.pathdict:::get_dictionary_one_by_one(paths, n = 5)
 result
 ```
 
-### to_frequency_data
+### Subfolder Frequency Functions
 
-This function creates a data frame from list with paths as keys and path 
-frequencies as values.
+The function `to_frequency_data()` creates a data frame from a list with paths
+as keys and path frequencies as values.
 
 ```{r}
 # Define artificial frequency data
 freqs <- list(a = 10, bc = 20, cde = 15)
 
 # Convert to data frame, calculate string length and score
-kwb.pathdict:::to_frequency_data(freqs)
+(frequency_data <- kwb.pathdict:::to_frequency_data(freqs))
 ```
 
-### rescore_and_reorder_frequency_data() and get_frequency_score()
-
-This function takes a data frame with columns `length` and `count` as input.
-It calculates `score = (length - length(to_placeholder(key))) * count` and
-orders the data frame decreasingly by this score.
+The function `rescore_and_reorder_frequency_data()` takes a data frame with
+columns `length` and `count` as input. It calculates `score = (length -
+nchar(to_placeholder(key))) * count` and orders the data frame decreasingly by
+this score.
 
 ```{r}
 # Define artificial frequency data
-frequency_data <- data.frame(length = c(10, 11, 20), count = c(3, 4, 4))
 key <- "abc"
 
 kwb.pathdict:::rescore_and_reorder_frequency_data(frequency_data, key)
@@ -107,11 +106,34 @@ kwb.pathdict:::get_frequency_score(frequency_data, key)
 (frequency_data$length - nchar(key) - 2) * frequency_data$count
 ```
 
-### Functions that still need to be des described
+### get_subdir_frequencies()
+
+The function `get_subdir_frequencies()` either gets a vector of path strings or
+a list of character vectors representing all parts of the full paths as input.
+For each possible path length it determines all different sub-paths and orders
+them by their "importance", i.e. the product of frequency and path length in
+number of characters. 
+
+```{r}
+length(paths)
+
+kwb.pathdict:::get_subdir_frequencies(
+  paths = paths, first.only = FALSE, dbg = FALSE
+)
+```
+
+### get_next_level()
+
+The function `get_next_level()` is a helper function that is called by the
+function `compress_one_by_one()`.
 
 ```{r}
 kwb.pathdict:::get_next_level
-kwb.pathdict:::get_subdir_frequencies
+```
+
+### Functions that still need to be described
+
+```{r}
 kwb.pathdict:::get_subdirs_by_frequence
 kwb.pathdict:::log_result_if
 kwb.pathdict:::lookup_in_dictionary
