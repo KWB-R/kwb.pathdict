@@ -19,14 +19,14 @@ knitr::opts_chunk$set(
 ```
 
 This vignette describes the functions that have not yet been described in other
-vignettes, one by one. 
+vignettes. 
 
 ### Provide Random Example Paths
 
 ```{r}
 set.seed(53653815)
 
-paths <- kwb.pathdict::random_paths(5, min_chars = 5, max_elements = 4)
+(paths <- kwb.pathdict::random_paths(5, min_chars = 5, max_elements = 4))
 ```
 
 ### data_frame_to_paths()
@@ -42,7 +42,7 @@ appear in the paths.
 subdir_matrix <- kwb.file::to_subdir_matrix(paths)
 
 # Convert to data frame
-subdir_data <- kwb.utils::asNoFactorDataFrame(subdir_matrix)
+(subdir_data <- kwb.utils::asNoFactorDataFrame(subdir_matrix))
 
 # Reconstruct the paths from this data frame
 paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)

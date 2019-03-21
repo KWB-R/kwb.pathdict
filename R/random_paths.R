@@ -94,5 +94,6 @@ random_filenames <- function(min_chars = 4, max_elements = 10, size = NULL)
 english_words <- function(min_chars = 0)
 {
   words <- qdapDictionaries::Fry_1000
+  words <- gsub("'", "_", words)
   words[nchar(words) >= min_chars]
 }
