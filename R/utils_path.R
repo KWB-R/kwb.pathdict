@@ -12,9 +12,12 @@ get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
 
-  rows <- which(cumid[, freqinfo$depth] == freqinfo$n.x)[1]
+  depth <- kwb.utils::selectColumns(freqinfo, "depth")
+  n <- kwb.utils::selectColumns(freqinfo, "n.x")
 
-  subdirs[rows, seq_len(freqinfo$depth)]
+  rows <- which(cumid[, depth] == n)[1]
+
+  subdirs[rows, seq_len(depth)]
 }
 
 # lookup_in_dictionary ---------------------------------------------------------
