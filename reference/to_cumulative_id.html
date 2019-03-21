@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • kwb.pathdict</title>
+<title>Give Each Field in a Subdirectory Matrix an ID — to_cumulative_id • kwb.pathdict</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,7 +36,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Give Each Field in a Subdirectory Matrix an ID — to_cumulative_id" />
+
+<meta property="og:description" content="In the subdir matrix, each row represents a file path. The different
+parts of the paths (the folder names) appear in the different columns. For
+example, the paths &quot;a/b/c&quot; and &quot;d/e&quot; are represented by a matrix with values
+&quot;a&quot;, &quot;b&quot;, &quot;c&quot; in the first and &quot;d&quot;, &quot;e&quot;, &quot;&quot; in the second row. Each cell of
+the subdir matrix that is not empty gets a number. If two cells of one
+column have the same number, this means that the paths to the cells are the
+same. See example." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -53,7 +62,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -127,72 +136,74 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Give Each Field in a Subdirectory Matrix an ID</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/kwb.pathdict/blob/master/R/to_cumulative_id.R'><code>R/to_cumulative_id.R</code></a></small>
+    <div class="hidden name"><code>to_cumulative_id.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>In the <code>subdir</code> matrix, each row represents a file path. The different
+parts of the paths (the folder names) appear in the different columns. For
+example, the paths "a/b/c" and "d/e" are represented by a matrix with values
+"a", "b", "c" in the first and "d", "e", "" in the second row. Each cell of
+the <code>subdir</code> matrix that is not empty gets a number. If two cells of one
+column have the same number, this means that the paths to the cells are the
+same. See example.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="get_dictionary_one_by_one.html">get_dictionary_one_by_one()</a></code> </p>
-        </td>
-        <td><p>Get a Path Dictionary</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="random_paths.html">random_paths()</a></code> </p>
-        </td>
-        <td><p>Create Random File Paths Using English Words</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sorted_importance.html">sorted_importance()</a></code> </p>
-        </td>
-        <td><p>Importance of Strings</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="starts_with_parts.html">starts_with_parts()</a></code> </p>
-        </td>
-        <td><p>Do Subfolder List Elements Start with Given Folder Names?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_cumulative_id.html">to_cumulative_id()</a></code> </p>
-        </td>
-        <td><p>Give Each Field in a Subdirectory Matrix an ID</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_dictionary.html">use_dictionary()</a></code> </p>
-        </td>
-        <td><p>Substitute Values that are in a Dictionary with their Keys</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>to_cumulative_id</span>(<span class='no'>subdirs</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>subdirs</th>
+      <td><p>matrix of subdirectory names, as returned by <code>
+<a href='https://www.rdocumentation.org/packages/kwb.file/topics/to_subdir_matrix'>to_subdir_matrix</a></code></p></td>
+    </tr>
     </table>
-  </div>
+    
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Create a very simple subdirectory matrix</span>
+(<span class='no'>subdirs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(
+  <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>,
+  <span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"d"</span>, <span class='st'>""</span>,
+  <span class='st'>"a"</span>, <span class='st'>"c"</span>, <span class='st'>"d"</span>, <span class='st'>"e"</span>
+)))</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4]
+#&gt; [1,] "a"  "b"  "c"  "d" 
+#&gt; [2,] "a"  "b"  "d"  ""  
+#&gt; [3,] "a"  "c"  "d"  "e" </div><div class='input'>
+<span class='co'># Give each non-empty cell of the matrix an ID</span>
+<span class='kw pkg'>kwb.pathdict</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/kwb.pathdict/topics/to_cumulative_id'>to_cumulative_id</a></span>(<span class='no'>subdirs</span>)</div><div class='output co'>#&gt; depth: 00 1 2 3 4</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4]
+#&gt; [1,]    1    1    1    1
+#&gt; [2,]    1    1    2   NA
+#&gt; [3,]    1    2    3    2</div><div class='input'>
+# You can read the matrix column by column. The highest number represents the
+# number of different paths that reach up to the corresponding path level.
+# 1st column: The starting parts of the paths in depth 1 are the same: "a".
+#  All cells have ID = 1.
+# 2nd column: There are two different paths to the folders in depth 2:
+#   "a/b" (ID = 1) and "a/c" (ID = 2).
+# 3rd column: There are three different paths to the folders in depth 3:
+#   "a/b/c" (ID = 1), "a/b/d" (ID = 2), "a/c/d" (ID = 3).
+# 4th column: There are only two out of three paths that reach depth 4:
+#   "a/b/c/d" (ID = 1), "a/c/d/e" (ID = 2)
+
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 
