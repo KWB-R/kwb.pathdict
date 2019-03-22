@@ -163,27 +163,25 @@ to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
 }
 
 # rescore_and_reorder_frequency_data -------------------------------------------
-#' @importFrom kwb.utils resetRowNames
+#' @importFrom kwb.utils resetRowNames selectColumns
 rescore_and_reorder_frequency_data <-function(frequency_data, key)
 {
-  frequency_data$score2 <- get_frequency_score(frequency_data, key)
+  # How many characters will the placeholder occupy?
+  key_placeholder_size <- nchar(to_placeholder(key))
 
+  # Get the path lengths
+  lengths <- kwb.utils::selectColumns(frequency_data, "length")
+
+  # Get the path counts
+  counts <- kwb.utils::selectColumns(frequency_data, "count")
+
+  # Calculate the "effective" score
+  frequency_data$score2 <- (lengths - key_placeholder_size) * counts
+
+  # Order decreasingly by this "effective" score
   row_order <- order(frequency_data$score2, decreasing = TRUE)
 
   kwb.utils::resetRowNames(frequency_data[row_order, ])
-}
-
-# get_frequency_score ----------------------------------------------------------
-#' @importFrom kwb.utils selectColumns
-get_frequency_score <- function(frequency_data, key)
-{
-  key_placeholder_size <- nchar(to_placeholder(key))
-
-  lengths <- kwb.utils::selectColumns(frequency_data, "length")
-
-  counts <- kwb.utils::selectColumns(frequency_data, "count")
-
-  (lengths - key_placeholder_size) * counts
 }
 
 # print_path_frequencies -------------------------------------------------------
