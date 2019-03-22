@@ -97,7 +97,7 @@
       <h1>Functions in this Package</h1>
                         <h4 class="author">Hauke Sonnenberg</h4>
             
-            <h4 class="date">2019-03-21</h4>
+            <h4 class="date">2019-03-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/KWB-R/kwb.pathdict/blob/master/vignettes/functions.Rmd"><code>vignettes/functions.Rmd</code></a></small>
       <div class="hidden name"><code>functions.Rmd</code></div>
@@ -112,37 +112,21 @@
 <a href="#provide-random-example-paths" class="anchor"></a>Provide Random Example Paths</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">53653815</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">(paths &lt;-<span class="st"> </span>kwb.pathdict<span class="op">::</span><span class="kw">random_paths</span>(<span class="dv">5</span>, <span class="dt">min_chars =</span> <span class="dv">5</span>, <span class="dt">max_elements =</span> <span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;  [1] "contain/represent/value/don_t/position.R"          </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;  [2] "contain/represent/value/don_t/eight/range.doc"     </span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;  [3] "contain/represent/value/don_t/eight/cotton.xls"    </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;  [4] "contain/represent/value/don_t/eight/small.png"     </span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;  [5] "contain/represent/value/don_t/white/between.png"   </span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;  [6] "contain/represent/value/don_t/white/length.png"    </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  [7] "contain/represent/value/don_t/white/imagine.png"   </span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  [8] "contain/represent/value/don_t/parent/character.doc"</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;  [9] "contain/represent/value/don_t/parent/afraid.xls"   </span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; [10] "contain/represent/ready/grass/after/process.doc"   </span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; [11] "contain/represent/ready/engine/visit.png"          </span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; [12] "contain/represent/ready/engine/describe/minute.jpg"</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; [13] "contain/represent/ready/engine/describe/reach.doc" </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; [14] "contain/represent/ready/engine/describe/above.jpg" </span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; [15] "contain/represent/ready/engine/correct.pdf"        </span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; [16] "contain/represent/ready/engine/great/sister.jpg"   </span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; [17] "contain/represent/ready/engine/great/practice.R"   </span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; [18] "contain/represent/ready/engine/great/place.xls"    </span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; [19] "contain/represent/ready/substance.doc"             </span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; [20] "contain/represent/ready/match/distant.png"         </span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; [21] "contain/represent/include.doc"                     </span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; [22] "contain/represent/twenty.doc"                      </span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt; [23] "contain/should/finger.R"                           </span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt; [24] "contain/should/afraid.doc"                         </span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt; [25] "contain/should/steel/magnet.jpg"                   </span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt; [26] "contain/should/steel/track/support/mother.R"       </span></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30"><span class="co">#&gt; [27] "contain/should/steel/track/support/garden.doc"     </span></a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co">#&gt; [28] "contain/should/steel/blood.png"                    </span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"><span class="co">#&gt; [29] "contain/answer.xls"                                </span></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33"><span class="co">#&gt; [30] "contain/appear/except.pdf"</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3">(paths &lt;-<span class="st"> </span>kwb.pathdict<span class="op">::</span><span class="kw">random_paths</span>(<span class="dv">4</span>, <span class="dt">min_chars =</span> <span class="dv">5</span>, <span class="dt">max_elements =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;  [1] "contain/surface/woman/plain.R"          </span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;  [2] "contain/surface/woman/don_t.jpg"        </span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;  [3] "contain/surface/exact/receive/order.R"  </span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;  [4] "contain/surface/exact/receive/range.doc"</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;  [5] "contain/surface/exact/cotton/white.R"   </span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;  [6] "contain/surface/exact/cotton/decide.xls"</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  [7] "contain/surface/exact/until.pdf"        </span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  [8] "contain/party/spread/character.doc"     </span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;  [9] "contain/party/spread/afraid.xls"        </span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; [10] "contain/party/spread/ready.jpg"         </span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; [11] "contain/party/track/those.png"          </span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; [12] "contain/party/track/after/process.doc"  </span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; [13] "contain/party/track/engine.jpg"         </span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; [14] "contain/vowel.png"</span></a></code></pre></div>
 </div>
 <div id="data_frame_to_paths" class="section level3">
 <h3 class="hasAnchor">
@@ -153,44 +137,28 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Convert to data frame</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">(subdir_data &lt;-<span class="st"> </span>kwb.utils<span class="op">::</span><span class="kw">asNoFactorDataFrame</span>(subdir_matrix))</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;         V1         V2          V3            V4          V5            V6</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 1  contain  represent       value         don_t  position.R              </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 2  contain  represent       value         don_t       eight     range.doc</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 3  contain  represent       value         don_t       eight    cotton.xls</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 4  contain  represent       value         don_t       eight     small.png</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; 5  contain  represent       value         don_t       white   between.png</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; 6  contain  represent       value         don_t       white    length.png</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; 7  contain  represent       value         don_t       white   imagine.png</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 8  contain  represent       value         don_t      parent character.doc</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 9  contain  represent       value         don_t      parent    afraid.xls</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 10 contain  represent       ready         grass       after   process.doc</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 11 contain  represent       ready        engine   visit.png              </span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 12 contain  represent       ready        engine    describe    minute.jpg</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; 13 contain  represent       ready        engine    describe     reach.doc</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; 14 contain  represent       ready        engine    describe     above.jpg</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; 15 contain  represent       ready        engine correct.pdf              </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; 16 contain  represent       ready        engine       great    sister.jpg</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; 17 contain  represent       ready        engine       great    practice.R</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="co">#&gt; 18 contain  represent       ready        engine       great     place.xls</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co">#&gt; 19 contain  represent       ready substance.doc                          </span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="co">#&gt; 20 contain  represent       ready         match distant.png              </span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; 21 contain  represent include.doc                                        </span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="co">#&gt; 22 contain  represent  twenty.doc                                        </span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="co">#&gt; 23 contain     should    finger.R                                        </span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="co">#&gt; 24 contain     should  afraid.doc                                        </span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="co">#&gt; 25 contain     should       steel    magnet.jpg                          </span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="co">#&gt; 26 contain     should       steel         track     support      mother.R</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33"><span class="co">#&gt; 27 contain     should       steel         track     support    garden.doc</span></a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"><span class="co">#&gt; 28 contain     should       steel     blood.png                          </span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"><span class="co">#&gt; 29 contain answer.xls                                                    </span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="co">#&gt; 30 contain     appear  except.pdf</span></a>
-<a class="sourceLine" id="cb2-37" data-line-number="37"></a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"><span class="co"># Reconstruct the paths from this data frame</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">paths_reconstructed &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">data_frame_to_paths</span>(subdir_data)</a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="co"># Check that the paths have not changed</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(paths_reconstructed, paths)</a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;         V1        V2     V3            V4          V5</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 1  contain   surface  woman       plain.R            </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 2  contain   surface  woman     don_t.jpg            </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 3  contain   surface  exact       receive     order.R</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 4  contain   surface  exact       receive   range.doc</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; 5  contain   surface  exact        cotton     white.R</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; 6  contain   surface  exact        cotton  decide.xls</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; 7  contain   surface  exact     until.pdf            </span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 8  contain     party spread character.doc            </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; 9  contain     party spread    afraid.xls            </span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; 10 contain     party spread     ready.jpg            </span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 11 contain     party  track     those.png            </span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; 12 contain     party  track         after process.doc</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; 13 contain     party  track    engine.jpg            </span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; 14 contain vowel.png</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co"># Reconstruct the paths from this data frame</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">paths_reconstructed &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">data_frame_to_paths</span>(subdir_data)</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="co"># Check that the paths have not changed</span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(paths_reconstructed, paths)</a>
+<a class="sourceLine" id="cb2-27" data-line-number="27"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
 <div id="is_placeholder" class="section level3">
 <h3 class="hasAnchor">
@@ -219,262 +187,220 @@
 <p><img src="functions_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <pre><code>#&gt; Distribution of path depths:
 #&gt; n_levels
-#&gt;  2  3  4  5  6 
-#&gt;  1  5  3  4 17 
-#&gt; i = 1, n = 30...
+#&gt; 2 4 5 
+#&gt; 1 8 5 
+#&gt; i = 1, n = 14...
 #&gt; utils::head(y):
 #&gt; contain 
-#&gt;     210 
-#&gt; i = 2, n = 30...
+#&gt;      98 
+#&gt; i = 2, n = 14...
 #&gt; utils::head(y):
 #&gt; x
-#&gt;  contain/represent     contain/should contain/answer.xls 
-#&gt;                374                 84                 18 
-#&gt;     contain/appear 
-#&gt;                 14 
-#&gt; i = 3, n = 29...
+#&gt;   contain/surface     contain/party contain/vowel.png 
+#&gt;               105                78                17 
+#&gt; i = 3, n = 13...
 #&gt; utils::head(y):
 #&gt; x
-#&gt;       contain/represent/ready       contain/represent/value 
-#&gt;                           253                           207 
-#&gt;          contain/should/steel contain/represent/include.doc 
-#&gt;                            80                            29 
-#&gt;  contain/represent/twenty.doc     contain/appear/except.pdf 
-#&gt;                            28                            25 
-#&gt; i = 4, n = 24...
+#&gt; contain/surface/exact  contain/party/spread   contain/party/track 
+#&gt;                   105                    60                    57 
+#&gt; contain/surface/woman 
+#&gt;                    42 
+#&gt; i = 4, n = 13...
 #&gt; utils::head(y):
 #&gt; x
-#&gt;         contain/represent/value/don_t 
-#&gt;                                   261 
-#&gt;        contain/represent/ready/engine 
-#&gt;                                   240 
-#&gt;            contain/should/steel/track 
-#&gt;                                    52 
-#&gt; contain/represent/ready/substance.doc 
-#&gt;                                    37 
-#&gt;       contain/should/steel/magnet.jpg 
-#&gt;                                    31 
-#&gt;        contain/should/steel/blood.png 
-#&gt;                                    30 
-#&gt; i = 5, n = 21...
+#&gt;      contain/surface/exact/receive       contain/surface/exact/cotton 
+#&gt;                                 58                                 56 
+#&gt; contain/party/spread/character.doc    contain/party/spread/afraid.xls 
+#&gt;                                 34                                 31 
+#&gt;    contain/surface/exact/until.pdf    contain/surface/woman/don_t.jpg 
+#&gt;                                 31                                 31 
+#&gt; i = 5, n = 5...
 #&gt; utils::head(y):
 #&gt; x
-#&gt; contain/represent/ready/engine/describe 
-#&gt;                                     117 
-#&gt;    contain/represent/ready/engine/great 
-#&gt;                                     108 
-#&gt;     contain/represent/value/don_t/eight 
-#&gt;                                     105 
-#&gt;     contain/represent/value/don_t/white 
-#&gt;                                     105 
-#&gt;    contain/represent/value/don_t/parent 
-#&gt;                                      72 
-#&gt;      contain/should/steel/track/support 
-#&gt;                                      68 
-#&gt; i = 6, n = 17...
-#&gt; utils::head(y):
-#&gt; x
-#&gt; contain/represent/ready/engine/describe/minute.jpg 
-#&gt;                                                 50 
-#&gt; contain/represent/value/don_t/parent/character.doc 
-#&gt;                                                 50 
-#&gt;  contain/represent/ready/engine/describe/above.jpg 
-#&gt;                                                 49 
-#&gt;  contain/represent/ready/engine/describe/reach.doc 
-#&gt;                                                 49 
-#&gt;    contain/represent/ready/engine/great/practice.R 
-#&gt;                                                 47 
-#&gt;    contain/represent/ready/engine/great/sister.jpg 
-#&gt;                                                 47 
-#&gt;                                                 path score length count
-#&gt; 1                                  contain/represent   374     17    22
-#&gt; 2                      contain/represent/value/don_t   261     29     9
-#&gt; 3                            contain/represent/ready   253     23    11
-#&gt; 4            contain/represent/ready/engine/describe   117     39     3
-#&gt; 5                                            contain   210      7    30
-#&gt; 6 contain/represent/ready/engine/describe/minute.jpg    50     50     1
-#&gt;   score2
-#&gt; 1    286
-#&gt; 2    225
-#&gt; 3    209
-#&gt; 4    105
-#&gt; 5     90
-#&gt; 6     46
-#&gt;  i key score count length              path score2
-#&gt;  1  p1   374    22     17 contain/represent    286
-#&gt;                                                 path score length count
-#&gt; 1                      contain/represent/value/don_t   261     16     9
-#&gt; 2                                            contain   210      7    30
-#&gt; 3                            contain/represent/ready   253     10    11
-#&gt; 4            contain/represent/ready/engine/describe   117     26     3
-#&gt; 5 contain/represent/ready/engine/describe/minute.jpg    50     37     1
-#&gt;   score2
-#&gt; 1    108
-#&gt; 2     90
-#&gt; 3     66
-#&gt; 4     66
-#&gt; 5     33
-#&gt;  i key score count length                          path score2
-#&gt;  2  p2   261     9     16 contain/represent/value/don_t    108
-#&gt;                                                 path score length count
-#&gt; 1                                            contain   210      7    30
-#&gt; 2                            contain/represent/ready   253     10    11
-#&gt; 3            contain/represent/ready/engine/describe   117     26     3
-#&gt; 4 contain/represent/ready/engine/describe/minute.jpg    50     37     1
-#&gt;   score2
-#&gt; 1     90
-#&gt; 2     66
-#&gt; 3     66
-#&gt; 4     33
+#&gt; contain/surface/exact/cotton/decide.xls 
+#&gt;                                      39 
+#&gt; contain/surface/exact/receive/range.doc 
+#&gt;                                      39 
+#&gt;   contain/party/track/after/process.doc 
+#&gt;                                      37 
+#&gt;   contain/surface/exact/receive/order.R 
+#&gt;                                      37 
+#&gt;    contain/surface/exact/cotton/white.R 
+#&gt;                                      36 
+#&gt;                                      path score length count score2
+#&gt; 1                   contain/surface/exact   105     21     5     85
+#&gt; 2                         contain/surface   105     15     7     77
+#&gt; 3           contain/surface/exact/receive    58     29     2     50
+#&gt; 4                                 contain    98      7    14     42
+#&gt; 5 contain/surface/exact/cotton/decide.xls    39     39     1     35
+#&gt;  i key score count length                  path score2
+#&gt;  1  p1   105     5     21 contain/surface/exact     85
+#&gt;                                      path score length count score2
+#&gt; 1                         contain/surface   105     15     7     77
+#&gt; 2                                 contain    98      7    14     42
+#&gt; 3 contain/surface/exact/cotton/decide.xls    39     22     1     18
+#&gt; 4           contain/surface/exact/receive    58     12     2     16
+#&gt;  i key score count length            path score2
+#&gt;  2  p2   105     7     15 contain/surface     77
+#&gt;                                      path score length count score2
+#&gt; 1                                 contain    98      7    14     42
+#&gt; 2 contain/surface/exact/cotton/decide.xls    39     11     1      7
+#&gt; 3           contain/surface/exact/receive    58      1     2     -6
 #&gt;  i key score count length    path score2
-#&gt;  3  p3   210    30      7 contain     90
-#&gt;                                                 path score length count
-#&gt; 1            contain/represent/ready/engine/describe   117     23     3
-#&gt; 2                            contain/represent/ready   253      7    11
-#&gt; 3 contain/represent/ready/engine/describe/minute.jpg    50     34     1
-#&gt;   score2
-#&gt; 1     57
-#&gt; 2     33
-#&gt; 3     30
+#&gt;  3  p3    98    14      7 contain     42
+#&gt;                                      path score length count score2
+#&gt; 1 contain/surface/exact/cotton/decide.xls    39      8     1      4
+#&gt; 2           contain/surface/exact/receive    58     -2     2    -12
 #&gt;  i key score count length                                    path score2
-#&gt;  4  p4   117     3     23 contain/represent/ready/engine/describe     57
-#&gt;                                                 path score length count
-#&gt; 1                            contain/represent/ready   253      7    11
-#&gt; 2 contain/represent/ready/engine/describe/minute.jpg    50     34     1
-#&gt;   score2
-#&gt; 1     33
-#&gt; 2     30
-#&gt;  i key score count length                    path score2
-#&gt;  5  p5   253    11      7 contain/represent/ready     33
+#&gt;  4  p4    39     1      8 contain/surface/exact/cotton/decide.xls      4
+#&gt;                            path score length count score2
+#&gt; 1 contain/surface/exact/receive    58     -2     2    -12
+#&gt;  i key score count length                          path score2
+#&gt;  5  p5    58     2     -2 contain/surface/exact/receive    -12
 result
 #&gt; $p1
-#&gt; [1] "contain/represent"
+#&gt; [1] "contain/surface/exact"
 #&gt; 
 #&gt; $p2
-#&gt; [1] "contain/represent/value/don_t"
+#&gt; [1] "contain/surface"
 #&gt; 
 #&gt; $p3
 #&gt; [1] "contain"
 #&gt; 
 #&gt; $p4
-#&gt; [1] "contain/represent/ready/engine/describe"
+#&gt; [1] "contain/surface/exact/cotton/decide.xls"
 #&gt; 
 #&gt; $p5
-#&gt; [1] "contain/represent/ready"</code></pre>
+#&gt; [1] "contain/surface/exact/receive"</code></pre>
 </div>
 <div id="subfolder-frequency-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#subfolder-frequency-functions" class="anchor"></a>Subfolder Frequency Functions</h3>
-<p>The function <code>to_frequency_data()</code> creates a data frame from a list with paths as keys and path frequencies as values.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Define artificial frequency data</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">freqs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">a =</span> <span class="dv">10</span>, <span class="dt">bc =</span> <span class="dv">20</span>, <span class="dt">cde =</span> <span class="dv">15</span>)</a>
+<p>At the start of <code><a href="../reference/get_dictionary_one_by_one.html">get_dictionary_one_by_one()</a></code> the function <code>get_subdir_frequencies()</code> is called. This function either gets a vector of path strings or a list of character vectors representing all parts of the paths as input. For each possible path length it determines all different sub-paths and orders them by their “importance”, i.e. the product of frequency and path length in number of characters. By default, only the most important path per depth level is returned:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">frequencies &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">get_subdir_frequencies</span>(<span class="dt">paths =</span> paths, <span class="dt">dbg =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Splitting paths ... ok. (0.00s)</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># Convert to data frame, calculate string length and score</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">(frequency_data &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">to_frequency_data</span>(freqs))</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt;   path score length count</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 1   bc    20      2    10</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 2  cde    15      3     5</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 3    a    10      1    10</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># Define helper function for output</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">print_frequencies &lt;-<span class="st"> </span><span class="cf">function</span>(f) {</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_along</a></span>(f)) {</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">message</a></span>(<span class="st">"</span><span class="ch">\n</span><span class="st">depth = "</span>, i)</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(kwb.pathdict<span class="op">:::</span><span class="kw"><a href="../reference/named_vector_to_data_frame.html">named_vector_to_data_frame</a></span>(f[[i]]))</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="kw">print_frequencies</span>(frequencies)</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; depth = 1</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt;      name value</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 1 contain    98</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; depth = 2</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt;              name value</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; 1 contain/surface   105</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; depth = 3</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt;                    name value</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; 1 contain/surface/exact   105</span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; depth = 4</span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt;                            name value</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; 1 contain/surface/exact/receive    58</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="co">#&gt; depth = 5</span></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="co">#&gt;                                      name value</span></a>
+<a class="sourceLine" id="cb6-32" data-line-number="32"><span class="co">#&gt; 1 contain/surface/exact/cotton/decide.xls    39</span></a></code></pre></div>
+<p>All different paths are returned when the argument <code>first.only</code> is set to <code>FALSE</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">all_frequencies &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">get_subdir_frequencies</span>(</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dt">paths =</span> paths, <span class="dt">first.only =</span> <span class="ot">FALSE</span>, <span class="dt">dbg =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; Splitting paths ... ok. (0.00s)</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw">print_frequencies</span>(all_frequencies)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; depth = 1</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;      name value</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 1 contain    98</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; depth = 2</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;                name value</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; 1   contain/surface   105</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 2     contain/party    78</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 3 contain/vowel.png    17</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; depth = 3</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt;                    name value</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; 1 contain/surface/exact   105</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; 2  contain/party/spread    60</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; 3   contain/party/track    57</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt; 4 contain/surface/woman    42</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; depth = 4</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt;                                  name value</span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; 1       contain/surface/exact/receive    58</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; 2        contain/surface/exact/cotton    56</span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; 3  contain/party/spread/character.doc    34</span></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="co">#&gt; 4     contain/party/spread/afraid.xls    31</span></a>
+<a class="sourceLine" id="cb7-31" data-line-number="31"><span class="co">#&gt; 5     contain/surface/exact/until.pdf    31</span></a>
+<a class="sourceLine" id="cb7-32" data-line-number="32"><span class="co">#&gt; 6     contain/surface/woman/don_t.jpg    31</span></a>
+<a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">#&gt; 7      contain/party/spread/ready.jpg    30</span></a>
+<a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">#&gt; 8      contain/party/track/engine.jpg    30</span></a>
+<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt; 9       contain/party/track/those.png    29</span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; 10      contain/surface/woman/plain.R    29</span></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt; 11          contain/party/track/after    25</span></a>
+<a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; depth = 5</span></a>
+<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt;                                      name value</span></a>
+<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; 1 contain/surface/exact/cotton/decide.xls    39</span></a>
+<a class="sourceLine" id="cb7-42" data-line-number="42"><span class="co">#&gt; 2 contain/surface/exact/receive/range.doc    39</span></a>
+<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; 3   contain/party/track/after/process.doc    37</span></a>
+<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; 4   contain/surface/exact/receive/order.R    37</span></a>
+<a class="sourceLine" id="cb7-45" data-line-number="45"><span class="co">#&gt; 5    contain/surface/exact/cotton/white.R    36</span></a></code></pre></div>
+<p>The function <code>to_frequency_data()</code> is called next within <code><a href="../reference/get_dictionary_one_by_one.html">get_dictionary_one_by_one()</a></code>. It takes the list returned by <code>get_subdir_frequencies()</code> as input and converts it to a data frame.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Convert frequency list to data frame</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">(frequency_data &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">to_frequency_data</span>(frequencies))</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;                                      path score length count</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; 1                         contain/surface   105     15     7</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 2                   contain/surface/exact   105     21     5</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 3                                 contain    98      7    14</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 4           contain/surface/exact/receive    58     29     2</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 5 contain/surface/exact/cotton/decide.xls    39     39     1</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">(all_frequency_data &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">to_frequency_data</span>(all_frequencies))</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;                                       path score length count</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 1                          contain/surface   105     15     7</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 2                    contain/surface/exact   105     21     5</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; 3                                  contain    98      7    14</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 4                            contain/party    78     13     6</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 5                     contain/party/spread    60     20     3</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 6            contain/surface/exact/receive    58     29     2</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 7                      contain/party/track    57     19     3</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 8             contain/surface/exact/cotton    56     28     2</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 9                    contain/surface/woman    42     21     2</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 10 contain/surface/exact/cotton/decide.xls    39     39     1</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 11 contain/surface/exact/receive/range.doc    39     39     1</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 12   contain/party/track/after/process.doc    37     37     1</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; 13   contain/surface/exact/receive/order.R    37     37     1</span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; 14    contain/surface/exact/cotton/white.R    36     36     1</span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; 15      contain/party/spread/character.doc    34     34     1</span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; 16         contain/party/spread/afraid.xls    31     31     1</span></a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt; 17         contain/surface/exact/until.pdf    31     31     1</span></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; 18         contain/surface/woman/don_t.jpg    31     31     1</span></a>
+<a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; 19          contain/party/spread/ready.jpg    30     30     1</span></a>
+<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; 20          contain/party/track/engine.jpg    30     30     1</span></a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; 21           contain/party/track/those.png    29     29     1</span></a>
+<a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; 22           contain/surface/woman/plain.R    29     29     1</span></a>
+<a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt; 23               contain/party/track/after    25     25     1</span></a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; 24                       contain/vowel.png    17     17     1</span></a></code></pre></div>
 <p>The function <code>rescore_and_reorder_frequency_data()</code> takes a data frame with columns <code>length</code> and <code>count</code> as input. It calculates <code>score = (length - nchar(to_placeholder(key))) * count</code> and orders the data frame decreasingly by this score.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Define artificial frequency data</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">key &lt;-<span class="st"> "abc"</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">kwb.pathdict<span class="op">:::</span><span class="kw">rescore_and_reorder_frequency_data</span>(frequency_data, key)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   path score length count score2</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 1  cde    15      3     5    -10</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 2   bc    20      2    10    -30</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 3    a    10      1    10    -40</span></a></code></pre></div>
-<p>This function internally uses <code>get_frequency_score()</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">kwb.pathdict<span class="op">:::</span><span class="kw">get_frequency_score</span>(frequency_data, key)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1] -30 -10 -40</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Calculate manually</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">(frequency_data<span class="op">$</span>length <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nchar">nchar</a></span>(key) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>frequency_data<span class="op">$</span>count</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [1] -30 -10 -40</span></a></code></pre></div>
-</div>
-<div id="get_subdir_frequencies" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get_subdir_frequencies" class="anchor"></a>get_subdir_frequencies()</h3>
-<p>The function <code>get_subdir_frequencies()</code> either gets a vector of path strings or a list of character vectors representing all parts of the paths as input. For each possible path length it determines all different sub-paths and orders them by their “importance”, i.e. the product of frequency and path length in number of characters.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(paths)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 30</span></a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Define artificial frequency data</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">key &lt;-<span class="st"> "abc"</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">frequencies &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw">get_subdir_frequencies</span>(</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="dt">paths =</span> paths, <span class="dt">first.only =</span> <span class="ot">FALSE</span>, <span class="dt">dbg =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Splitting paths ... ok. (0.00s)</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_along</a></span>(frequencies)) {</a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">message</a></span>(<span class="st">"</span><span class="ch">\n</span><span class="st">depth = "</span>, i)</a>
-<a class="sourceLine" id="cb9-11" data-line-number="11">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(kwb.pathdict<span class="op">:::</span><span class="kw"><a href="../reference/named_vector_to_data_frame.html">named_vector_to_data_frame</a></span>(frequencies[[i]]))</a>
-<a class="sourceLine" id="cb9-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; depth = 1</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;      name value</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 1 contain   210</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; depth = 2</span></a>
-<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt;                 name value</span></a>
-<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; 1  contain/represent   374</span></a>
-<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 2     contain/should    84</span></a>
-<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; 3 contain/answer.xls    18</span></a>
-<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 4     contain/appear    14</span></a>
-<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; depth = 3</span></a>
-<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt;                            name value</span></a>
-<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt; 1       contain/represent/ready   253</span></a>
-<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt; 2       contain/represent/value   207</span></a>
-<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt; 3          contain/should/steel    80</span></a>
-<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt; 4 contain/represent/include.doc    29</span></a>
-<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt; 5  contain/represent/twenty.doc    28</span></a>
-<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt; 6     contain/appear/except.pdf    25</span></a>
-<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt; 7     contain/should/afraid.doc    25</span></a>
-<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt; 8       contain/should/finger.R    23</span></a>
-<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt; depth = 4</span></a>
-<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt;                                    name value</span></a>
-<a class="sourceLine" id="cb9-38" data-line-number="38"><span class="co">#&gt; 1         contain/represent/value/don_t   261</span></a>
-<a class="sourceLine" id="cb9-39" data-line-number="39"><span class="co">#&gt; 2        contain/represent/ready/engine   240</span></a>
-<a class="sourceLine" id="cb9-40" data-line-number="40"><span class="co">#&gt; 3            contain/should/steel/track    52</span></a>
-<a class="sourceLine" id="cb9-41" data-line-number="41"><span class="co">#&gt; 4 contain/represent/ready/substance.doc    37</span></a>
-<a class="sourceLine" id="cb9-42" data-line-number="42"><span class="co">#&gt; 5       contain/should/steel/magnet.jpg    31</span></a>
-<a class="sourceLine" id="cb9-43" data-line-number="43"><span class="co">#&gt; 6        contain/should/steel/blood.png    30</span></a>
-<a class="sourceLine" id="cb9-44" data-line-number="44"><span class="co">#&gt; 7         contain/represent/ready/grass    29</span></a>
-<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="co">#&gt; 8         contain/represent/ready/match    29</span></a>
-<a class="sourceLine" id="cb9-46" data-line-number="46"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-47" data-line-number="47"><span class="co">#&gt; depth = 5</span></a>
-<a class="sourceLine" id="cb9-48" data-line-number="48"><span class="co">#&gt;                                          name value</span></a>
-<a class="sourceLine" id="cb9-49" data-line-number="49"><span class="co">#&gt; 1     contain/represent/ready/engine/describe   117</span></a>
-<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="co">#&gt; 2        contain/represent/ready/engine/great   108</span></a>
-<a class="sourceLine" id="cb9-51" data-line-number="51"><span class="co">#&gt; 3         contain/represent/value/don_t/eight   105</span></a>
-<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="co">#&gt; 4         contain/represent/value/don_t/white   105</span></a>
-<a class="sourceLine" id="cb9-53" data-line-number="53"><span class="co">#&gt; 5        contain/represent/value/don_t/parent    72</span></a>
-<a class="sourceLine" id="cb9-54" data-line-number="54"><span class="co">#&gt; 6          contain/should/steel/track/support    68</span></a>
-<a class="sourceLine" id="cb9-55" data-line-number="55"><span class="co">#&gt; 7  contain/represent/ready/engine/correct.pdf    42</span></a>
-<a class="sourceLine" id="cb9-56" data-line-number="56"><span class="co">#&gt; 8   contain/represent/ready/match/distant.png    41</span></a>
-<a class="sourceLine" id="cb9-57" data-line-number="57"><span class="co">#&gt; 9    contain/represent/ready/engine/visit.png    40</span></a>
-<a class="sourceLine" id="cb9-58" data-line-number="58"><span class="co">#&gt; 10   contain/represent/value/don_t/position.R    40</span></a>
-<a class="sourceLine" id="cb9-59" data-line-number="59"><span class="co">#&gt; 11        contain/represent/ready/grass/after    35</span></a>
-<a class="sourceLine" id="cb9-60" data-line-number="60"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-61" data-line-number="61"><span class="co">#&gt; depth = 6</span></a>
-<a class="sourceLine" id="cb9-62" data-line-number="62"><span class="co">#&gt;                                                  name value</span></a>
-<a class="sourceLine" id="cb9-63" data-line-number="63"><span class="co">#&gt; 1  contain/represent/ready/engine/describe/minute.jpg    50</span></a>
-<a class="sourceLine" id="cb9-64" data-line-number="64"><span class="co">#&gt; 2  contain/represent/value/don_t/parent/character.doc    50</span></a>
-<a class="sourceLine" id="cb9-65" data-line-number="65"><span class="co">#&gt; 3   contain/represent/ready/engine/describe/above.jpg    49</span></a>
-<a class="sourceLine" id="cb9-66" data-line-number="66"><span class="co">#&gt; 4   contain/represent/ready/engine/describe/reach.doc    49</span></a>
-<a class="sourceLine" id="cb9-67" data-line-number="67"><span class="co">#&gt; 5     contain/represent/ready/engine/great/practice.R    47</span></a>
-<a class="sourceLine" id="cb9-68" data-line-number="68"><span class="co">#&gt; 6     contain/represent/ready/engine/great/sister.jpg    47</span></a>
-<a class="sourceLine" id="cb9-69" data-line-number="69"><span class="co">#&gt; 7     contain/represent/ready/grass/after/process.doc    47</span></a>
-<a class="sourceLine" id="cb9-70" data-line-number="70"><span class="co">#&gt; 8     contain/represent/value/don_t/parent/afraid.xls    47</span></a>
-<a class="sourceLine" id="cb9-71" data-line-number="71"><span class="co">#&gt; 9     contain/represent/value/don_t/white/between.png    47</span></a>
-<a class="sourceLine" id="cb9-72" data-line-number="72"><span class="co">#&gt; 10    contain/represent/value/don_t/white/imagine.png    47</span></a>
-<a class="sourceLine" id="cb9-73" data-line-number="73"><span class="co">#&gt; 11     contain/represent/ready/engine/great/place.xls    46</span></a>
-<a class="sourceLine" id="cb9-74" data-line-number="74"><span class="co">#&gt; 12     contain/represent/value/don_t/eight/cotton.xls    46</span></a>
-<a class="sourceLine" id="cb9-75" data-line-number="75"><span class="co">#&gt; 13     contain/represent/value/don_t/white/length.png    46</span></a>
-<a class="sourceLine" id="cb9-76" data-line-number="76"><span class="co">#&gt; 14      contain/represent/value/don_t/eight/range.doc    45</span></a>
-<a class="sourceLine" id="cb9-77" data-line-number="77"><span class="co">#&gt; 15      contain/represent/value/don_t/eight/small.png    45</span></a>
-<a class="sourceLine" id="cb9-78" data-line-number="78"><span class="co">#&gt; 16      contain/should/steel/track/support/garden.doc    45</span></a>
-<a class="sourceLine" id="cb9-79" data-line-number="79"><span class="co">#&gt; 17        contain/should/steel/track/support/mother.R    43</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-4" data-line-number="4">kwb.pathdict<span class="op">:::</span><span class="kw">rescore_and_reorder_frequency_data</span>(frequency_data, key)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;                                      path score length count score2</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; 1                   contain/surface/exact   105     21     5     80</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 2                         contain/surface   105     15     7     70</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 3           contain/surface/exact/receive    58     29     2     48</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; 4 contain/surface/exact/cotton/decide.xls    39     39     1     34</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 5                                 contain    98      7    14     28</span></a></code></pre></div>
 </div>
 <div id="get_next_level" class="section level3">
 <h3 class="hasAnchor">
@@ -493,7 +419,7 @@ result
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt;     }</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt;     result</span></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; &lt;bytecode: 0x4a28bc8&gt;</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; &lt;bytecode: 0x49e9468&gt;</span></a>
 <a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a></code></pre></div>
 </div>
 <div id="get_subdirs_by_frequence" class="section level3">
@@ -512,7 +438,7 @@ result
 </ol>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">subdirs &lt;-<span class="st"> </span>kwb.file<span class="op">::</span><span class="kw">to_subdir_matrix</span>(paths)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">cumid &lt;-<span class="st"> </span>kwb.pathdict<span class="op">:::</span><span class="kw"><a href="../reference/to_cumulative_id.html">to_cumulative_id</a></span>(subdirs)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; depth: 00 1 2 3 4 5 6</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; depth: 00 1 2 3 4 5</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4">freqinfo &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">depth =</span> <span class="dv">2</span>, <span class="dt">n.x =</span> <span class="dv">10</span>, <span class="dt">n.Freq =</span> <span class="dv">10</span>)</a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6">kwb.pathdict<span class="op">:::</span><span class="kw">get_subdirs_by_frequence</span>(subdirs, cumid, freqinfo)</a>
@@ -534,7 +460,7 @@ result
 <a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;         utils::str(kwb.utils::getAttribute(y, "dict"))</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;     }</span></a>
 <a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; &lt;bytecode: 0x58f3f28&gt;</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; &lt;bytecode: 0x60d5590&gt;</span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13">kwb.pathdict<span class="op">:::</span>lookup_in_dictionary</a>
 <a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; function (x, dict) </span></a>
@@ -545,14 +471,14 @@ result
 <a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt;         dict)]))</span></a>
 <a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt;     out</span></a>
 <a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; &lt;bytecode: 0x5a329d8&gt;</span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; &lt;bytecode: 0x6134848&gt;</span></a>
 <a class="sourceLine" id="cb12-23" data-line-number="23"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-24" data-line-number="24">kwb.pathdict<span class="op">:::</span>main_columns_winner</a>
 <a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co">#&gt; function () </span></a>
 <a class="sourceLine" id="cb12-26" data-line-number="26"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb12-27" data-line-number="27"><span class="co">#&gt;     c("i", "key", "score", "count", "length")</span></a>
 <a class="sourceLine" id="cb12-28" data-line-number="28"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-29" data-line-number="29"><span class="co">#&gt; &lt;bytecode: 0x6372d68&gt;</span></a>
+<a class="sourceLine" id="cb12-29" data-line-number="29"><span class="co">#&gt; &lt;bytecode: 0x6238878&gt;</span></a>
 <a class="sourceLine" id="cb12-30" data-line-number="30"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-31" data-line-number="31">kwb.pathdict<span class="op">:::</span>print_path_frequencies</a>
 <a class="sourceLine" id="cb12-32" data-line-number="32"><span class="co">#&gt; function (x, maxchar = 80) </span></a>
@@ -560,7 +486,7 @@ result
 <a class="sourceLine" id="cb12-34" data-line-number="34"><span class="co">#&gt;     x$path &lt;- substr(x$path, 1, maxchar)</span></a>
 <a class="sourceLine" id="cb12-35" data-line-number="35"><span class="co">#&gt;     print(x)</span></a>
 <a class="sourceLine" id="cb12-36" data-line-number="36"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-37" data-line-number="37"><span class="co">#&gt; &lt;bytecode: 0x62f4f88&gt;</span></a>
+<a class="sourceLine" id="cb12-37" data-line-number="37"><span class="co">#&gt; &lt;bytecode: 0x61be8d8&gt;</span></a>
 <a class="sourceLine" id="cb12-38" data-line-number="38"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-39" data-line-number="39">kwb.pathdict<span class="op">:::</span>replace_subdirs</a>
 <a class="sourceLine" id="cb12-40" data-line-number="40"><span class="co">#&gt; function (s, r, p) </span></a>
@@ -575,7 +501,7 @@ result
 <a class="sourceLine" id="cb12-49" data-line-number="49"><span class="co">#&gt;         0))</span></a>
 <a class="sourceLine" id="cb12-50" data-line-number="50"><span class="co">#&gt;     s[, seq_len(maxcol)]</span></a>
 <a class="sourceLine" id="cb12-51" data-line-number="51"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-52" data-line-number="52"><span class="co">#&gt; &lt;bytecode: 0x5b49e80&gt;</span></a>
+<a class="sourceLine" id="cb12-52" data-line-number="52"><span class="co">#&gt; &lt;bytecode: 0x62633e8&gt;</span></a>
 <a class="sourceLine" id="cb12-53" data-line-number="53"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-54" data-line-number="54">kwb.pathdict<span class="op">:::</span>starts_with_parts</a>
 <a class="sourceLine" id="cb12-55" data-line-number="55"><span class="co">#&gt; function (parts, elements) </span></a>
@@ -595,7 +521,7 @@ result
 <a class="sourceLine" id="cb12-69" data-line-number="69"><span class="co">#&gt;     })</span></a>
 <a class="sourceLine" id="cb12-70" data-line-number="70"><span class="co">#&gt;     Reduce(`&amp;`, selected_at_level, init = rep(TRUE, length_out))</span></a>
 <a class="sourceLine" id="cb12-71" data-line-number="71"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-72" data-line-number="72"><span class="co">#&gt; &lt;bytecode: 0x5ba7bb8&gt;</span></a>
+<a class="sourceLine" id="cb12-72" data-line-number="72"><span class="co">#&gt; &lt;bytecode: 0x62cad30&gt;</span></a>
 <a class="sourceLine" id="cb12-73" data-line-number="73"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-74" data-line-number="74">kwb.pathdict<span class="op">:::</span>to_dictionary</a>
 <a class="sourceLine" id="cb12-75" data-line-number="75"><span class="co">#&gt; function (x, prefix = "a", leading.zeros = FALSE) </span></a>
@@ -604,7 +530,7 @@ result
 <a class="sourceLine" id="cb12-78" data-line-number="78"><span class="co">#&gt;     keys &lt;- to_dictionary_key(seq_along(dict), prefix, leading.zeros)</span></a>
 <a class="sourceLine" id="cb12-79" data-line-number="79"><span class="co">#&gt;     stats::setNames(dict, keys)</span></a>
 <a class="sourceLine" id="cb12-80" data-line-number="80"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-81" data-line-number="81"><span class="co">#&gt; &lt;bytecode: 0x62b9de8&gt;</span></a>
+<a class="sourceLine" id="cb12-81" data-line-number="81"><span class="co">#&gt; &lt;bytecode: 0x6331fe8&gt;</span></a>
 <a class="sourceLine" id="cb12-82" data-line-number="82"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-83" data-line-number="83">kwb.pathdict<span class="op">:::</span>to_dictionary_key</a>
 <a class="sourceLine" id="cb12-84" data-line-number="84"><span class="co">#&gt; function (i, prefix = "p", leading.zeros = FALSE) </span></a>
@@ -618,14 +544,14 @@ result
 <a class="sourceLine" id="cb12-92" data-line-number="92"><span class="co">#&gt;     }</span></a>
 <a class="sourceLine" id="cb12-93" data-line-number="93"><span class="co">#&gt;     sprintf(fmt, prefix, i)</span></a>
 <a class="sourceLine" id="cb12-94" data-line-number="94"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-95" data-line-number="95"><span class="co">#&gt; &lt;bytecode: 0x62d3688&gt;</span></a>
+<a class="sourceLine" id="cb12-95" data-line-number="95"><span class="co">#&gt; &lt;bytecode: 0x61a0660&gt;</span></a>
 <a class="sourceLine" id="cb12-96" data-line-number="96"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-97" data-line-number="97">kwb.pathdict<span class="op">:::</span>to_placeholder</a>
 <a class="sourceLine" id="cb12-98" data-line-number="98"><span class="co">#&gt; function (x) </span></a>
 <a class="sourceLine" id="cb12-99" data-line-number="99"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb12-100" data-line-number="100"><span class="co">#&gt;     paste0("&lt;", x, "&gt;")</span></a>
 <a class="sourceLine" id="cb12-101" data-line-number="101"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-102" data-line-number="102"><span class="co">#&gt; &lt;bytecode: 0x62d97a0&gt;</span></a>
+<a class="sourceLine" id="cb12-102" data-line-number="102"><span class="co">#&gt; &lt;bytecode: 0x61a7038&gt;</span></a>
 <a class="sourceLine" id="cb12-103" data-line-number="103"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-104" data-line-number="104">kwb.pathdict<span class="op">:::</span>update_frequency_data_length</a>
 <a class="sourceLine" id="cb12-105" data-line-number="105"><span class="co">#&gt; function (frequency_data, winner, key) </span></a>
@@ -640,7 +566,7 @@ result
 <a class="sourceLine" id="cb12-114" data-line-number="114"><span class="co">#&gt;         shortage</span></a>
 <a class="sourceLine" id="cb12-115" data-line-number="115"><span class="co">#&gt;     frequency_data</span></a>
 <a class="sourceLine" id="cb12-116" data-line-number="116"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-117" data-line-number="117"><span class="co">#&gt; &lt;bytecode: 0x63d4c70&gt;</span></a>
+<a class="sourceLine" id="cb12-117" data-line-number="117"><span class="co">#&gt; &lt;bytecode: 0x6298860&gt;</span></a>
 <a class="sourceLine" id="cb12-118" data-line-number="118"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a>
 <a class="sourceLine" id="cb12-119" data-line-number="119">kwb.pathdict<span class="op">:::</span>use_dictionary</a>
 <a class="sourceLine" id="cb12-120" data-line-number="120"><span class="co">#&gt; function (x, dict, method = "full") </span></a>
@@ -670,7 +596,7 @@ result
 <a class="sourceLine" id="cb12-144" data-line-number="144"><span class="co">#&gt;     }</span></a>
 <a class="sourceLine" id="cb12-145" data-line-number="145"><span class="co">#&gt;     x</span></a>
 <a class="sourceLine" id="cb12-146" data-line-number="146"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb12-147" data-line-number="147"><span class="co">#&gt; &lt;bytecode: 0x6452008&gt;</span></a>
+<a class="sourceLine" id="cb12-147" data-line-number="147"><span class="co">#&gt; &lt;bytecode: 0x64b5980&gt;</span></a>
 <a class="sourceLine" id="cb12-148" data-line-number="148"><span class="co">#&gt; &lt;environment: namespace:kwb.pathdict&gt;</span></a></code></pre></div>
 </div>
   </div>
