@@ -170,7 +170,7 @@ directory path changes, only one entry of the list needs to be changed. Also,
 this condensed form of the path definition better reveals the directory
 structure than did the very first version `dirs_1` that we defined above.
 
-Of course, we cannot use this version containig `<placeholders>` directly in
+Of course, we cannot use this version containing `<placeholders>` directly in
 calls to `file.path` as we did with `dirs_1`. We need a means to create the full 
 paths as defined in `dirs_1` back from the condensed path definitions in 
 `dirs_4`. 
