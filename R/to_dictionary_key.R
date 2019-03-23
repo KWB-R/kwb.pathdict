@@ -1,16 +1,26 @@
 # to_dictionary_key ------------------------------------------------------------
-to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
+to_dictionary_key <- function(
+  i, prefix = "p", leading_zeros = FALSE, max_i = NULL
+)
 {
-  fmt <- if (leading.zeros) {
+  stopifnot(is.numeric(i))
 
-    digits <- nchar(to_dictionary_key(length(i), ""))
+  i <- as.integer(i)
 
-    paste0("%s%0", digits, "X")
+  stopifnot(all(i > 0))
+
+  fmt <- if (leading_zeros) {
+
+    max_i <- kwb.utils::defaultIfNULL(max_i, max(i))
+
+    raw_key <- to_dictionary_key(max_i, prefix = "", leading_zeros = FALSE)
+
+    paste0("%0", nchar(raw_key), "X")
 
   } else {
 
-    "%s%X"
+    "%X"
   }
 
-  sprintf(fmt, prefix, i)
+  paste0(prefix, sprintf(fmt, i))
 }

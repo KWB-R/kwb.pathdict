@@ -48,7 +48,7 @@ paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)
 identical(paths_reconstructed, paths)
 ```
 
-### to_placeholder(), is_placeholder()
+### to_placeholder(), is_placeholder(), to_dictionary_key()
 
 The function `to_placeholder()` converts a string to a placeholder \<string\>.
 
@@ -69,6 +69,15 @@ kwb.pathdict:::is_placeholder(c("<abc>", "<def>", "ghi", "<jkl>"))
 kwb.pathdict:::is_placeholder("<abc>def")
 kwb.pathdict:::is_placeholder("<abc><def>")
 kwb.pathdict:::is_placeholder("<>")
+```
+
+The function `to_dictionary_key` creates the name for a key in a dictionary,
+consisting of a prefix ("p" by default) and a number, given in the hexadecimal 
+system:
+
+```{r}
+kwb.pathdict:::to_dictionary_key(1:17)
+kwb.pathdict:::to_dictionary_key(1:17, leading_zeros = TRUE)
 ```
 
 ### get_dictionary_one_by_one
@@ -122,9 +131,8 @@ The function `to_frequency_data()` is called next within
 ```
 
 The function `rescore_and_reorder_frequency_data()` takes a data frame with
-columns `length` and `count` as input. It calculates `score = (length -
-nchar(to_placeholder(key))) * count` and orders the data frame decreasingly by
-this score.
+columns `length` and `count` as input. It calculates `score2 = (length -
+placeholder_size) * count` and orders the data frame decreasingly by this score.
 
 ```{r}
 kwb.pathdict:::rescore_and_reorder_frequency_data(
@@ -170,7 +178,6 @@ kwb.pathdict:::print_path_frequencies
 kwb.pathdict:::replace_subdirs
 kwb.pathdict:::starts_with_parts
 kwb.pathdict:::to_dictionary
-kwb.pathdict:::to_dictionary_key
 kwb.pathdict:::update_frequency_data_length
 kwb.pathdict:::use_dictionary
 ```

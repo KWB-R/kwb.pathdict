@@ -32,7 +32,7 @@ test_that("compress works for simple path vectors", {
   expect_identical(as.character(compress(x1)), c1)
 
   dict <- list("p1" = "hallo")
-  expect_identical(as.character(compress(x1, dict = dict)), c21)
+  expect_identical(as.character(compress(x = x1, dict = dict)), c21)
 
   expect_identical(as.character(compress(x2)), c22)
 
