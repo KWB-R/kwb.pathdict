@@ -72,12 +72,11 @@ result
 ### Subfolder Frequency Functions
 
 At the start of `get_dictionary_one_by_one()` the function
-`get_subdir_frequencies()` is called. This function either gets a vector of path
-strings or a list of character vectors representing all parts of the paths as
-input. For each possible path length it determines all different sub-paths and
-orders them by their "importance", i.e. the product of frequency and path length
-in number of characters. By default, only the most important path per depth 
-level is returned:
+`get_subdir_frequencies()` is called. This function can be given a vector of
+path strings as input. For each possible depth in the path tree it determines
+all different sub-paths and orders them by their "importance", i.e. the product
+of frequency and path length in number of characters. By default, only the most
+important path per depth level is returned:
 
 ```{r}
 frequencies <- kwb.pathdict:::get_subdir_frequencies(paths = paths, dbg = FALSE)
