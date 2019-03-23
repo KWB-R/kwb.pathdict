@@ -38,11 +38,8 @@ values `""` (and not `NA`) in the last columns, otherwise the string `NA` will
 appear in the paths.
 
 ```{r}
-# Create subdirectory matrix
-subdir_matrix <- kwb.file::to_subdir_matrix(paths)
-
-# Convert to data frame
-(subdir_data <- kwb.utils::asNoFactorDataFrame(subdir_matrix))
+# Create subdirectory matrix as data frame
+(subdir_data <- kwb.file::to_subdir_matrix(paths, result_type = "data.frame"))
 
 # Reconstruct the paths from this data frame
 paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)
