@@ -61,7 +61,7 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 
   # Create a new dictionary if there are any duplicates in x but do not
   # consider elements that are already placeholders
-  dict_new <- to_dictionary(x[! is_placeholder(x)], prefix)
+  dict_new <- to_dictionary(x = x[! is_placeholder(x)], prefix)
 
   x <- use_dictionary(x, dict_new)
 
@@ -72,11 +72,15 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 
 # to_dictionary ----------------------------------------------------------------
 #' @importFrom stats setNames
-to_dictionary <- function(x, prefix = "a", leading.zeros = FALSE)
+to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
 {
+  if (length(x) == 0) {
+    return(list())
+  }
+
   dict <- as.list(names(sorted_importance(x)))
 
-  keys <- to_dictionary_key(seq_along(dict), prefix, leading.zeros)
+  keys <- to_dictionary_key(seq_along(dict), prefix, leading_zeros)
 
   stats::setNames(dict, keys)
 }
