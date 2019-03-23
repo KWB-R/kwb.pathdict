@@ -21,8 +21,13 @@ get_dictionary_one_by_one <- function(paths, n = 10)
     # Next key to be used in the dictionary
     key <- to_dictionary_key(length(dictionary) + 1)
 
+    # How many characters will the placeholder occupy?
+    placeholder_size = nchar(to_placeholder(key))
+
     # Rescore and reorder frequency_data
-    frequency_data <- rescore_and_reorder_frequency_data(frequency_data, key)
+    frequency_data <- rescore_and_reorder_frequency_data(
+      frequency_data, placeholder_size
+    )
 
     print_path_frequencies(frequency_data)
 
@@ -163,12 +168,15 @@ to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
 }
 
 # rescore_and_reorder_frequency_data -------------------------------------------
+#' Rescore and Reorder Frequency Data
+#'
+#' @param frequency_data data frame with columns \code{length} and \code{count}
+#' @param placeholder_size size of placeholder in number of characters. The path
+#'   length will be reduced by this value before being multiplied with the count
+#'   to calculate the score.
 #' @importFrom kwb.utils resetRowNames selectColumns
-rescore_and_reorder_frequency_data <-function(frequency_data, key)
+rescore_and_reorder_frequency_data <-function(frequency_data, placeholder_size)
 {
-  # How many characters will the placeholder occupy?
-  key_placeholder_size <- nchar(to_placeholder(key))
-
   # Get the path lengths
   lengths <- kwb.utils::selectColumns(frequency_data, "length")
 
@@ -176,20 +184,19 @@ rescore_and_reorder_frequency_data <-function(frequency_data, key)
   counts <- kwb.utils::selectColumns(frequency_data, "count")
 
   # Calculate the "effective" score
-  frequency_data$score2 <- (lengths - key_placeholder_size) * counts
+  frequency_data$score2 <- (lengths - placeholder_size) * counts
 
   # Order decreasingly by this "effective" score
-  order_by_score(frequency_data)
+  order_decreasingly_by(frequency_data, "score2")
 }
 
-# order_by_score ---------------------------------------------------------------
-#' Order Data Frame Decreasingly by Score Column
+# order_decreasingly_by --------------------------------------------------------
+#' Order Data Frame Decreasingly by one Column
 #'
 #' @param df data frame
-#' @param column name of column by which to order decreasingly. Default:
-#'   "score2"
+#' @param column name of column by which to order decreasingly.
 #' @importFrom kwb.utils selectColumns
-order_by_score <- function(df, column = "score2")
+order_decreasingly_by <- function(df, column)
 {
   # Order decreasingly by this "effective" score
   kwb.utils::resetRowNames(

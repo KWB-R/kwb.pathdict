@@ -73,8 +73,8 @@ result
 
 At the start of `get_dictionary_one_by_one()` the function
 `get_subdir_frequencies()` is called. This function can be given a vector of
-path strings as input. For each possible depth in the path tree it determines
-all different sub-paths and orders them by their "importance", i.e. the product
+path strings as input. For each possible depth in the path tree all different
+sub-paths are determined and ordered by their "importance", i.e. by the product
 of frequency and path length in number of characters. By default, only the most
 important path per depth level is returned:
 
@@ -104,8 +104,8 @@ print_frequencies(all_frequencies)
 ```
 
 The function `to_frequency_data()` is called next within 
-`get_dictionary_one_by_one()`. It takes the list returned by 
-`get_subdir_frequencies()` as input and converts it to a data frame.
+`get_dictionary_one_by_one()`. It converts the list returned by 
+`get_subdir_frequencies()` to a data frame.
 
 ```{r}
 # Convert frequency list to data frame
@@ -119,10 +119,10 @@ nchar(to_placeholder(key))) * count` and orders the data frame decreasingly by
 this score.
 
 ```{r}
-# Define artificial frequency data
-key <- "abc"
+# Size of placeholder to be used instead of a path (number of characters)
+size <- nchar("<p1>")
 
-kwb.pathdict:::rescore_and_reorder_frequency_data(frequency_data, key)
+kwb.pathdict:::rescore_and_reorder_frequency_data(frequency_data, size)
 ```
 
 ### get_next_level()
