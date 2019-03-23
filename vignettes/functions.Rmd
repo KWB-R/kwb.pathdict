@@ -48,18 +48,27 @@ paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)
 identical(paths_reconstructed, paths)
 ```
 
-### is_placeholder
+### to_placeholder(), is_placeholder()
 
-This function checks if a string looks like a \<placeholder\>:
+The function `to_placeholder()` converts a string to a placeholder \<string\>.
 
 ```{r}
+kwb.pathdict:::to_placeholder("abc")
+
+(placeholders <- kwb.pathdict:::to_placeholder(c("abc", 123)))
+```
+
+The function `is_placeholder()` checks whether a string looks like a
+\<placeholder\>:
+
+```{r}
+kwb.pathdict:::is_placeholder(placeholders)
 kwb.pathdict:::is_placeholder("abc")
-kwb.pathdict:::is_placeholder("<abc>")
+kwb.pathdict:::is_placeholder("[abc]")
 kwb.pathdict:::is_placeholder(c("<abc>", "<def>", "ghi", "<jkl>"))
 kwb.pathdict:::is_placeholder("<abc>def")
 kwb.pathdict:::is_placeholder("<abc><def>")
 kwb.pathdict:::is_placeholder("<>")
-kwb.pathdict:::is_placeholder("[abc]")
 ```
 
 ### get_dictionary_one_by_one
@@ -76,7 +85,7 @@ At the start of `get_dictionary_one_by_one()` the function
 path strings as input. For each possible depth in the path tree all different
 sub-paths are determined and ordered by their "importance", i.e. by the product
 of frequency and path length in number of characters. By default, only the most
-important path per depth level is returned:
+important path per depth is returned:
 
 ```{r}
 frequencies <- kwb.pathdict:::get_subdir_frequencies(paths = paths, dbg = FALSE)
@@ -84,7 +93,7 @@ frequencies <- kwb.pathdict:::get_subdir_frequencies(paths = paths, dbg = FALSE)
 # Define helper function for output
 print_frequencies <- function(f) {
   for (i in seq_along(f)) {
-    message("\ndepth = ", i)
+    message("=== depth: ", i)
     print(kwb.pathdict:::named_vector_to_data_frame(f[[i]]))
   }
 }
@@ -92,8 +101,7 @@ print_frequencies <- function(f) {
 print_frequencies(frequencies)
 ```
 
-All different paths are returned when the argument `first.only` is set to 
-`FALSE`:
+To return all different paths, set `first.only = FALSE`:
 
 ```{r}
 all_frequencies <- kwb.pathdict:::get_subdir_frequencies(
@@ -119,10 +127,11 @@ nchar(to_placeholder(key))) * count` and orders the data frame decreasingly by
 this score.
 
 ```{r}
-# Size of placeholder to be used instead of a path (number of characters)
-size <- nchar("<p1>")
-
-kwb.pathdict:::rescore_and_reorder_frequency_data(frequency_data, size)
+kwb.pathdict:::rescore_and_reorder_frequency_data(
+  frequency_data, 
+  # Length of placeholder string to be used instead of path
+  placeholder_size = nchar("<p1>")
+)
 ```
 
 ### get_next_level()
@@ -162,7 +171,6 @@ kwb.pathdict:::replace_subdirs
 kwb.pathdict:::starts_with_parts
 kwb.pathdict:::to_dictionary
 kwb.pathdict:::to_dictionary_key
-kwb.pathdict:::to_placeholder
 kwb.pathdict:::update_frequency_data_length
 kwb.pathdict:::use_dictionary
 ```
