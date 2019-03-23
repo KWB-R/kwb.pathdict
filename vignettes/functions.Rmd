@@ -87,8 +87,7 @@ input strings. Each unique input string is given a short name by which ich can
 be looked up in the returned dictionary. The dictionary is a list with the
 unique input strings as values and the assigned short names as keys. The entries
 in the dictionary are sorted decreasingly by the "importance" of the 
-corresponding input string, i.e. the product of frequency and string length of 
-the input string. 
+corresponding input string, i.e. the product of frequency and string length. 
 
 ```{r}
 dict <- kwb.pathdict:::to_dictionary(dirname(paths))
@@ -101,14 +100,18 @@ Once you have defined a dictionary you can replace the original strings with
 placeholders that correspond to the short names in the dictionary:
 
 ```{r}
-short_paths <- kwb.pathdict:::use_dictionary(dirname(paths), dict)
+(short_paths <- kwb.pathdict:::use_dictionary(dirname(paths), dict))
 ```
 
 The short paths can be resolved back to the original paths using the `resolve()`
 function from the kwb.utils package:
 
 ```{r}
-kwb.utils::resolve(short_paths, dict)
+# Resolve the placeholders in the short paths back to the original paths
+long_paths <- kwb.utils::resolve(short_paths, dict)
+
+# Check that the original paths were reproduced
+identical(long_paths, dirname(paths))
 ```
 
 ### get_dictionary_one_by_one()
