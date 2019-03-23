@@ -87,7 +87,7 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 #' # Create a dictionary for the unique values in x
 #' kwb.pathdict:::to_dictionary(x)
 #'
-#' # Note that "cat" is the first entry because its has the highest "importance"
+#' # Note that "cat" is the first entry because it has the highest "importance"
 #' kwb.pathdict:::sorted_importance(x)
 #'
 to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
