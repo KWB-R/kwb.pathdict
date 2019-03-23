@@ -109,23 +109,6 @@ to_frequency_data <- function(freqs)
   )
 }
 
-# to_dictionary_key ------------------------------------------------------------
-to_dictionary_key <- function(i, prefix = "p", leading.zeros = FALSE)
-{
-  fmt <- if (leading.zeros) {
-
-    digits <- nchar(to_dictionary_key(length(i), ""))
-
-    paste0("%s%0", digits, "X")
-
-  } else {
-
-    "%s%X"
-  }
-
-  sprintf(fmt, prefix, i)
-}
-
 # rescore_and_reorder_frequency_data -------------------------------------------
 #' Rescore and Reorder Frequency Data
 #'
