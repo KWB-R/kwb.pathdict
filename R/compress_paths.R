@@ -14,38 +14,35 @@ compress_paths <- function(
 
   ok <- (dirs != "." & dirs != "/")
 
+  if (! any(ok)) {
+    return(structure(x, dict = list()))
+  }
+
   result <- x
 
-  if (any(ok)) {
+  dict_old <- if (depth > 1) dicts[[depth - 1]] else NULL
 
-    dict_old <- if (depth > 1) dicts[[depth - 1]] else NULL
+  y <- compress(x = dirs[ok], dict = dict_old, prefix = letters[depth])
 
-    y <- compress(x = dirs[ok], dict = dict_old, prefix = letters[depth])
+  log_result_if(dbg, dirs[ok], y)
 
-    log_result_if(dbg, dirs[ok], y)
+  dict_new <- kwb.utils::getAttribute(y, "dict")
 
-    dict_new <- kwb.utils::getAttribute(y, "dict")
+  dicts[[depth]] <- dict_new
 
-    dicts[[depth]] <- dict_new
+  if (depth < maxdepth) {
 
-    if (depth < maxdepth) {
+    y2 <- compress_paths(
+      x = as.character(dict_new), depth = depth + 1, maxdepth = maxdepth,
+      dicts = dicts
+    )
 
-      y2 <- compress_paths(
-        x = as.character(dict_new), depth = depth + 1, maxdepth = maxdepth,
-        dicts = dicts
-      )
+    dict_new[seq_along(dict_new)] <- as.character(y2)
 
-      dict_new[seq_along(dict_new)] <- as.character(y2)
-
-      dict_new <- c(dict_new, kwb.utils::getAttribute(y2, "dict"))
-    }
-
-    result[ok] <- file.path(as.character(y), basename(x[ok]))
-
-  } else {
-
-    dict_new = list()
+    dict_new <- c(dict_new, kwb.utils::getAttribute(y2, "dict"))
   }
+
+  result[ok] <- file.path(as.character(y), basename(x[ok]))
 
   structure(result, dict = dict_new)
 }
@@ -72,6 +69,8 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 
 # to_dictionary ----------------------------------------------------------------
 #' @importFrom stats setNames
+#' @examples
+#' kwb.pathdict:::to_dictionary(c("abc/def", "abc/def/ghi", "abc/def"))
 to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
 {
   if (length(x) == 0) {
