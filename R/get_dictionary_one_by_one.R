@@ -146,10 +146,12 @@ print_path_frequencies <- function(x, maxchar = 80)
 #' @importFrom kwb.utils selectColumns
 update_frequency_data_length <- function(frequency_data, winner, key)
 {
-  winner_length <- kwb.utils::selectColumns(winner, "length")
-  winner_path <- kwb.utils::selectColumns(winner, "path")
-  data_length <- kwb.utils::selectColumns(frequency_data, "length")
-  data_path <- kwb.utils::selectColumns(frequency_data, "path")
+  get_column <- kwb.utils::selectColumns
+
+  winner_length <- get_column(winner, "length")
+  winner_path <- get_column(winner, "path")
+  data_length <- get_column(frequency_data, "length")
+  data_path <- get_column(frequency_data, "path")
 
   shortage <- winner_length - nchar(to_placeholder(key))
 
