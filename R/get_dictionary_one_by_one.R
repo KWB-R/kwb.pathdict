@@ -210,7 +210,6 @@ update_frequency_data_length <- function(frequency_data, winner, key)
 {
   winner_length <- kwb.utils::selectColumns(winner, "length")
   winner_path <- kwb.utils::selectColumns(winner, "path")
-
   data_length <- kwb.utils::selectColumns(frequency_data, "length")
   data_path <- kwb.utils::selectColumns(frequency_data, "path")
 
@@ -222,4 +221,3 @@ update_frequency_data_length <- function(frequency_data, winner, key)
 
   frequency_data
 }
-
