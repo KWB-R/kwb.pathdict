@@ -12,6 +12,8 @@ get_subdirs_by_frequency <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
 
+  stopifnot(nrow(freqinfo) == 1)
+
   depth <- kwb.utils::selectColumns(freqinfo, "depth")
   n <- kwb.utils::selectColumns(freqinfo, "n.x")
 
