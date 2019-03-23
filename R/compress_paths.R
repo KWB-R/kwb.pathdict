@@ -68,9 +68,28 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 }
 
 # to_dictionary ----------------------------------------------------------------
+
+#' Create Dictionary from Unique Strings
+#'
+#' @param x vector of strings
+#' @param prefix prefix to be given to the keys in the dictionary.
+#'   Default: "a"
+#' @param leading_zeros whether to make all keys in the dictionary have same
+#'   length by adding leading zeros to the keys. Default: \code{FALSE}
+#' @value list with unique values of \code{x} as values and element names
+#'   "<prefix>_<i>" with <i> being a number from 1 to the number of unique
+#'   elements in \code{x}
 #' @importFrom stats setNames
 #' @examples
-#' kwb.pathdict:::to_dictionary(c("abc/def", "abc/def/ghi", "abc/def"))
+#' # Define input strings
+#' x <- c("elephant", "mouse", "cat", "cat", "cat", "mouse", "cat", "cat")
+#'
+#' # Create a dictionary for the unique values in x
+#' kwb.pathdict:::to_dictionary(x)
+#'
+#' # Note that "cat" is the first entry because its has the highest "importance"
+#' kwb.pathdict:::sorted_importance(x)
+#'
 to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
 {
   if (length(x) == 0) {
