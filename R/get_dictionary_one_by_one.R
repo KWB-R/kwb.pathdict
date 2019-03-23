@@ -55,14 +55,14 @@ get_dictionary_one_by_one <- function(paths, n = 10)
 
 # get_subdir_frequencies -------------------------------------------------------
 #' @importFrom kwb.file split_paths
-#' @importFrom kwb.utils catIf collapsed getElementLengths printIf
+#' @importFrom kwb.utils catIf collapsed printIf
 #' @importFrom graphics hist
 get_subdir_frequencies <- function(
   subdirs = kwb.file::split_paths(paths), paths = NULL, first.only = TRUE,
   dbg = TRUE
 )
 {
-  n_levels <- kwb.utils::getElementLengths(subdirs)
+  n_levels <- lengths(subdirs)
 
   if (dbg) {
 
