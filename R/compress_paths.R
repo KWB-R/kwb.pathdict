@@ -18,11 +18,11 @@ compress_paths <- function(
     return(structure(x, dict = list()))
   }
 
-  result <- x
-
-  dict_old <- if (depth > 1) dicts[[depth - 1]] else NULL
-
-  y <- compress(x = dirs[ok], dict = dict_old, prefix = letters[depth])
+  y <- compress(
+    x = dirs[ok],
+    dict = if (depth > 1) dicts[[depth - 1]] else NULL,
+    prefix = letters[depth]
+  )
 
   log_result_if(dbg, dirs[ok], y)
 
@@ -42,9 +42,9 @@ compress_paths <- function(
     dict_new <- c(dict_new, kwb.utils::getAttribute(y2, "dict"))
   }
 
-  result[ok] <- file.path(as.character(y), basename(x[ok]))
+  x[ok] <- file.path(as.character(y), basename(x[ok]))
 
-  structure(result, dict = dict_new)
+  structure(x, dict = dict_new)
 }
 
 # compress ---------------------------------------------------------------------
