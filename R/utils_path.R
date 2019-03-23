@@ -96,10 +96,3 @@ starts_with_parts <- function(parts, elements)
 
   Reduce(`&`, selected_at_level, init = rep(TRUE, length_out))
 }
-
-
-# to_placeholder ---------------------------------------------------------------
-to_placeholder <- function(x)
-{
-  paste0("<", x, ">")
-}

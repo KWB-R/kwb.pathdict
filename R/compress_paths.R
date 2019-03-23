@@ -85,12 +85,6 @@ to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
   stats::setNames(dict, keys)
 }
 
-# is_placeholder ---------------------------------------------------------------
-is_placeholder <- function(x)
-{
-  grepl("^<[^<>]+>$", x)
-}
-
 # log_result_if ----------------------------------------------------------------
 #' @importFrom kwb.utils catLines getAttribute
 log_result_if <- function(dbg, x, y)
