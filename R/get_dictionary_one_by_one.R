@@ -7,6 +7,8 @@
 #' @importFrom kwb.utils moveColumnsToFront
 get_dictionary_one_by_one <- function(paths, n = 10)
 {
+  main_columns_winner <- c("i", "key", "score", "count", "length")
+
   # Get the frequencies of the directory paths
   frequencies <- get_subdir_frequencies(paths = paths, first.only = TRUE)
 
@@ -42,7 +44,7 @@ get_dictionary_one_by_one <- function(paths, n = 10)
 
     winner <- cbind(i = length(dictionary), key = key, winner)
 
-    winner <- kwb.utils::moveColumnsToFront(winner, main_columns_winner())
+    winner <- kwb.utils::moveColumnsToFront(winner, main_columns_winner)
 
     print(winner, row.names = FALSE)
 
@@ -138,12 +140,6 @@ print_path_frequencies <- function(x, maxchar = 80)
   x$path <- substr(x$path, 1, maxchar)
 
   print(x)
-}
-
-# main_columns_winner ----------------------------------------------------------
-main_columns_winner <- function()
-{
-  c("i", "key", "score", "count", "length")
 }
 
 # update_frequency_data_length -------------------------------------------------

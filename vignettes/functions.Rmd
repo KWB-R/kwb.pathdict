@@ -157,7 +157,6 @@ kwb.pathdict:::get_subdirs_by_frequence(subdirs, cumid, freqinfo)
 ```{r}
 kwb.pathdict:::log_result_if
 kwb.pathdict:::lookup_in_dictionary
-kwb.pathdict:::main_columns_winner
 kwb.pathdict:::print_path_frequencies
 kwb.pathdict:::replace_subdirs
 kwb.pathdict:::starts_with_parts
