@@ -1,3 +1,16 @@
+# named_vector_to_data_frame ---------------------------------------------------
+#' Convert a Named Vector to a Data Frame
+#'
+#' @param x named vector
+#' @return data frame with columns \code{name}, containing the names of \code{x}
+#'   and \code{value}, containing the values of \code{x}
+#' @examples
+#' kwb.pathdict:::named_vector_to_data_frame(c(a = 1, b = 2, c = 3))
+named_vector_to_data_frame <- function(x)
+{
+  kwb.utils::noFactorDataFrame(name = names(x), value = as.character(x))
+}
+
 # order_decreasingly_by --------------------------------------------------------
 
 #' Order Data Frame Decreasingly by one Column
