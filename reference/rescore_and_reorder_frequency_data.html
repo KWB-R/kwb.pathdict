@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • kwb.pathdict</title>
+<title>Rescore and Reorder Frequency Data — rescore_and_reorder_frequency_data • kwb.pathdict</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,7 +36,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Rescore and Reorder Frequency Data — rescore_and_reorder_frequency_data" />
+
+<meta property="og:description" content="Rescore and Reorder Frequency Data" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -53,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -127,84 +130,44 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Rescore and Reorder Frequency Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KWB-R/kwb.pathdict/blob/master/R/dictionary.R'><code>R/dictionary.R</code></a></small>
+    <div class="hidden name"><code>rescore_and_reorder_frequency_data.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Rescore and Reorder Frequency Data</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="get_dictionary_one_by_one.html">get_dictionary_one_by_one()</a></code> </p>
-        </td>
-        <td><p>Get a Path Dictionary</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="order_decreasingly_by.html">order_decreasingly_by()</a></code> </p>
-        </td>
-        <td><p>Order Data Frame Decreasingly by one Column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="random_paths.html">random_paths()</a></code> </p>
-        </td>
-        <td><p>Create Random File Paths Using English Words</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rescore_and_reorder_frequency_data.html">rescore_and_reorder_frequency_data()</a></code> </p>
-        </td>
-        <td><p>Rescore and Reorder Frequency Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sorted_importance.html">sorted_importance()</a></code> </p>
-        </td>
-        <td><p>Importance of Strings</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="starts_with_parts.html">starts_with_parts()</a></code> </p>
-        </td>
-        <td><p>Do Subfolder List Elements Start with Given Folder Names?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_cumulative_id.html">to_cumulative_id()</a></code> </p>
-        </td>
-        <td><p>Give Each Field in a Subdirectory Matrix an ID</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_dictionary.html">use_dictionary()</a></code> </p>
-        </td>
-        <td><p>Substitute Values that are in a Dictionary with their Keys</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>rescore_and_reorder_frequency_data</span>(<span class='no'>frequency_data</span>, <span class='no'>placeholder_size</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>frequency_data</th>
+      <td><p>data frame with columns <code>length</code> and <code>count</code></p></td>
+    </tr>
+    <tr>
+      <th>placeholder_size</th>
+      <td><p>size of placeholder in number of characters. The path
+length will be reduced by this value before being multiplied with the count
+to calculate the score.</p></td>
+    </tr>
     </table>
-  </div>
+    
 
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
+
   </div>
 </div>
 
