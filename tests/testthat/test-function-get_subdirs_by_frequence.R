@@ -5,10 +5,10 @@
 # so that real cases are tested. You should then delete this comment.
 #
 
-test_that("get_subdirs_by_frequence() works", {
+test_that("get_subdirs_by_frequency() works", {
 
   expect_error(
-    kwb.pathdict:::get_subdirs_by_frequence()
+    kwb.pathdict:::get_subdirs_by_frequency()
     # argument "freqinfo" is missing, with no default
   )
 

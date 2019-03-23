@@ -6,9 +6,9 @@ data_frame_to_paths <- function(df)
   gsub("/+$", "", kwb.utils::pasteColumns(df, sep = "/"))
 }
 
-# get_subdirs_by_frequence -----------------------------------------------------
+# get_subdirs_by_frequency -----------------------------------------------------
 #' @importFrom kwb.utils printIf
-get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
+get_subdirs_by_frequency <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
 

@@ -151,9 +151,9 @@ function `compress_one_by_one()`.
 kwb.pathdict:::get_next_level
 ```
 
-### get_subdirs_by_frequence()
+### get_subdirs_by_frequency()
 
-The function `get_subdirs_by_frequence()` is used by a FAKIN script that is not
+The function `get_subdirs_by_frequency()` is used by a FAKIN script that is not
 yet part of a package. It gets different inputs:
 
 1. `subdirs`: subdirectory matrix
@@ -166,7 +166,7 @@ subdirs <- kwb.file::to_subdir_matrix(paths)
 cumid <- kwb.pathdict:::to_cumulative_id(subdirs)
 freqinfo <- data.frame(depth = 2, n.x = 10, n.Freq = 10)
 
-kwb.pathdict:::get_subdirs_by_frequence(subdirs, cumid, freqinfo)
+kwb.pathdict:::get_subdirs_by_frequency(subdirs, cumid, freqinfo)
 ```
 
 ### Functions that still need to be described
