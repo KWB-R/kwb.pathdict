@@ -179,9 +179,22 @@ rescore_and_reorder_frequency_data <-function(frequency_data, key)
   frequency_data$score2 <- (lengths - key_placeholder_size) * counts
 
   # Order decreasingly by this "effective" score
-  row_order <- order(frequency_data$score2, decreasing = TRUE)
+  order_by_score(frequency_data)
+}
 
-  kwb.utils::resetRowNames(frequency_data[row_order, ])
+# order_by_score ---------------------------------------------------------------
+#' Order Data Frame Decreasingly by Score Column
+#'
+#' @param df data frame
+#' @param column name of column by which to order decreasingly. Default:
+#'   "score2"
+#' @importFrom kwb.utils selectColumns
+order_by_score <- function(df, column = "score2")
+{
+  # Order decreasingly by this "effective" score
+  kwb.utils::resetRowNames(
+    df[order(kwb.utils::selectColumns(df, column), decreasing = TRUE), ]
+  )
 }
 
 # print_path_frequencies -------------------------------------------------------
