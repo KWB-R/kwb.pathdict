@@ -13,7 +13,7 @@ sub-paths and to define placeholders accordingly.
 
 For more details on how to install KWB-R packages checkout our [installation tutorial](https://kwb-r.github.io/kwb.pkgbuild/articles/install.html).
 
-```{r echo = TRUE, eval = FALSE}
+```r
 ### Option: specify GitHub Personal Access Token (GITHUB_PAT)
 ### see: https://kwb-r.github.io/kwb.pkgbuild/articles/install.html#set-your-github_pat
 ### why this might be important for you!
