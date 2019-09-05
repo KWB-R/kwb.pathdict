@@ -88,11 +88,11 @@ random_filenames <- function(min_chars = 4, max_elements = 10, size = NULL)
   paste0(sample(words, size), ".", sample(extensions, size, replace = TRUE))
 }
 
-
 # english_words ----------------------------------------------------------------
 
 english_words <- function(min_chars = 0)
 {
   words <- qdapDictionaries::Fry_1000
+  words <- gsub("'", "_", words)
   words[nchar(words) >= min_chars]
 }

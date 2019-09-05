@@ -42,11 +42,3 @@ print_compressed <- function(x)
   print_dict(compressed = x)
   cat("\nSize: ", utils::capture.output(dictionary_size(compressed = x)))
 }
-
-# named_vector_to_data_frame ---------------------------------------------------
-#' Helper function to convert a named vector to a data frame
-#' @keywords internal
-named_vector_to_data_frame <- function(x)
-{
-  kwb.utils::noFactorDataFrame(name = names(x), value = as.character(x))
-}

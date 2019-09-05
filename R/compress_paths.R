@@ -14,40 +14,37 @@ compress_paths <- function(
 
   ok <- (dirs != "." & dirs != "/")
 
-  result <- x
-
-  if (any(ok)) {
-
-    dict_old <- if (depth > 1) dicts[[depth - 1]] else NULL
-
-    y <- compress(x = dirs[ok], dict = dict_old, prefix = letters[depth])
-
-    log_result_if(dbg, dirs[ok], y)
-
-    dict_new <- kwb.utils::getAttribute(y, "dict")
-
-    dicts[[depth]] <- dict_new
-
-    if (depth < maxdepth) {
-
-      y2 <- compress_paths(
-        x = as.character(dict_new), depth = depth + 1, maxdepth = maxdepth,
-        dicts = dicts
-      )
-
-      dict_new[seq_along(dict_new)] <- as.character(y2)
-
-      dict_new <- c(dict_new, kwb.utils::getAttribute(y2, "dict"))
-    }
-
-    result[ok] <- file.path(as.character(y), basename(x[ok]))
-
-  } else {
-
-    dict_new = list()
+  if (! any(ok)) {
+    return(structure(x, dict = list()))
   }
 
-  structure(result, dict = dict_new)
+  y <- compress(
+    x = dirs[ok],
+    dict = if (depth > 1) dicts[[depth - 1]] else NULL,
+    prefix = letters[depth]
+  )
+
+  log_result_if(dbg, dirs[ok], y)
+
+  dict_new <- kwb.utils::getAttribute(y, "dict")
+
+  dicts[[depth]] <- dict_new
+
+  if (depth < maxdepth) {
+
+    y2 <- compress_paths(
+      x = as.character(dict_new), depth = depth + 1, maxdepth = maxdepth,
+      dicts = dicts
+    )
+
+    dict_new[seq_along(dict_new)] <- as.character(y2)
+
+    dict_new <- c(dict_new, kwb.utils::getAttribute(y2, "dict"))
+  }
+
+  x[ok] <- file.path(as.character(y), basename(x[ok]))
+
+  structure(x, dict = dict_new)
 }
 
 # compress ---------------------------------------------------------------------
@@ -61,7 +58,7 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 
   # Create a new dictionary if there are any duplicates in x but do not
   # consider elements that are already placeholders
-  dict_new <- to_dictionary(x[! is_placeholder(x)], prefix)
+  dict_new <- to_dictionary(x = x[! is_placeholder(x)], prefix)
 
   x <- use_dictionary(x, dict_new)
 
@@ -71,20 +68,39 @@ compress <- function(x, dict = NULL, prefix = "a", extend.dict = FALSE)
 }
 
 # to_dictionary ----------------------------------------------------------------
+
+#' Create Dictionary from Unique Strings
+#'
+#' @param x vector of strings
+#' @param prefix prefix to be given to the keys in the dictionary.
+#'   Default: "a"
+#' @param leading_zeros whether to make all keys in the dictionary have same
+#'   length by adding leading zeros to the keys. Default: \code{FALSE}
+#' @value list with unique values of \code{x} as values and element names
+#'   "<prefix>_<i>" with <i> being a number from 1 to the number of unique
+#'   elements in \code{x}
 #' @importFrom stats setNames
-to_dictionary <- function(x, prefix = "a", leading.zeros = FALSE)
+#' @examples
+#' # Define input strings
+#' x <- c("elephant", "mouse", "cat", "cat", "cat", "mouse", "cat", "cat")
+#'
+#' # Create a dictionary for the unique values in x
+#' kwb.pathdict:::to_dictionary(x)
+#'
+#' # Note that "cat" is the first entry because it has the highest "importance"
+#' kwb.pathdict:::sorted_importance(x)
+#'
+to_dictionary <- function(x, prefix = "a", leading_zeros = FALSE)
 {
+  if (length(x) == 0) {
+    return(list())
+  }
+
   dict <- as.list(names(sorted_importance(x)))
 
-  keys <- to_dictionary_key(seq_along(dict), prefix, leading.zeros)
+  keys <- to_dictionary_key(seq_along(dict), prefix, leading_zeros)
 
   stats::setNames(dict, keys)
-}
-
-# is_placeholder ---------------------------------------------------------------
-is_placeholder <- function(x)
-{
-  grepl("^<[^<>]+>$", x)
 }
 
 # log_result_if ----------------------------------------------------------------
@@ -101,51 +117,4 @@ log_result_if <- function(dbg, x, y)
 
     utils::str(kwb.utils::getAttribute(y, "dict"))
   }
-}
-
-# compress_one_by_one ----------------------------------------------------------
-compress_one_by_one <- function(x, keys = LETTERS[1:n], n = 10)
-{
-  lapply(keys, function(key) {
-
-    elapsed <- system.time(x <<- get_next_level(x, key))
-
-    cat(sprintf("Elapsed: %0.1f s\n", elapsed["elapsed"]))
-
-    x
-  })
-}
-
-# get_next_level ---------------------------------------------------------------
-get_next_level <- function(x, key, set.attributes = FALSE, dbg = FALSE)
-{
-  freqs <- get_subdir_frequencies(paths = x, dbg = dbg)
-
-  allfreqs <- sort(unlist(freqs), decreasing = TRUE)
-
-  dict <- structure(list(names(allfreqs[1])), names = key)
-
-  result <- use_dictionary(x, dict, method = "part")
-
-  if (set.attributes) {
-
-    attr(result, "freqs") <- freqs
-
-    attr(result, "dict") <- dict
-  }
-
-  result
-}
-
-# compress_with_dictionary -----------------------------------------------------
-compress_with_dictionary <- function(subdirs, dict, fill.value = "")
-{
-  strings <- names(dict)[match(subdirs, as.character(dict))]
-
-  if (! is.na(fill.value)) {
-
-    strings[is.na(strings)] <- fill.value
-  }
-
-  matrix(strings, nrow = nrow(subdirs))
 }

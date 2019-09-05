@@ -61,9 +61,7 @@ use_dictionary <- function(x, dict, method = "full")
 
   } else {
 
-    stop(
-      "use_dictionary(): method must be one of 'full', 'part'", call. = FALSE
-    )
+    stop_("use_dictionary(): method must be one of 'full', 'part'")
   }
 
   x

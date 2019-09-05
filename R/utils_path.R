@@ -6,15 +6,20 @@ data_frame_to_paths <- function(df)
   gsub("/+$", "", kwb.utils::pasteColumns(df, sep = "/"))
 }
 
-# get_subdirs_by_frequence -----------------------------------------------------
+# get_subdirs_by_frequency -----------------------------------------------------
 #' @importFrom kwb.utils printIf
-get_subdirs_by_frequence <- function(subdirs, cumid, freqinfo, dbg = TRUE)
+get_subdirs_by_frequency <- function(subdirs, cumid, freqinfo, dbg = TRUE)
 {
   kwb.utils::printIf(dbg, freqinfo)
 
-  rows <- which(cumid[, freqinfo$depth] == freqinfo$n.x)[1]
+  stopifnot(nrow(freqinfo) == 1)
 
-  subdirs[rows, seq_len(freqinfo$depth)]
+  depth <- kwb.utils::selectColumns(freqinfo, "depth")
+  n <- kwb.utils::selectColumns(freqinfo, "n.x")
+
+  rows <- which(cumid[, depth] == n)[1]
+
+  subdirs[rows, seq_len(depth)]
 }
 
 # lookup_in_dictionary ---------------------------------------------------------
@@ -92,11 +97,4 @@ starts_with_parts <- function(parts, elements)
   })
 
   Reduce(`&`, selected_at_level, init = rep(TRUE, length_out))
-}
-
-
-# to_placeholder ---------------------------------------------------------------
-to_placeholder <- function(x)
-{
-  paste0("<", x, ">")
 }

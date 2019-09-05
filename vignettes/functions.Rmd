@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Functions}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -16,47 +18,198 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette aims at describing the functions that have not yet been described
-in other vignettes, one by one. For the moment I only print out the 
-implementation of each function.
+This vignette describes the functions that have not yet been described in other
+vignettes. 
+
+### Provide Random Example Paths
+
+```{r}
+set.seed(53653815)
+
+(paths <- kwb.pathdict::random_paths(4, min_chars = 5, max_elements = 3))
+```
 
 ### data_frame_to_paths()
 
-The next function, `data_frame_to_paths()` converts a subdirectory matrix that
-has been converted to a data frame back to the paths by pasting all non-empty
-columns with slash. Short paths must have empty values `""` and not `NA` in the
-last columns:
+The function `data_frame_to_paths()` converts a subdirectory matrix that has
+been converted to a data frame back to the paths by pasting all non-empty
+columns with slashes. Paths that do not have the maximum depth must have empty 
+values `""` (and not `NA`) in the last columns, otherwise the string `NA` will
+appear in the paths.
 
 ```{r}
-(df <- kwb.utils::asNoFactorDataFrame(matrix(
-  c("a", "b", "c", 
-    "d", "e", "",
-    "f", "g", NA), 3, 3, byrow = TRUE
-)))
+# Create subdirectory matrix as data frame
+(subdir_data <- kwb.file::to_subdir_matrix(paths, result_type = "data.frame"))
 
-kwb.pathdict:::data_frame_to_paths(df)
+# Reconstruct the paths from this data frame
+paths_reconstructed <- kwb.pathdict:::data_frame_to_paths(subdir_data)
+
+# Check that the paths have not changed
+identical(paths_reconstructed, paths)
 ```
 
-### Functions that still need to be des described
+### to_placeholder(), is_placeholder(), to_dictionary_key()
+
+The function `to_placeholder()` converts a string to a placeholder \<string\>.
 
 ```{r}
-kwb.pathdict:::get_dictionary_one_by_one
-kwb.pathdict:::get_frequency_score
+kwb.pathdict:::to_placeholder("abc")
+
+(placeholders <- kwb.pathdict:::to_placeholder(c("abc", 123)))
+```
+
+The function `is_placeholder()` checks whether a string looks like a
+\<placeholder\>:
+
+```{r}
+kwb.pathdict:::is_placeholder(placeholders)
+kwb.pathdict:::is_placeholder("abc")
+kwb.pathdict:::is_placeholder("[abc]")
+kwb.pathdict:::is_placeholder(c("<abc>", "<def>", "ghi", "<jkl>"))
+kwb.pathdict:::is_placeholder("<abc>def")
+kwb.pathdict:::is_placeholder("<abc><def>")
+kwb.pathdict:::is_placeholder("<>")
+```
+
+The function `to_dictionary_key` creates the name for a key in a dictionary,
+consisting of a prefix ("p" by default) and a number, given in the hexadecimal 
+system:
+
+```{r}
+kwb.pathdict:::to_dictionary_key(1:17)
+kwb.pathdict:::to_dictionary_key(1:17, leading_zeros = TRUE)
+```
+
+### to_dictionary(), use_dictionary()
+
+The function `to_dictionary()` creates a "dictionary" for a given vector of 
+input strings. Each unique input string is given a short name by which ich can
+be looked up in the returned dictionary. The dictionary is a list with the
+unique input strings as values and the assigned short names as keys. The entries
+in the dictionary are sorted decreasingly by the "importance" of the 
+corresponding input string, i.e. the product of frequency and string length. 
+
+```{r}
+dict <- kwb.pathdict:::to_dictionary(dirname(paths))
+
+# Show the dictionary in the form of a data frame
+kwb.pathdict:::named_vector_to_data_frame(unlist(dict))
+```
+
+Once you have defined a dictionary you can replace the original strings with
+placeholders that correspond to the short names in the dictionary:
+
+```{r}
+(short_paths <- kwb.pathdict:::use_dictionary(dirname(paths), dict))
+```
+
+The short paths can be resolved back to the original paths using the `resolve()`
+function from the kwb.utils package:
+
+```{r}
+# Resolve the placeholders in the short paths back to the original paths
+long_paths <- kwb.utils::resolve(short_paths, dict)
+
+# Check that the original paths were reproduced
+identical(long_paths, dirname(paths))
+```
+
+### get_dictionary_one_by_one()
+
+```{r}
+result <- kwb.pathdict:::get_dictionary_one_by_one(paths, n = 5)
+result
+```
+
+### Subfolder Frequency Functions
+
+At the start of `get_dictionary_one_by_one()` the function
+`get_subdir_frequencies()` is called. This function can be given a vector of
+path strings as input. For each possible depth in the path tree all different
+sub-paths are determined and ordered by their "importance", i.e. by the product
+of frequency and path length in number of characters. By default, only the most
+important path per depth is returned:
+
+```{r}
+frequencies <- kwb.pathdict:::get_subdir_frequencies(paths = paths, dbg = FALSE)
+
+# Define helper function for output
+print_frequencies <- function(f) {
+  for (i in seq_along(f)) {
+    message("=== depth: ", i)
+    print(kwb.pathdict:::named_vector_to_data_frame(f[[i]]))
+  }
+}
+
+print_frequencies(frequencies)
+```
+
+To return all different paths, set `first.only = FALSE`:
+
+```{r}
+all_frequencies <- kwb.pathdict:::get_subdir_frequencies(
+  paths = paths, first.only = FALSE, dbg = FALSE
+)
+
+print_frequencies(all_frequencies)
+```
+
+The function `to_frequency_data()` is called next within 
+`get_dictionary_one_by_one()`. It converts the list returned by 
+`get_subdir_frequencies()` to a data frame.
+
+```{r}
+# Convert frequency list to data frame
+(frequency_data <- kwb.pathdict:::to_frequency_data(frequencies))
+(all_frequency_data <- kwb.pathdict:::to_frequency_data(all_frequencies))
+```
+
+The function `rescore_and_reorder_frequency_data()` takes a data frame with
+columns `length` and `count` as input. It calculates `score2 = (length -
+placeholder_size) * count` and orders the data frame decreasingly by this score.
+
+```{r}
+kwb.pathdict:::rescore_and_reorder_frequency_data(
+  frequency_data, 
+  # Length of placeholder string to be used instead of path
+  placeholder_size = nchar("<p1>")
+)
+```
+
+### get_next_level()
+
+The function `get_next_level()` is a helper function that is called by the
+function `compress_one_by_one()`.
+
+```{r}
 kwb.pathdict:::get_next_level
-kwb.pathdict:::get_subdir_frequencies
-kwb.pathdict:::get_subdirs_by_frequence
-kwb.pathdict:::is_placeholder
+```
+
+### get_subdirs_by_frequency()
+
+The function `get_subdirs_by_frequency()` is used by a FAKIN script that is not
+yet part of a package. It gets different inputs:
+
+1. `subdirs`: subdirectory matrix
+2. `cumid`: cumulative identifier, created with
+  `kwb.pathdict:::to_cumulative_id()`
+3. `freqinfo`: one-row data frame with columns `depth`, `n.x`, `n.Freq`
+
+```{r}
+subdirs <- kwb.file::to_subdir_matrix(paths)
+cumid <- kwb.pathdict:::to_cumulative_id(subdirs)
+freqinfo <- data.frame(depth = 2, n.x = 10, n.Freq = 10)
+
+kwb.pathdict:::get_subdirs_by_frequency(subdirs, cumid, freqinfo)
+```
+
+### Functions that still need to be described
+
+```{r}
 kwb.pathdict:::log_result_if
 kwb.pathdict:::lookup_in_dictionary
-kwb.pathdict:::main_columns_winner
 kwb.pathdict:::print_path_frequencies
 kwb.pathdict:::replace_subdirs
-kwb.pathdict:::rescore_and_reorder_frequency_data
 kwb.pathdict:::starts_with_parts
-kwb.pathdict:::to_dictionary
-kwb.pathdict:::to_dictionary_key
-kwb.pathdict:::to_frequency_data
-kwb.pathdict:::to_placeholder
 kwb.pathdict:::update_frequency_data_length
-kwb.pathdict:::use_dictionary
 ```
