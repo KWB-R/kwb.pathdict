@@ -4,8 +4,12 @@
 \alias{random_paths}
 \title{Create Random File Paths Using English Words}
 \usage{
-random_paths(max_depth = 5, min_chars = 5, max_elements = 10,
-  depth_to_leaf_weight = function(depth) 1.2^depth)
+random_paths(
+  max_depth = 5,
+  min_chars = 5,
+  max_elements = 10,
+  depth_to_leaf_weight = function(depth) 1.2^depth
+)
 }
 \arguments{
 \item{max_depth}{maximum path depth}

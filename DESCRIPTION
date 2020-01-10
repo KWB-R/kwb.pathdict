@@ -1,6 +1,6 @@
 Package: kwb.pathdict
 Title: Functions to Work with Path Dictionaries
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Hauke",
              family = "Sonnenberg",
@@ -29,7 +29,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports: 
     fs,
     kwb.file,
