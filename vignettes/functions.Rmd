@@ -93,7 +93,7 @@ corresponding input string, i.e. the product of frequency and string length.
 dict <- kwb.pathdict:::to_dictionary(dirname(paths))
 
 # Show the dictionary in the form of a data frame
-kwb.pathdict:::named_vector_to_data_frame(unlist(dict))
+kwb.utils::namedVectorToDataFrame(unlist(dict))
 ```
 
 Once you have defined a dictionary you can replace the original strings with
@@ -137,7 +137,7 @@ frequencies <- kwb.pathdict:::get_subdir_frequencies(paths = paths, dbg = FALSE)
 print_frequencies <- function(f) {
   for (i in seq_along(f)) {
     message("=== depth: ", i)
-    print(kwb.pathdict:::named_vector_to_data_frame(f[[i]]))
+    print(kwb.utils::namedVectorToDataFrame(f[[i]]))
   }
 }
 

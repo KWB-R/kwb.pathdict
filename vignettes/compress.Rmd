@@ -96,7 +96,7 @@ string frequency and string length for the different strings given in its first
 argument.
 
 ```{r}
-kwb.pathdict:::named_vector_to_data_frame(
+kwb.utils::namedVectorToDataFrame(
   kwb.pathdict:::sorted_importance(dirname(paths)
   )
 )

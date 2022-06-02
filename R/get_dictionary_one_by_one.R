@@ -118,7 +118,7 @@ to_frequency_data <- function(freqs)
 #' @param placeholder_size size of placeholder in number of characters. The path
 #'   length will be reduced by this value before being multiplied with the count
 #'   to calculate the score.
-#' @importFrom kwb.utils resetRowNames selectColumns
+#' @importFrom kwb.utils orderDecreasinglyBy resetRowNames selectColumns
 rescore_and_reorder_frequency_data <-function(frequency_data, placeholder_size)
 {
   # Get the path lengths
@@ -131,7 +131,7 @@ rescore_and_reorder_frequency_data <-function(frequency_data, placeholder_size)
   frequency_data$score2 <- (lengths - placeholder_size) * counts
 
   # Order decreasingly by this "effective" score
-  order_decreasingly_by(frequency_data, "score2")
+  kwb.utils::orderDecreasinglyBy(frequency_data, "score2")
 }
 
 # print_path_frequencies -------------------------------------------------------
