@@ -1,5 +1,5 @@
 # compress_one_by_one ----------------------------------------------------------
-compress_one_by_one <- function(x, keys = LETTERS[1:n], n = 10)
+compress_one_by_one <- function(x, keys = LETTERS[seq_len(n)], n = 10)
 {
   lapply(keys, function(key) {
 
